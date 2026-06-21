@@ -116,13 +116,13 @@ body {
 }
 
 /* ─── CUSTOM SCROLLBAR ─── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-surface);
+  background: rgba(88, 101, 242, 0.4);
   border-radius: var(--radius-full);
 }
-::-webkit-scrollbar-thumb:hover { background: var(--cosmic-indigo); }
+::-webkit-scrollbar-thumb:hover { background: var(--cyber-teal); }
 
 /* ─── TYPOGRAPHY ─── */
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
@@ -1196,8 +1196,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
 /* ─── DASHBOARD SPECIFIC (kept for dashboard.html) ─── */
 .dashboard-body {
   background: var(--bg-deepest);
-  overflow-y: auto;
-  height: auto;
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100vh;
 }
 .navbar {
   height: 72px;
