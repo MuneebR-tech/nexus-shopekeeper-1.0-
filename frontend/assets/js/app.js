@@ -413,7 +413,9 @@ class KioskApp {
     Object.keys(this.screens).forEach(key => {
       this.screens[key].classList.remove('active-screen');
     });
-    const target = this.screens[screenId.replace('-screen', '')];
+    let key = screenId.replace('-screen', '');
+    if (key === 'main-workspace') key = 'workspace';
+    const target = this.screens[key];
     if (target) {
       target.classList.add('active-screen');
       this.currentScreen = screenId;
