@@ -225,6 +225,7 @@ class KioskApp {
     this.api = new NexusAPI();
     this.currentScreen = 'entry-screen';
     this.pinDigits = [];
+    this.pinAttempts = 0;
     this.cart = [];
     this.memberData = null;
     this.products = [];
@@ -373,6 +374,23 @@ class KioskApp {
       this.productPanel.classList.remove('open');
       this.productPanelOvl.classList.remove('visible');
     });
+
+    // Keyboard support for keypad screen
+    document.addEventListener('keydown', (e) => {
+      if (this.currentScreen !== 'keypad-screen') return;
+      if (e.key >= '0' && e.key <= '9') {
+        if (this.pinDigits.length < 6) {
+          this.pinDigits.push(e.key);
+          this.audio.playKeyTone(e.key);
+          this._updatePinDots();
+        }
+      } else if (e.key === 'Backspace') {
+        this.pinDigits.pop();
+        this._updatePinDots();
+      } else if (e.key === 'Enter') {
+        this._verifyPinCode();
+      }
+    });
   }
 
   async _loadInitialData() {
@@ -404,7 +422,9 @@ class KioskApp {
 
   _updatePinDots() {
     this.pinDots.forEach((dot, idx) => {
-      dot.classList.toggle('filled', idx < this.pinDigits.length);
+      const filled = idx < this.pinDigits.length;
+      dot.classList.toggle('filled', filled);
+      dot.textContent = filled ? '•' : '';
       dot.classList.remove('error', 'success');
     });
     this.pinStatus.textContent = '';
@@ -423,8 +443,12 @@ class KioskApp {
 
     const result = await this.api.verifyMembership(pin);
     if (result && result.valid) {
+      this.pinAttempts = 0;
       this.memberData = result.customer;
-      this.pinDots.forEach(dot => dot.classList.add('success'));
+      this.pinDots.forEach(dot => {
+        dot.classList.add('success');
+        dot.textContent = '✓';
+      });
       this.pinStatus.textContent = `✅ Welcome back, ${this.memberData.name}!`;
       this.pinStatus.className = 'pin-status success';
       this.audio.playSuccess();
@@ -437,8 +461,12 @@ class KioskApp {
     } else {
       // Try fallback for demo
       if (pin.startsWith('1')) {
+        this.pinAttempts = 0;
         this.memberData = { customer_id: 'CUST-DEMO', name: 'Zeeshan Malik', segment: 'Ultra-Luxury Spender', tier: 'Platinum' };
-        this.pinDots.forEach(dot => dot.classList.add('success'));
+        this.pinDots.forEach(dot => {
+          dot.classList.add('success');
+          dot.textContent = '✓';
+        });
         this.pinStatus.textContent = `✅ Verification Override. Welcome, Zeeshan Malik!`;
         this.pinStatus.className = 'pin-status success';
         this.audio.playSuccess();
@@ -449,10 +477,31 @@ class KioskApp {
           this._updatePinDots();
         }, 1200);
       } else {
-        this.pinDots.forEach(dot => dot.classList.add('error'));
-        this.pinStatus.textContent = '❌ Card verification failed. (Hint: Try PIN starting with 1)';
-        this.pinStatus.className = 'pin-status error';
-        this.audio.playError();
+        this.pinAttempts++;
+        this.pinDots.forEach(dot => {
+          dot.classList.add('error');
+          dot.textContent = '✕';
+        });
+        
+        if (this.pinAttempts >= 3) {
+          this.pinStatus.textContent = '❌ Keypad Locked. Too many failed attempts. Re-enabling in 10s.';
+          this.pinStatus.className = 'pin-status error';
+          this.audio.playError();
+          
+          const submitBtn = document.getElementById('keypad-submit');
+          if (submitBtn) submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            if (submitBtn) submitBtn.disabled = false;
+            this.pinAttempts = 0;
+            this.pinDigits = [];
+            this._updatePinDots();
+          }, 10000);
+        } else {
+          this.pinStatus.textContent = `❌ Verification failed. (Attempt ${this.pinAttempts} of 3)`;
+          this.pinStatus.className = 'pin-status error';
+          this.audio.playError();
+        }
       }
     }
   }

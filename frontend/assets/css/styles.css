@@ -454,6 +454,13 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
   background: var(--bg-raised);
   transition: all var(--transition-base);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1;
 }
 .pin-dot.filled {
   background: var(--cosmic-indigo);
