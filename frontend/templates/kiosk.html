@@ -1,69 +1,381 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus Shopkeeper - Retail Smart Kiosk</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="../assets/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nexus Shopkeeper — Pakistan's Smartest Retail Kiosk Experience" />
+  <meta name="theme-color" content="#0a0b10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Nexus Shopkeeper — Smart Kiosk</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
-<body>
-  <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+<body class="kiosk-body">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VIEW 0 — ENTRY SCREEN
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="entry-screen" class="screen active-screen">
+    <div class="welcome-bg-anim"></div>
+    <div style="position: absolute; top: 24px; right: 28px; z-index: 100;">
+      <a href="dashboard.html" class="btn btn-glass btn-sm">🔐 Administration</a>
+    </div>
     
-    <!-- Header -->
-    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-      <div>
-        <h1 style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #fff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NEXUS SHOPKEEPER</h1>
-        <p style="color: var(--text-secondary); margin-top: 5px;">Smart Kiosk & Concierge Interface</p>
+    <div class="welcome-content">
+      <div class="welcome-logo-ring">
+        <span class="welcome-logo-icon">🏪</span>
       </div>
-      <div class="glass-panel" style="padding: 10px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px;">
-        <span style="display: inline-block; width: 8px; height: 8px; background-color: #00f2fe; border-radius: 50%; box-shadow: 0 0 10px #00f2fe;"></span>
-        <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-secondary);">Kiosk Connected</span>
+      <h1 class="welcome-title">Nexus <span class="gradient-text">Shopkeeper</span></h1>
+      <p class="welcome-subtitle">Pakistan's Smartest Autonomous Retail Kiosk</p>
+      <div class="welcome-divider"></div>
+      
+      <div class="welcome-actions" style="flex-direction: column; align-items: center; gap: 16px;">
+        <button id="btn-enter-mart" class="btn btn-primary btn-xl" style="width: 340px; justify-content: center;">
+          <span class="btn-icon">🛒</span>
+          <span class="btn-label">Check In (Enter Mart)</span>
+        </button>
+        <button id="btn-exit-mart" class="btn btn-outline btn-xl" style="width: 340px; justify-content: center; backdrop-filter: blur(8px);">
+          <span class="btn-icon">💳</span>
+          <span class="btn-label">Check Out (Pay)</span>
+        </button>
+      </div>
+      <p class="welcome-footer-note">Touch an option to begin. No human checkout lines, 100% automated.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VIEW 1 — WELCOME SCREEN (Premium Ask)
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="welcome-screen" class="screen">
+    <div class="welcome-bg-anim"></div>
+    <div class="welcome-content">
+      <div class="welcome-logo-ring">
+        <span class="welcome-logo-icon">💳</span>
+      </div>
+      <h1 class="welcome-title">Loyalty Verification</h1>
+      <p class="welcome-subtitle">Identify yourself to apply personal discounts & credit limits</p>
+      <div class="welcome-divider"></div>
+      <h2 class="welcome-question">Are you a premium card holder?</h2>
+      
+      <div class="welcome-actions">
+        <button id="btn-has-card" class="btn btn-primary btn-xl">
+          <span class="btn-icon">🔑</span>
+          <span class="btn-label">Yes, I have a PIN</span>
+        </button>
+        <button id="btn-guest" class="btn btn-outline btn-xl">
+          <span class="btn-icon">👤</span>
+          <span class="btn-label">Continue as Guest</span>
+        </button>
+      </div>
+      
+      <button class="btn-link" id="btn-welcome-back" style="margin-top: 36px; display: block; margin-left: auto; margin-right: auto;">
+        ← Back to Entry
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VIEW 2 — MEMBERSHIP KEYPAD
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="keypad-screen" class="screen">
+    <div class="keypad-wrapper">
+      <div class="keypad-header">
+        <h2 class="keypad-title">Enter Your 6-Digit PIN</h2>
+        <p class="keypad-subtitle">Type your membership PIN to retrieve your active profile</p>
+      </div>
+
+      <div class="pin-display" id="pin-display">
+        <div class="pin-dot" data-index="0"></div>
+        <div class="pin-dot" data-index="1"></div>
+        <div class="pin-dot" data-index="2"></div>
+        <div class="pin-dot" data-index="3"></div>
+        <div class="pin-dot" data-index="4"></div>
+        <div class="pin-dot" data-index="5"></div>
+      </div>
+      <p class="pin-status" id="pin-status"></p>
+
+      <div class="keypad-grid" id="keypad-grid">
+        <button class="keypad-btn" data-key="1">1</button>
+        <button class="keypad-btn" data-key="2">2</button>
+        <button class="keypad-btn" data-key="3">3</button>
+        <button class="keypad-btn" data-key="4">4</button>
+        <button class="keypad-btn" data-key="5">5</button>
+        <button class="keypad-btn" data-key="6">6</button>
+        <button class="keypad-btn" data-key="7">7</button>
+        <button class="keypad-btn" data-key="8">8</button>
+        <button class="keypad-btn" data-key="9">9</button>
+        <button class="keypad-btn keypad-btn--scan" data-key="scan">📷 Scan</button>
+        <button class="keypad-btn" data-key="0">0</button>
+        <button class="keypad-btn keypad-btn--backspace" data-key="backspace">⌫</button>
+      </div>
+
+      <button class="btn btn-primary btn-lg keypad-submit" id="keypad-submit">Verify PIN →</button>
+      <button class="btn-link keypad-cancel" id="keypad-cancel">← Cancel &amp; Go Back</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VIEW 3 — MAIN WIDESCREEN WORKSPACE
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="main-workspace" class="screen">
+
+    <!-- ─── TOP BAR ─── -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-logo-icon">🏪</span>
+        <span class="topbar-brand">Nexus <span class="gradient-text">Shopkeeper</span></span>
+      </div>
+      <div class="topbar-center">
+        <div class="search-wrapper" id="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search product database... (e.g. Cola, Juice, Milk)" autocomplete="off" />
+          <div class="search-autocomplete" id="search-autocomplete"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-accent btn-topbar" id="btn-workspace-checkout">
+          <span>🛍️</span> View Cart
+          <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+        <button class="btn btn-glass btn-topbar" id="btn-account">
+          <span>👤</span> <span id="account-label">Account</span>
+        </button>
       </div>
     </header>
 
-    <!-- Main Grid -->
-    <main class="kiosk-grid">
-      <!-- Concierge Agent Interaction -->
-      <section class="glass-panel" style="grid-column: span 2;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 1.25rem;">🤖</span> Antigravity Concierge Agent
-        </h2>
-        <div style="background-color: rgba(0,0,0,0.2); border-radius: 12px; height: 250px; padding: 20px; overflow-y: auto; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.03);">
-          <div style="margin-bottom: 15px;">
-            <span style="color: var(--accent-secondary); font-weight: 600;">System:</span> 
-            <span style="color: var(--text-secondary);">Welcome to Nexus Smart-Mart. Please tap your RFID token or enter customer ID below to initiate personalization.</span>
+    <!-- ─── WORKSPACE BODY ─── -->
+    <div class="workspace-body">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar sidebar-left" id="sidebar-left">
+        <div class="sidebar-profile glass-card" id="profile-card">
+          <div class="profile-avatar">👤</div>
+          <p class="profile-name" id="profile-name">Guest Shopper</p>
+          <p class="profile-tier" id="profile-tier">Standard</p>
+        </div>
+        <nav class="sidebar-actions">
+          <button class="sidebar-btn" id="btn-sidebar-view-cart">🛒 View Current Cart</button>
+          <button class="sidebar-btn" id="btn-sidebar-help">❓ Ask AI Guide</button>
+          <button class="sidebar-btn" id="btn-sidebar-catalog">📋 Reset Finder</button>
+          <button class="sidebar-btn" id="btn-logout">🚪 Exit Mart / Logout</button>
+        </nav>
+      </aside>
+
+      <!-- CENTER CONTENT -->
+      <main class="center-content" id="center-content">
+        <!-- Headcount / Statistics bar -->
+        <div class="glass-card" style="margin-bottom: var(--space-md); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-left: 3px solid var(--cyber-teal);">
+          <span style="font-size: 14px; font-weight: 500; display: flex; items-center; gap: 8px;">
+            🤖 <span id="staff-count-indicator">Mart operated by 10 active automation technicians.</span>
+          </span>
+          <span style="font-size: 12px; color: var(--text-secondary); font-weight: 600;">
+            📉 Staff headcount reduced by 85% via automated IoT storage.
+          </span>
+        </div>
+
+        <h2 class="section-heading">Browse Store Aisle Categories</h2>
+        <div class="category-grid" id="category-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="sidebar sidebar-right" id="sidebar-right">
+        <div class="glass-card sidebar-section">
+          <h3 class="sidebar-section-title">🤖 AI Smart Assistant</h3>
+          <div class="ai-recs" id="ai-recs">
+            <!-- Rendered by JS -->
           </div>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <input type="text" placeholder="Speak to concierge or enter command..." style="flex: 1; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px; color: var(--text-primary); outline: none;">
-          <button class="btn-interactive">Send</button>
+        <div class="glass-card sidebar-section">
+          <h3 class="sidebar-section-title">⭐ Featured Purchases</h3>
+          <div class="sponsored-items" id="sponsored-items">
+            <!-- Rendered by JS -->
+          </div>
         </div>
-      </section>
+      </aside>
+    </div>
 
-      <!-- RFID Simulator & Quick Actions -->
-      <section class="glass-panel">
-        <h2 style="font-size: 1.25rem; margin-bottom: 15px;">💳 RFID Handshake Simulator</h2>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Use the following buttons to trigger mock handshakes mimicking shopper check-ins:</p>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <button class="btn-interactive" onclick="scanMockCard('CUST-8021', 'Ultra-Luxury')" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); shadow: none;">Scan Ultra-Luxury Spender</button>
-          <button class="btn-interactive" onclick="scanMockCard('CUST-4410', 'Budget')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); shadow: none;">Scan Strict Budget Spender</button>
+    <!-- ─── BOTTOM BAR ─── -->
+    <footer class="bottombar">
+      <div class="bottombar-left">
+        <span class="status-dot status-dot--online"></span>
+        <span class="bottombar-text">Aisle Finder System Online</span>
+      </div>
+      <div class="bottombar-center">
+        <span class="bottombar-text" id="system-clock"></span>
+      </div>
+      <div class="bottombar-right">
+        <span class="bottombar-text">Nexus Shopkeeper v2.4.0 — Islamabad Smart Mart</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       VIEW 4 — CHECKOUT SCREEN
+       ═══════════════════════════════════════════════════════════════ -->
+  <section id="checkout-screen" class="screen">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-logo-icon">🏪</span>
+        <span class="topbar-brand">Nexus <span class="gradient-text">Shopkeeper</span></span>
+      </div>
+      <div class="topbar-center">
+        <h2 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; text-align: center; color: var(--text-primary);">Secure Payment Desk</h2>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-glass btn-topbar" id="btn-checkout-back">
+          ← Back to Mart
+        </button>
+      </div>
+    </header>
+
+    <div class="workspace-body" style="padding: var(--space-xl); gap: var(--space-xl); justify-content: center; align-items: flex-start; overflow-y: auto;">
+      <!-- Left side: Cart Items -->
+      <div class="glass-card" style="flex: 1; max-width: 600px; display: flex; flex-direction: column; gap: var(--space-md); width: 100%;">
+        <h3 style="font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-xs); display: flex; justify-content: space-between;">
+          <span>🛍️ Your Cart Items</span>
+          <span id="checkout-cart-count" style="font-size: 13px; color: var(--text-muted);">0 items</span>
+        </h3>
+        
+        <div id="checkout-screen-items" style="display: flex; flex-direction: column; gap: var(--space-sm); max-height: 400px; overflow-y: auto; padding-right: 4px;">
+          <!-- Populated by JS -->
+          <p class="empty-cart-msg">Your cart is empty.</p>
         </div>
-      </section>
-    </main>
+        
+        <div class="cart-total" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: var(--space-md); font-size: 22px; font-weight: 700; margin-top: 10px;">
+          <span>Grand Total:</span>
+          <span class="gradient-text" id="checkout-screen-total">Rs. 0</span>
+        </div>
+      </div>
 
+      <!-- Right side: Payment Methods -->
+      <div class="glass-card" style="width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: var(--space-md);">
+        <h3 style="font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-xs);">💳 Choose Payment Method</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 6px;">Select a checkout method. Tap/Insert or redeem store points directly.</p>
+        
+        <div class="payment-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+          <button class="payment-btn btn btn-glass" data-method="cash" style="height: auto; padding: 24px var(--space-md); display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; border-radius: var(--radius-lg);">
+            <span style="font-size: 32px;">💵</span>
+            <span style="font-weight: 700; font-size: 15px; color: var(--text-primary);">Cash</span>
+            <span style="font-size: 10px; color: var(--text-muted);">Chimes: Coin Drop</span>
+          </button>
+          
+          <button class="payment-btn btn btn-glass" data-method="card" style="height: auto; padding: 24px var(--space-md); display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; border-radius: var(--radius-lg);">
+            <span style="font-size: 32px;">💳</span>
+            <span style="font-weight: 700; font-size: 15px; color: var(--text-primary);">Card</span>
+            <span style="font-size: 10px; color: var(--text-muted);">Chimes: Swipe Click</span>
+          </button>
+
+          <button class="payment-btn btn btn-glass" data-method="points" style="height: auto; padding: 24px var(--space-md); display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; border-radius: var(--radius-lg);">
+            <span style="font-size: 32px;">🪙</span>
+            <span style="font-weight: 700; font-size: 15px; color: var(--text-primary);">Store Points</span>
+            <span style="font-size: 10px; color: var(--text-muted);">Chimes: Point Beep</span>
+          </button>
+
+          <button class="payment-btn btn btn-glass" data-method="coupons" style="height: auto; padding: 24px var(--space-md); display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: center; border-radius: var(--radius-lg);">
+            <span style="font-size: 32px;">🎟️</span>
+            <span style="font-weight: 700; font-size: 15px; color: var(--text-primary);">Coupons</span>
+            <span style="font-size: 10px; color: var(--text-muted);">Chimes: Code Beep</span>
+          </button>
+        </div>
+        
+        <div id="payment-status-message" style="margin-top: 10px; font-size: 13px; text-align: center; color: var(--text-accent); min-height: 24px; font-weight: 600;"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <footer class="bottombar">
+      <div class="bottombar-left">
+        <span class="status-dot status-dot--online"></span>
+        <span class="bottombar-text">Secured Autonomous Terminal</span>
+      </div>
+      <div class="bottombar-center">
+        <span class="bottombar-text">Powered by Nexus Smart Engine</span>
+      </div>
+      <div class="bottombar-right">
+        <span class="bottombar-text">Mart #302</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       PRODUCT DETAILS MODAL
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="product-details-overlay">
+    <div class="modal glass-card" id="product-details-modal" style="max-width: 500px; width: 90%;">
+      <div class="modal-header">
+        <h2 style="font-size: 20px; font-weight: 700;">🔍 Product Coordinates</h2>
+        <button class="modal-close" id="pd-close">✕</button>
+      </div>
+      <div class="modal-body" style="padding-bottom: 0;">
+        <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+          <div id="pd-emoji" style="font-size: 56px; background: var(--bg-raised); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">🍎</div>
+          <div>
+            <h3 id="pd-name" style="font-size: 18px; margin-bottom: 6px; color: var(--text-primary);">Product Name</h3>
+            <span id="pd-category-badge" class="badge" style="background: var(--cosmic-indigo); color: #fff; padding: 4px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Category</span>
+          </div>
+        </div>
+        
+        <p id="pd-description" style="color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; font-size: 13.5px; min-height: 48px;">Detailed product description and supply chain specifications.</p>
+        
+        <div class="finder-details-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Floor Level</div>
+            <div id="pd-floor" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">Ground Floor</div>
+          </div>
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Aisle Location</div>
+            <div id="pd-aisle" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">Aisle B</div>
+          </div>
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Shelf Rank</div>
+            <div id="pd-shelf" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">3 of 5</div>
+          </div>
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Aisle Coordinates</div>
+            <div id="pd-coords" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">X: 4.0m, Y: 1.5m, Z: 1.1m</div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 16px; padding-bottom: 16px;">
+          <div style="font-size: 24px; font-weight: 800; color: var(--text-primary);" id="pd-price">Rs. 0</div>
+          <button class="btn btn-primary" id="pd-add-to-cart">🛒 Add to Cart</button>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       PRODUCT OVERLAY PANEL (slides in from right - kept for layout compatibility)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="product-panel-overlay" id="product-panel-overlay"></div>
+  <aside class="product-panel" id="product-panel">
+    <div class="product-panel-header">
+      <h2 class="product-panel-title" id="product-panel-title">Aisle Products</h2>
+      <button class="product-panel-close" id="product-panel-close">✕</button>
+    </div>
+    <div class="product-panel-grid" id="product-panel-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       TOAST CONTAINER
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FLOATING SUPPORT WIDGET
+       ═══════════════════════════════════════════════════════════════ -->
+  <button class="support-widget" id="support-widget">
+    <span class="support-widget-icon">🎧</span>
+    <span class="support-widget-text" id="support-widget-text">Call Support Agent</span>
+  </button>
+
   <script src="../assets/js/app.js"></script>
-  <script>
-    function scanMockCard(id, type) {
-      console.log(`Simulating card scan: ${id} (${type})`);
-      window.nexusWorker.scanCustomerRFID(id, `TOKEN-${Math.floor(Math.random()*900000)+100000}`);
-    }
-  </script>
 </body>
 </html>

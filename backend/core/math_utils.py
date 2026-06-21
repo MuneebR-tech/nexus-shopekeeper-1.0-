@@ -1,52 +1,62 @@
 """
 Nexus Shopkeeper - Core Mathematics & Clustering Engine
-
-This module serves as the primary matrix mathematics engine for modern retail spaces.
-Includes templates for:
-1. K-Means clustering algorithm for customer segmentations.
-2. Silhouette scores for cluster optimization.
-3. Vectorized 16-Dimensional distance matrix calculation.
+Vectorized matrix math, distance calculations, and clustering hook for KMeans engine.
 """
 
+import sys
 import numpy as np
-from typing import List, Tuple, Dict
+from pathlib import Path
+from typing import Tuple
+
+# Add project root to python path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.append(str(PROJECT_ROOT))
+
+from phase_2.kmeans_engine import KMeansEngine
+
 
 def calculate_distance_matrix(data: np.ndarray) -> np.ndarray:
     """
     Computes a vectorized 16-dimensional distance matrix between all customer feature vectors.
-    (Scheduled for implementation on Day 3).
+    Uses NumPy broadcasting for speed.
     
-    :param data: A NumPy array of shape (N, 16) containing normalized customer feature vectors.
+    :param data: A NumPy array of shape (N, 16) containing customer feature vectors.
     :return: A matrix of shape (N, N) containing Euclidean distances.
     """
-    pass
+    # Vectorized pairwise Euclidean distance
+    # d(u, v) = sqrt(||u||^2 + ||v||^2 - 2 u . v)
+    dot_product = np.dot(data, data.T)
+    square_norms = np.diag(dot_product)
+    
+    # Broadcasting to get pairwise squared differences
+    dists_sq = square_norms[:, np.newaxis] + square_norms[np.newaxis, :] - 2 * dot_product
+    # Avoid numerical precision negative values
+    dists_sq = np.clip(dists_sq, 0.0, None)
+    
+    return np.sqrt(dists_sq)
+
 
 def calculate_silhouette_score(data: np.ndarray, labels: np.ndarray) -> float:
     """
     Computes the silhouette score to optimize the selection of clusters (K).
-    (Concept reflected from user's 'K-segmemtation-basic-ML' repo).
     
     :param data: Customer feature vectors.
     :param labels: Assigned cluster labels.
     :return: Silhouette coefficient float between -1 and 1.
     """
-    pass
+    engine = KMeansEngine(n_clusters=len(np.unique(labels)))
+    return engine.calculate_silhouette_score(data, labels)
+
 
 def run_k_means_clustering(data: np.ndarray, k: int) -> Tuple[np.ndarray, np.ndarray]:
     """
     Executes K-means clustering on customer purchase histories.
-    Maps customer profiles to 6 core retail personas:
-      - Ultra-Luxury Spender
-      - Mid-Tier Consistent
-      - High-Value Impulse
-      - Essential Bulk Buyer
-      - Strict Budget Spender
-      - Strategic Deal-Hunter
-      
-    (Scheduled for implementation on Day 3).
+    Maps customer profiles to 6 core retail personas.
     
     :param data: NumPy array of shape (N, 16).
     :param k: Number of target clusters (typically 6).
     :return: A tuple of (centroids, labels).
     """
-    pass
+    engine = KMeansEngine(n_clusters=k, max_iterations=300, tolerance=1e-6, random_state=42)
+    labels = engine.fit_predict(data)
+    return engine.centroids, labels

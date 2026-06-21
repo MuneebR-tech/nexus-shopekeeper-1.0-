@@ -3,125 +3,361 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus Shopkeeper - Management Dashboard</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Stylesheet -->
+  <title>Nexus Shopkeeper — Admin Dashboard</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-  <div style="max-width: 1400px; margin: 0 auto; padding: 40px 20px;">
-    
-    <!-- Header -->
-    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-      <div>
-        <h1 style="font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, #fff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NEXUS DASHBOARD</h1>
-        <p style="color: var(--text-secondary); margin-top: 5px;">Commercial SaaS Analytics & Robot Control</p>
-      </div>
-      <div style="display: flex; gap: 15px;">
-        <button class="btn-interactive">Refresh Data</button>
-      </div>
-    </header>
 
-    <!-- Stat Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px;">
-      <div class="glass-panel" style="padding: 20px;">
-        <span style="color: var(--text-secondary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Active Sessions</span>
-        <div style="font-size: 2rem; font-weight: 700; margin-top: 10px; color: var(--accent-secondary);">12</div>
-      </div>
-      <div class="glass-panel" style="padding: 20px;">
-        <span style="color: var(--text-secondary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Total Customers</span>
-        <div style="font-size: 2rem; font-weight: 700; margin-top: 10px; color: var(--accent-primary);">148</div>
-      </div>
-      <div class="glass-panel" style="padding: 20px;">
-        <span style="color: var(--text-secondary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Optimal Clusters (K)</span>
-        <div style="font-size: 2rem; font-weight: 700; margin-top: 10px; color: var(--accent-neon);">6</div>
-      </div>
+  <!-- ═══════════ TOP NAV ═══════════ -->
+  <nav class="navbar">
+    <div class="navbar__logo">
+      <div class="navbar__logo-icon">⚡</div>
+      <span class="text-gradient">Nexus Shopkeeper</span>
     </div>
+    <div class="navbar__links">
+      <a href="dashboard.html" class="active">📊 Dashboard</a>
+      <a href="kiosk.html">🖥️ Kiosk Mode</a>
+      <a href="#" id="settings-link">⚙️ Settings</a>
+    </div>
+    <div class="flex items-center gap-md">
+      <button class="btn btn-secondary btn-sm" id="refresh-btn">🔄 Refresh Data</button>
+      <div class="navbar__user" title="Admin User">A</div>
+    </div>
+  </nav>
 
-    <!-- Main Analytics Section -->
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
-      <!-- Customer Segments List -->
-      <section class="glass-panel">
-        <h2 style="font-size: 1.4rem; margin-bottom: 20px;">👥 Customer Personas (6-Tier Classification Framework)</h2>
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid #f59e0b;">
-            <div>
-              <strong style="color: #f59e0b;">Ultra-Luxury Spender</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 3px;">High premium, margin insensitivity, tailored concierge actions.</p>
-            </div>
-            <span class="glass-panel" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 20px;">12.4%</span>
-          </div>
+  <div class="container" style="padding-top:var(--space-lg);padding-bottom:var(--space-3xl)">
 
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid #3b82f6;">
-            <div>
-              <strong style="color: #3b82f6;">Mid-Tier Consistent</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 3px;">High loyalty, subscription options, steady grocery shopping.</p>
-            </div>
-            <span class="glass-panel" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 20px;">35.1%</span>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid #ec4899;">
-            <div>
-              <strong style="color: #ec4899;">High-Value Impulse</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 3px;">Responsive to flashing checkout alerts and agent recommendations.</p>
-            </div>
-            <span class="glass-panel" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 20px;">18.2%</span>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid #a855f7;">
-            <div>
-              <strong style="color: #a855f7;">Essential Bulk Buyer</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 3px;">High volume, multi-pack units, repeat scheduled routing.</p>
-            </div>
-            <span class="glass-panel" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 20px;">14.8%</span>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid #ef4444;">
-            <div>
-              <strong style="color: #ef4444;">Strict Budget Spender</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 3px;">Price sensitive, custom store credit loans, essential items only.</p>
-            </div>
-            <span class="glass-panel" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 20px;">9.5%</span>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid #06b6d4;">
-            <div>
-              <strong style="color: #06b6d4;">Strategic Deal-Hunter</strong>
-              <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 3px;">Coupon matching, bundle maximization, specific time-window shoppers.</p>
-            </div>
-            <span class="glass-panel" style="padding: 5px 12px; font-size: 0.8rem; border-radius: 20px;">10.0%</span>
-          </div>
-
+    <!-- ═══════════ STATS ROW ═══════════ -->
+    <section class="stats-row" style="margin-bottom:var(--space-lg)">
+      <!-- Active Sessions -->
+      <div class="glass-card stat-card animate-in">
+        <div class="stat-card__icon" style="background:rgba(88,101,242,0.15);color:var(--cosmic-indigo)">📡</div>
+        <div class="stat-card__label">Active Sessions</div>
+        <div class="stat-card__value">
+          <span id="stat-sessions">0</span>
+          <span class="stat-card__trend stat-card__trend--up">+3 ↑</span>
         </div>
-      </section>
+      </div>
+      <!-- Total Customers -->
+      <div class="glass-card stat-card animate-in">
+        <div class="stat-card__icon" style="background:rgba(0,242,254,0.1);color:var(--cyber-teal)">👥</div>
+        <div class="stat-card__label">Total Customers</div>
+        <div class="stat-card__value">
+          <span id="stat-customers">0</span>
+          <span class="stat-card__trend stat-card__trend--up">+12.4% ↑</span>
+        </div>
+      </div>
+      <!-- Revenue Today -->
+      <div class="glass-card stat-card animate-in">
+        <div class="stat-card__icon" style="background:rgba(245,158,11,0.12);color:var(--amber-gold)">💰</div>
+        <div class="stat-card__label">Revenue Today</div>
+        <div class="stat-card__value">
+          <span id="stat-revenue">₨ 0</span>
+          <span class="stat-card__trend stat-card__trend--up">+8.2% ↑</span>
+        </div>
+      </div>
+      <!-- Optimal K -->
+      <div class="glass-card stat-card animate-in">
+        <div class="stat-card__icon" style="background:rgba(112,0,255,0.12);color:var(--neon-purple)">🧮</div>
+        <div class="stat-card__label">Optimal K (Clusters)</div>
+        <div class="stat-card__value">
+          <span id="stat-k">0</span>
+          <span class="stat-card__trend stat-card__trend--up">Optimal</span>
+        </div>
+      </div>
+    </section>
 
-      <!-- Inventory Rack-Map Preview -->
-      <section class="glass-panel">
-        <h2 style="font-size: 1.25rem; margin-bottom: 15px;">📦 Physical Rack Mapping</h2>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">Real-time inventory grid and dispenser layouts:</p>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-          <div style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center;">
-            <div style="font-size: 0.75rem; color: var(--text-muted);">Rack A1</div>
-            <div style="font-weight: 700; margin-top: 5px;">Drinks</div>
-          </div>
-          <div style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center;">
-            <div style="font-size: 0.75rem; color: var(--text-muted);">Rack A2</div>
-            <div style="font-weight: 700; margin-top: 5px;">Snacks</div>
-          </div>
-          <div style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center;">
-            <div style="font-size: 0.75rem; color: var(--text-muted);">Rack B1</div>
-            <div style="font-weight: 700; margin-top: 5px;">Pantry</div>
+    <!-- ═══════════ MAIN GRID ═══════════ -->
+    <div class="dashboard-grid">
+
+      <!-- ──── LEFT COLUMN (65%) ──── -->
+      <div class="flex-col gap-lg" style="display:flex;flex-direction:column;gap:var(--space-lg)">
+
+        <!-- Customer Segments Panel -->
+        <div class="glass-card animate-in">
+          <div class="panel-title"><span class="icon">📊</span> Customer Loyalty Segment Distribution</div>
+          <div class="body-xs text-muted" style="margin-bottom:var(--space-md)">Dynamic SVG charts rendering spend, visits, and customer group metrics (K-Means fit).</div>
+          <div class="flex gap-lg" style="display: flex; gap: var(--space-lg); flex-wrap: wrap;">
+            <div id="segment-distribution-chart" style="flex: 1.2; min-width: 250px; display: flex; justify-content: center; align-items: center;">
+              <div class="spinner"></div>
+            </div>
+            <div id="segment-legend" style="flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 8px; justify-content: center;">
+              <!-- Dynamic Legend -->
+            </div>
           </div>
         </div>
-      </section>
-    </div>
 
+        <!-- Customer Table -->
+        <div class="glass-card animate-in">
+          <div class="panel-title"><span class="icon">👥</span> Top Customer Database</div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID <span class="sort-arrow">↕</span></th>
+                  <th>Name <span class="sort-arrow">↕</span></th>
+                  <th>Segment</th>
+                  <th>Total Spend <span class="sort-arrow">↕</span></th>
+                  <th>Credit <span class="sort-arrow">↕</span></th>
+                  <th>Visits <span class="sort-arrow">↕</span></th>
+                </tr>
+              </thead>
+              <tbody id="customer-tbody">
+                <tr><td colspan="6" class="text-center text-muted" style="padding:var(--space-xl)"><div class="spinner" style="margin:0 auto"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Inventory Manager CRUD Table -->
+        <div class="glass-card animate-in" id="inventory-manager-section">
+          <div class="panel-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span><span class="icon">📦</span> Autonomous Inventory Manager</span>
+            <button class="btn btn-accent btn-sm" id="btn-add-inventory-modal">➕ Add SKU</button>
+          </div>
+          <div class="body-xs text-muted" style="margin-bottom:var(--space-md)">Add new items, delete catalog items, and live-update price in PKR. Syncs instantly with Kiosk.</div>
+          <div style="overflow-x:auto; max-height: 480px;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Price (PKR)</th>
+                  <th>Stock</th>
+                  <th>Rack/Shelf</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-tbody">
+                <tr><td colspan="7" class="text-center text-muted" style="padding:var(--space-xl)"><div class="spinner" style="margin:0 auto"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Payment Trends split chart -->
+        <div class="glass-card animate-in">
+          <div class="panel-title"><span class="icon">💳</span> Payment Trends Split Chart</div>
+          <div class="body-xs text-muted" style="margin-bottom:var(--space-md)">Split between Cash, Card, Store Points, and Coupons. Rendered via dynamic SVGs.</div>
+          <div id="payment-trends-chart" style="display: flex; justify-content: center; align-items: center; min-height: 180px;">
+            <div class="spinner"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ──── RIGHT COLUMN (35%) ──── -->
+      <div class="flex-col gap-lg" style="display:flex;flex-direction:column;gap:var(--space-lg)">
+
+        <!-- System Health Panel -->
+        <div class="glass-card animate-in" style="border-left: 3px solid var(--success-green);">
+          <div class="panel-title"><span class="icon">🏥</span> System Health Status</div>
+          <div class="flex-col gap-sm" style="display:flex; flex-direction:column; gap: 12px; margin-bottom: 6px;">
+            <div class="flex justify-between items-center body-xs" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+              <span class="text-secondary">Core API Latency:</span>
+              <span class="font-bold text-accent" id="health-latency" style="color: var(--cyber-teal); font-weight: 700;">-- ms</span>
+            </div>
+            <div class="flex justify-between items-center body-xs" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+              <span class="text-secondary">Database Connection:</span>
+              <span id="health-db" style="font-weight: 700; color: var(--success-green);">Connected</span>
+            </div>
+            <div class="flex justify-between items-center body-xs" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+              <span class="text-secondary">ML Pipeline Convergence:</span>
+              <span id="health-ml" style="font-weight: 700; color: var(--cyber-teal);">--</span>
+            </div>
+            <div class="flex justify-between items-center body-xs" style="padding-bottom: 4px;">
+              <span class="text-secondary">ML Model Accuracy:</span>
+              <span id="health-accuracy" style="font-weight: 700; color: var(--amber-gold);">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employee Attendance logs panel -->
+        <div class="glass-card animate-in">
+          <div class="panel-title"><span class="icon">👥</span> Technicians Attendance Logs</div>
+          <div class="body-xs text-muted" style="margin-bottom:var(--space-md)">Manage shift status for automation supervisors. Updates active kiosk capacity.</div>
+          <div id="employee-attendance-container" class="flex-col gap-sm" style="display:flex; flex-direction:column; gap: 8px; max-height: 380px; overflow-y: auto; padding-right: 4px;">
+            <div class="spinner"></div>
+          </div>
+        </div>
+
+        <!-- Physical Rack Map -->
+        <div class="glass-card animate-in">
+          <div class="panel-title"><span class="icon">🏪</span> Physical Rack Map</div>
+          <div class="body-xs text-muted" style="margin-bottom:var(--space-md)">6×5 grid — color intensity indicates stock level. Hover for details.</div>
+          <div class="rack-grid" id="rack-grid">
+            <!-- Populated by JS -->
+            <div class="flex justify-center" style="grid-column:1/-1;padding:var(--space-lg)"><div class="spinner"></div></div>
+          </div>
+          <div class="flex items-center gap-md" style="margin-top:var(--space-md);flex-wrap:wrap">
+            <div class="flex items-center gap-xs body-xs"><div style="width:12px;height:12px;border-radius:3px;background:rgba(239,68,68,0.3)"></div> Low</div>
+            <div class="flex items-center gap-xs body-xs"><div style="width:12px;height:12px;border-radius:3px;background:rgba(245,158,11,0.3)"></div> Medium</div>
+            <div class="flex items-center gap-xs body-xs"><div style="width:12px;height:12px;border-radius:3px;background:rgba(16,185,129,0.3)"></div> High</div>
+            <div class="flex items-center gap-xs body-xs"><div style="width:12px;height:12px;border-radius:3px;background:rgba(88,101,242,0.3)"></div> Full</div>
+          </div>
+        </div>
+
+        <!-- Clustering Controls -->
+        <div class="glass-card animate-in">
+          <div class="panel-title"><span class="icon">🧠</span> Clustering Engine</div>
+          <button class="btn btn-primary w-full" id="btn-cluster" style="margin-bottom:var(--space-md)">🧮 Run K-MeansFit</button>
+          <div class="cluster-info" id="cluster-info">
+            <div class="flex justify-center"><div class="spinner"></div></div>
+          </div>
+        </div>
+
+        <!-- Credit Engine Summary -->
+        <div class="glass-card animate-in">
+          <div class="panel-title"><span class="icon">💳</span> Credit Engine Summary</div>
+          <div id="credit-summary">
+            <div class="flex justify-center" style="padding:var(--space-lg)"><div class="spinner"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- ═══════════ INVENTORY EDIT/ADD MODAL ═══════════ -->
+  <div class="modal-overlay" id="inventory-modal-overlay" style="z-index: 500;">
+    <div class="modal glass-card" id="inventory-modal" style="max-width: 500px; width: 90%; max-height: 90vh;">
+      <div class="modal-header">
+        <h2 id="inv-modal-title" style="font-size: 18px; font-weight: 700;">Add New SKU</h2>
+        <button class="modal-close" id="inv-modal-close">✕</button>
+      </div>
+      <div class="modal-body" style="padding-bottom: 0;">
+        <form id="inventory-form" style="display: flex; flex-direction: column; gap: 12px;">
+          <input type="hidden" id="inv-action" value="create">
+          
+          <div class="flex-col gap-xs" style="display: flex; flex-direction: column; gap: 4px;">
+            <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-id">SKU Identifier</label>
+            <input type="text" id="inv-id" class="search-input" placeholder="e.g. SKU-0021" required style="padding-left: 16px;">
+          </div>
+          
+          <div class="flex-col gap-xs" style="display: flex; flex-direction: column; gap: 4px;">
+            <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-name">Product Name</label>
+            <input type="text" id="inv-name" class="search-input" placeholder="e.g. Mezan Oil 1L" required style="padding-left: 16px;">
+          </div>
+          
+          <div class="flex gap-sm" style="display: flex; gap: 12px;">
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-category">Category</label>
+              <select id="inv-category" class="search-input" style="padding-left: 16px; background: var(--bg-raised); color: var(--text-primary);" required>
+                <option value="beverages">beverages</option>
+                <option value="snacks">snacks</option>
+                <option value="pantry">pantry</option>
+                <option value="dairy">dairy</option>
+                <option value="frozen">frozen</option>
+                <option value="produce">produce</option>
+                <option value="household">household</option>
+                <option value="personal_care">personal_care</option>
+              </select>
+            </div>
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-price">Price (PKR)</label>
+              <input type="number" step="0.01" id="inv-price" class="search-input" placeholder="e.g. 350" required style="padding-left: 16px;">
+            </div>
+          </div>
+
+          <div class="flex gap-sm" style="display: flex; gap: 12px;">
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-cost">Cost (PKR)</label>
+              <input type="number" step="0.01" id="inv-cost" class="search-input" placeholder="e.g. 290" required style="padding-left: 16px;">
+            </div>
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-stock">Stock Quantity</label>
+              <input type="number" id="inv-stock" class="search-input" placeholder="e.g. 45" required style="padding-left: 16px;">
+            </div>
+          </div>
+
+          <div class="flex gap-sm" style="display: flex; gap: 12px;">
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-rack">Rack ID</label>
+              <input type="text" id="inv-rack" class="search-input" placeholder="e.g. A3" required style="padding-left: 16px;">
+            </div>
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-shelf">Shelf level (1-5)</label>
+              <input type="number" min="1" max="5" id="inv-shelf" class="search-input" placeholder="e.g. 2" required style="padding-left: 16px;">
+            </div>
+          </div>
+          
+          <div class="flex gap-sm" style="display: flex; gap: 12px;">
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-threshold">Reorder Point</label>
+              <input type="number" id="inv-threshold" class="search-input" placeholder="e.g. 10" required style="padding-left: 16px;">
+            </div>
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-supplier">Supplier</label>
+              <input type="text" id="inv-supplier" class="search-input" placeholder="e.g. Unilever" required style="padding-left: 16px;">
+            </div>
+          </div>
+
+          <div class="flex gap-sm" style="display: flex; gap: 12px;">
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-weight">Weight (kg)</label>
+              <input type="number" step="0.001" id="inv-weight" class="search-input" placeholder="e.g. 0.5" required style="padding-left: 16px;">
+            </div>
+            <div class="flex-col gap-xs" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+              <label class="body-xs text-secondary" style="font-weight: 600;" for="inv-expiry">Expiry Days</label>
+              <input type="number" id="inv-expiry" class="search-input" placeholder="optional" style="padding-left: 16px;">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 10px; margin-bottom: 20px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1; justify-content: center;" id="inv-submit-btn">Save Product</button>
+            <button type="button" class="btn btn-outline" style="flex: 1; justify-content: center;" id="inv-cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="bottom-bar">
+    <div class="flex items-center gap-md">
+      <span class="body-xs text-muted">Nexus Shopkeeper v1.0.0</span>
+      <span class="body-xs text-muted">|</span>
+      <span class="body-xs text-muted">Backend: FastAPI @ localhost:8000</span>
+    </div>
+    <div class="flex items-center gap-md">
+      <span class="body-xs text-muted">Auto-refresh: 30s</span>
+      <span class="body-xs text-muted">|</span>
+      <span class="body-xs text-muted" id="dash-clock"></span>
+    </div>
+  </footer>
+
   <script src="../assets/js/app.js"></script>
+  <script>
+    // Dashboard clock
+    (function dashClock() {
+      const el = document.getElementById('dash-clock');
+      if (!el) return;
+      const tick = () => { el.textContent = new Date().toLocaleString('en-US', { hour12: true, hour:'2-digit', minute:'2-digit', second:'2-digit', month:'short', day:'numeric' }); };
+      tick(); setInterval(tick, 1000);
+    })();
+
+    // Settings placeholder
+    document.getElementById('settings-link')?.addEventListener('click', e => { e.preventDefault(); Toast.info('Settings panel coming in v1.1'); });
+
+    // Table sorting
+    document.querySelectorAll('.data-table thead th').forEach((th, colIndex) => {
+      let asc = true;
+      th.addEventListener('click', () => {
+        const tbody = th.closest('table').querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort((a, b) => {
+          const cellA = a.children[colIndex]?.textContent.trim() || '';
+          const cellB = b.children[colIndex]?.textContent.trim() || '';
+          const numA = parseFloat(cellA.replace(/[^0-9.-]/g, ''));
+          const numB = parseFloat(cellB.replace(/[^0-9.-]/g, ''));
+          if (!isNaN(numA) && !isNaN(numB)) return asc ? numA - numB : numB - numA;
+          return asc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+        rows.forEach(r => tbody.appendChild(r));
+        asc = !asc;
+      });
+    });
+  </script>
 </body>
 </html>
