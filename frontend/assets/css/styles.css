@@ -1197,6 +1197,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
 .dashboard-body {
   background: var(--bg-deepest);
   overflow-y: auto !important;
+  overflow: auto !important;
   height: auto !important;
   min-height: 100vh;
 }
