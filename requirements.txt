@@ -3,3 +3,4 @@ uvicorn
 numpy
 pydantic
 python-dotenv
+python-multipart

@@ -15,6 +15,12 @@
 </head>
 <body class="kiosk-body">
 
+  <!-- Persistent Floating Language & Mobile Sync Controls -->
+  <div style="position: fixed; top: 24px; left: 24px; z-index: 999; display: flex; gap: 10px;" class="no-print">
+    <button id="btn-language-toggle" class="btn btn-glass btn-sm" style="border: 1px solid var(--border-subtle); background: rgba(10,11,16,0.65); backdrop-filter: blur(8px); font-weight: 700; height: 36px; padding: 0 16px;">🌐 EN / اردو</button>
+    <button id="btn-qr-mobile" class="btn btn-glass btn-sm" style="border: 1px solid var(--border-subtle); background: rgba(10,11,16,0.65); backdrop-filter: blur(8px); font-weight: 700; height: 36px; padding: 0 16px;" data-translate="mobile_sync_btn">📱 Mobile Sync</button>
+  </div>
+
   <!-- ═══════════════════════════════════════════════════════════════
        VIEW 0 — ENTRY SCREEN
        ═══════════════════════════════════════════════════════════════ -->
@@ -183,15 +189,33 @@
       </main>
 
       <!-- RIGHT SIDEBAR -->
-      <aside class="sidebar sidebar-right" id="sidebar-right">
-        <div class="glass-card sidebar-section">
-          <h3 class="sidebar-section-title">🤖 AI Smart Assistant</h3>
-          <div class="ai-recs" id="ai-recs">
-            <!-- Rendered by JS -->
+      <aside class="sidebar sidebar-right" id="sidebar-right" style="display: flex; flex-direction: column; gap: var(--space-md);">
+        <!-- AI chat guide widget -->
+        <div class="glass-card sidebar-section" style="flex: 1.5; display: flex; flex-direction: column; height: calc(100% - 10px);">
+          <h3 class="sidebar-section-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span data-translate="ai_title">🤖 AI Concierge Guide</span>
+            <button class="btn btn-glass btn-sm" id="btn-clear-chat" style="padding: 2px 6px; font-size: 10px;" data-translate="clear_btn">Clear</button>
+          </h3>
+          
+          <div id="ai-chat-messages" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; max-height: 220px; padding-right: 4px; font-size: 12px; margin-bottom: 8px; scroll-behavior: smooth;">
+            <div style="background: rgba(88,101,242,0.1); border-left: 2px solid var(--cosmic-indigo); padding: 8px; border-radius: var(--radius-sm); color: var(--text-secondary);" data-translate="ai_greeting">
+              Hello! I am your AI Mart Guide. Ask me anything like <em>"Where is rice?"</em> or upload an item picture to see its shelf coordinates.
+            </div>
+          </div>
+          
+          <!-- Camera/Photo Search and Text Input -->
+          <div style="display: flex; gap: 6px; align-items: center; position: relative;">
+            <button class="btn btn-glass btn-sm" id="btn-camera-upload" title="Upload Product Photo" style="padding: 8px 10px;">
+              📷
+            </button>
+            <input type="file" id="camera-file-input" style="display: none;" accept="image/*" />
+            <input type="text" id="ai-chat-input" class="search-input" placeholder="Ask AI... (English / اردو)" style="flex: 1; height: 36px; font-size: 12px; padding-left: 10px;" />
+            <button class="btn btn-primary btn-sm" id="btn-send-chat" style="padding: 6px 12px; height: 36px;">➔</button>
           </div>
         </div>
-        <div class="glass-card sidebar-section">
-          <h3 class="sidebar-section-title">⭐ Featured Purchases</h3>
+
+        <div class="glass-card sidebar-section" style="flex: 1;">
+          <h3 class="sidebar-section-title" data-translate="sponsored_title">⭐ Featured Purchases</h3>
           <div class="sponsored-items" id="sponsored-items">
             <!-- Rendered by JS -->
           </div>
@@ -313,37 +337,57 @@
       </div>
       <div class="modal-body" style="padding-bottom: 0;">
         <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
-          <div id="pd-emoji" style="font-size: 56px; background: var(--bg-raised); padding: 16px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">🍎</div>
+          <img id="pd-image" src="" alt="Product Image" style="width: 80px; height: 80px; object-fit: cover; background: var(--bg-raised); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);" />
           <div>
             <h3 id="pd-name" style="font-size: 18px; margin-bottom: 6px; color: var(--text-primary);">Product Name</h3>
             <span id="pd-category-badge" class="badge" style="background: var(--cosmic-indigo); color: #fff; padding: 4px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Category</span>
           </div>
         </div>
         
-        <p id="pd-description" style="color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; font-size: 13.5px; min-height: 48px;">Detailed product description and supply chain specifications.</p>
+        <p id="pd-description" style="color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; font-size: 13px; min-height: 40px;">Detailed product description and supply chain specifications.</p>
         
-        <div class="finder-details-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
-          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Floor Level</div>
-            <div id="pd-floor" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">Ground Floor</div>
+        <div class="finder-details-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;" data-translate="floor_level">Floor Level</div>
+            <div id="pd-floor" style="font-size: 13px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">Ground Floor</div>
           </div>
-          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Aisle Location</div>
-            <div id="pd-aisle" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">Aisle B</div>
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;" data-translate="aisle_location">Aisle Location</div>
+            <div id="pd-aisle" style="font-size: 13px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">Aisle B</div>
           </div>
-          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Shelf Rank</div>
-            <div id="pd-shelf" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">3 of 5</div>
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;" data-translate="shelf_rank">Shelf Rank</div>
+            <div id="pd-shelf" style="font-size: 13px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">3 of 5</div>
           </div>
-          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Aisle Coordinates</div>
-            <div id="pd-coords" style="font-size: 14px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">X: 4.0m, Y: 1.5m, Z: 1.1m</div>
+          <div class="finder-detail-box" style="background: var(--bg-raised); padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;" data-translate="aisle_coords">Aisle Coordinates</div>
+            <div id="pd-coords" style="font-size: 13px; font-weight: 700; color: var(--cyber-teal); margin-top: 4px;">X: 4.0m, Y: 1.5m, Z: 1.1m</div>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-top: 16px; padding-bottom: 16px;">
-          <div style="font-size: 24px; font-weight: 800; color: var(--text-primary);" id="pd-price">Rs. 0</div>
-          <button class="btn btn-primary" id="pd-add-to-cart">🛒 Add to Cart</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 12px; margin-top: 12px;">
+          <div style="font-size: 22px; font-weight: 800; color: var(--text-primary);" id="pd-price">Rs. 0</div>
+          <button class="btn btn-primary" id="pd-add-to-cart" data-translate="add_to_cart">🛒 Add to Cart</button>
+        </div>
+
+        <!-- Cheaper/Premium Alternatives -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 12px; margin-top: 12px; padding-bottom: 16px;">
+          <h4 style="font-size: 12px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); text-align: left; display: flex; justify-content: space-between; align-items: center;">
+            <span data-translate="smart_suggestions">⚡ Smart Alternatives (Cheaper vs. Premium)</span>
+            <span style="font-size: 9px; font-weight: 500; color: var(--text-muted);" data-translate="pricing_tiers">Real-time pricing tiers</span>
+          </h4>
+          <div style="display: flex; gap: 10px;">
+            <div id="alt-cheaper-card" class="glass-card" style="flex: 1; padding: 8px; border-radius: var(--radius-md); border: 1px dashed rgba(34, 197, 94, 0.3); background: rgba(34, 197, 94, 0.02); cursor: pointer; text-align: left; transition: all 0.2s;">
+              <div style="font-size: 8px; font-weight: 700; color: var(--success-green); text-transform: uppercase; letter-spacing: 0.5px;" data-translate="cheaper_alternative">📉 Cheaper Option</div>
+              <div id="alt-cheaper-name" style="font-size: 11px; font-weight: 700; color: var(--text-primary); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">N/A</div>
+              <div id="alt-cheaper-price" style="font-size: 10px; font-weight: 600; color: var(--success-green); margin-top: 2px;">Rs. 0</div>
+            </div>
+            <div id="alt-expensive-card" class="glass-card" style="flex: 1; padding: 8px; border-radius: var(--radius-md); border: 1px dashed rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.02); cursor: pointer; text-align: left; transition: all 0.2s;">
+              <div style="font-size: 8px; font-weight: 700; color: var(--amber-gold); text-transform: uppercase; letter-spacing: 0.5px;" data-translate="expensive_alternative">📈 Premium Option</div>
+              <div id="alt-expensive-name" style="font-size: 11px; font-weight: 700; color: var(--text-primary); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">N/A</div>
+              <div id="alt-expensive-price" style="font-size: 10px; font-weight: 600; color: var(--amber-gold); margin-top: 2px;">Rs. 0</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -366,6 +410,25 @@
   <!-- ═══════════════════════════════════════════════════════════════
        TOAST CONTAINER
        ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════
+       MOBILE SYNC QR MODAL
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="qr-modal-overlay">
+    <div class="modal glass-card" id="qr-modal" style="max-width: 360px; width: 90%; text-align: center;">
+      <div class="modal-header">
+        <h2 style="font-size: 18px; font-weight: 700;" data-translate="mobile_sync">Sync Kiosk to Mobile</h2>
+        <button class="modal-close" id="qr-modal-close">✕</button>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-bottom: 20px;">
+        <p class="body-xs text-secondary" style="font-size:12px; line-height: 1.4;" data-translate="qr_instructions">Scan this QR code with your phone camera to take your cart, aisle coordinates, and customer profile on the go!</p>
+        <svg width="180" height="180" viewBox="0 0 29 29" style="background: white; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <path d="M0 0h7v7H0zm2 2v3h3V2zm5 5h3v3H7zm3-7h7v7h-7zm2 2v3h3V2zm8-2h9v9h-9zm2 2v5h5V2zm-12 8h7v7h-7zm2 2v3h3v-3zm11-2h9v9h-9zm2 2v5h5V2zm-15 9h3v3H7zm11 0h3v3h-3zm-6 2h3v3h-3zm5 2h3v3h-3zm-9 3h3v3H2zm7 0h3v3H9zm5 0h3v3h-3zm4 0h3v3h-3zm7 0h3v3h-3zm-17 3h3v3H5zm6 0h3v3h-3zm5 0h3v3h-3zm4 0h3v3h-3zm-12 3h3v3H8zm7 0h3v3h-3zm4 0h3v3h-3z" fill="#0a0b10"/>
+        </svg>
+        <span style="font-size: 11px; font-weight: 700; color: var(--cyber-teal);" data-translate="server_ip">Mart Network IP: 192.168.10.85:8000</span>
+      </div>
+    </div>
+  </div>
+
   <div class="toast-container" id="toast-container"></div>
 
   <!-- ═══════════════════════════════════════════════════════════════

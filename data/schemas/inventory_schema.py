@@ -29,6 +29,7 @@ class InventoryItem(BaseModel):
     is_luxury: bool = Field(False, description="Whether this is a luxury/premium item")
     is_bulk_eligible: bool = Field(False, description="Whether bulk discounts are available")
     expiry_days: Optional[int] = Field(None, ge=1, description="Shelf life in days (None for non-perishable)")
+    image: Optional[str] = Field(None, description="Product image URL")
 
     @validator("category")
     def validate_category(cls, v):

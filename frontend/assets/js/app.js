@@ -7,26 +7,26 @@
 // PRODUCT CATALOG FALLBACK — 20 Pakistani Products
 // ─────────────────────────────────────────────
 const FALLBACK_PRODUCTS = [
-  { item_id: 'SKU-0001', name: 'Guard Basmati Rice 5kg', price: 1450, category: 'pantry', rack_id: 'C1', shelf_position: 1, stock_quantity: 45, reorder_threshold: 10, supplier: 'Guard Agri', weight_kg: 5.0 },
-  { item_id: 'SKU-0002', name: 'Mezan Cooking Oil 5L', price: 2890, category: 'pantry', rack_id: 'C2', shelf_position: 2, stock_quantity: 32, reorder_threshold: 8, supplier: 'Mezan Group', weight_kg: 4.6 },
-  { item_id: 'SKU-0003', name: 'Tapal Danedar Tea 950g', price: 1350, category: 'beverages', rack_id: 'A1', shelf_position: 3, stock_quantity: 60, reorder_threshold: 15, supplier: 'Tapal Tea Pvt Ltd', weight_kg: 0.95 },
-  { item_id: 'SKU-0004', name: 'National Biryani Masala 90g', price: 180, category: 'pantry', rack_id: 'C3', shelf_position: 1, stock_quantity: 120, reorder_threshold: 20, supplier: 'National Foods', weight_kg: 0.09 },
-  { item_id: 'SKU-0005', name: 'Shan Karahi Masala 50g', price: 120, category: 'pantry', rack_id: 'C4', shelf_position: 2, stock_quantity: 95, reorder_threshold: 20, supplier: 'Shan Foods', weight_kg: 0.05 },
-  { item_id: 'SKU-0006', name: 'Olpers Milk 1.5L', price: 380, category: 'dairy', rack_id: 'D1', shelf_position: 1, stock_quantity: 40, reorder_threshold: 12, supplier: 'Engro Foods', weight_kg: 1.5 },
-  { item_id: 'SKU-0007', name: 'Nurpur Butter 200g', price: 450, category: 'dairy', rack_id: 'D2', shelf_position: 2, stock_quantity: 25, reorder_threshold: 5, supplier: 'Nurpur Dairy', weight_kg: 0.2 },
-  { item_id: 'SKU-0008', name: 'Everyday Milk Powder 900g', price: 1650, category: 'beverages', rack_id: 'A2', shelf_position: 4, stock_quantity: 30, reorder_threshold: 10, supplier: 'Nestle Pakistan', weight_kg: 0.9 },
-  { item_id: 'SKU-0009', name: 'Lays Classic Chips 155g', price: 200, category: 'snacks', rack_id: 'B1', shelf_position: 1, stock_quantity: 80, reorder_threshold: 15, supplier: 'Pepsico Pakistan', weight_kg: 0.155 },
-  { item_id: 'SKU-0010', name: 'Sooper Biscuits 120g', price: 80, category: 'snacks', rack_id: 'B2', shelf_position: 2, stock_quantity: 150, reorder_threshold: 30, supplier: 'English Biscuit Manufacturers', weight_kg: 0.12 },
-  { item_id: 'SKU-0011', name: 'Sunsilk Shampoo 360ml', price: 680, category: 'personal_care', rack_id: 'E1', shelf_position: 3, stock_quantity: 55, reorder_threshold: 10, supplier: 'Unilever Pakistan', weight_kg: 0.36 },
-  { item_id: 'SKU-0012', name: 'Safeguard Soap 175g', price: 150, category: 'personal_care', rack_id: 'E2', shelf_position: 1, stock_quantity: 110, reorder_threshold: 20, supplier: 'Procter & Gamble', weight_kg: 0.175 },
-  { item_id: 'SKU-0013', name: 'Surf Excel 1kg', price: 520, category: 'household', rack_id: 'F1', shelf_position: 1, stock_quantity: 65, reorder_threshold: 12, supplier: 'Unilever Pakistan', weight_kg: 1.0 },
-  { item_id: 'SKU-0014', name: 'Harpic Toilet Cleaner 500ml', price: 380, category: 'household', rack_id: 'F2', shelf_position: 2, stock_quantity: 40, reorder_threshold: 8, supplier: 'Reckitt Benckiser', weight_kg: 0.5 },
-  { item_id: 'SKU-0015', name: 'Dalda Cooking Oil 3L', price: 1780, category: 'pantry', rack_id: 'C5', shelf_position: 3, stock_quantity: 28, reorder_threshold: 6, supplier: 'Dalda Foods', weight_kg: 2.76 },
-  { item_id: 'SKU-0016', name: 'Sufi Banaspati Ghee 1kg', price: 590, category: 'pantry', rack_id: 'C1', shelf_position: 4, stock_quantity: 50, reorder_threshold: 10, supplier: 'Sufi Group', weight_kg: 1.0 },
-  { item_id: 'SKU-0017', name: 'Knorr Noodles 6-Pack', price: 300, category: 'snacks', rack_id: 'B3', shelf_position: 3, stock_quantity: 90, reorder_threshold: 20, supplier: 'Unilever Pakistan', weight_kg: 0.36 },
-  { item_id: 'SKU-0018', name: 'Tang Orange 750g', price: 850, category: 'beverages', rack_id: 'A3', shelf_position: 2, stock_quantity: 45, reorder_threshold: 10, supplier: 'Mondelez', weight_kg: 0.75 },
-  { item_id: 'SKU-0019', name: 'Rooh Afza 800ml', price: 490, category: 'beverages', rack_id: 'A4', shelf_position: 1, stock_quantity: 70, reorder_threshold: 15, supplier: 'Hamdard Pakistan', weight_kg: 0.8 },
-  { item_id: 'SKU-0020', name: 'Vital Tea 475g', price: 720, category: 'beverages', rack_id: 'A5', shelf_position: 2, stock_quantity: 50, reorder_threshold: 12, supplier: 'Eastern Products', weight_kg: 0.475 },
+  { item_id: 'SKU-0001', name: 'Guard Basmati Rice 5kg', price: 1450, category: 'pantry', rack_id: 'C1', shelf_position: 1, stock_quantity: 45, reorder_threshold: 10, supplier: 'Guard Agri', weight_kg: 5.0, image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=350' },
+  { item_id: 'SKU-0002', name: 'Mezan Cooking Oil 5L', price: 2890, category: 'pantry', rack_id: 'C2', shelf_position: 2, stock_quantity: 32, reorder_threshold: 8, supplier: 'Mezan Group', weight_kg: 4.6, image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=350' },
+  { item_id: 'SKU-0003', name: 'Tapal Danedar Tea 950g', price: 1350, category: 'beverages', rack_id: 'A1', shelf_position: 3, stock_quantity: 60, reorder_threshold: 15, supplier: 'Tapal Tea Pvt Ltd', weight_kg: 0.95, image: 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=350' },
+  { item_id: 'SKU-0004', name: 'National Biryani Masala 90g', price: 180, category: 'pantry', rack_id: 'C3', shelf_position: 1, stock_quantity: 120, reorder_threshold: 20, supplier: 'National Foods', weight_kg: 0.09, image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=350' },
+  { item_id: 'SKU-0005', name: 'Shan Karahi Masala 50g', price: 120, category: 'pantry', rack_id: 'C4', shelf_position: 2, stock_quantity: 95, reorder_threshold: 20, supplier: 'Shan Foods', weight_kg: 0.05, image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=350' },
+  { item_id: 'SKU-0006', name: 'Olpers Milk 1.5L', price: 380, category: 'dairy', rack_id: 'D1', shelf_position: 1, stock_quantity: 40, reorder_threshold: 12, supplier: 'Engro Foods', weight_kg: 1.5, image: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=350' },
+  { item_id: 'SKU-0007', name: 'Nurpur Butter 200g', price: 450, category: 'dairy', rack_id: 'D2', shelf_position: 2, stock_quantity: 25, reorder_threshold: 5, supplier: 'Nurpur Dairy', weight_kg: 0.2, image: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=350' },
+  { item_id: 'SKU-0008', name: 'Everyday Milk Powder 900g', price: 1650, category: 'beverages', rack_id: 'A2', shelf_position: 4, stock_quantity: 30, reorder_threshold: 10, supplier: 'Nestle Pakistan', weight_kg: 0.9, image: 'https://images.unsplash.com/photo-1628163182830-27e91136b6d2?w=350' },
+  { item_id: 'SKU-0009', name: 'Lays Classic Chips 155g', price: 200, category: 'snacks', rack_id: 'B1', shelf_position: 1, stock_quantity: 80, reorder_threshold: 15, supplier: 'Pepsico Pakistan', weight_kg: 0.155, image: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=350' },
+  { item_id: 'SKU-0010', name: 'Sooper Biscuits 120g', price: 80, category: 'snacks', rack_id: 'B2', shelf_position: 2, stock_quantity: 150, reorder_threshold: 30, supplier: 'English Biscuit Manufacturers', weight_kg: 0.12, image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=350' },
+  { item_id: 'SKU-0011', name: 'Sunsilk Shampoo 360ml', price: 680, category: 'personal_care', rack_id: 'E1', shelf_position: 3, stock_quantity: 55, reorder_threshold: 10, supplier: 'Unilever Pakistan', weight_kg: 0.36, image: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=350' },
+  { item_id: 'SKU-0012', name: 'Safeguard Soap 175g', price: 150, category: 'personal_care', rack_id: 'E2', shelf_position: 1, stock_quantity: 110, reorder_threshold: 20, supplier: 'Procter & Gamble', weight_kg: 0.175, image: 'https://images.unsplash.com/photo-1607006342411-91f158557978?w=350' },
+  { item_id: 'SKU-0013', name: 'Surf Excel 1kg', price: 520, category: 'household', rack_id: 'F1', shelf_position: 1, stock_quantity: 65, reorder_threshold: 12, supplier: 'Unilever Pakistan', weight_kg: 1.0, image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=350' },
+  { item_id: 'SKU-0014', name: 'Harpic Toilet Cleaner 500ml', price: 380, category: 'household', rack_id: 'F2', shelf_position: 2, stock_quantity: 40, reorder_threshold: 8, supplier: 'Reckitt Benckiser', weight_kg: 0.5, image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=350' },
+  { item_id: 'SKU-0015', name: 'Dalda Cooking Oil 3L', price: 1780, category: 'pantry', rack_id: 'C5', shelf_position: 3, stock_quantity: 28, reorder_threshold: 6, supplier: 'Dalda Foods', weight_kg: 2.76, image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=350' },
+  { item_id: 'SKU-0016', name: 'Sufi Banaspati Ghee 1kg', price: 590, category: 'pantry', rack_id: 'C1', shelf_position: 4, stock_quantity: 50, reorder_threshold: 10, supplier: 'Sufi Group', weight_kg: 1.0, image: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=350' },
+  { item_id: 'SKU-0017', name: 'Knorr Noodles 6-Pack', price: 300, category: 'snacks', rack_id: 'B3', shelf_position: 3, stock_quantity: 90, reorder_threshold: 20, supplier: 'Unilever Pakistan', weight_kg: 0.36, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=350' },
+  { item_id: 'SKU-0018', name: 'Tang Orange 750g', price: 850, category: 'beverages', rack_id: 'A3', shelf_position: 2, stock_quantity: 45, reorder_threshold: 10, supplier: 'Mondelez', weight_kg: 0.75, image: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=350' },
+  { item_id: 'SKU-0019', name: 'Rooh Afza 800ml', price: 490, category: 'beverages', rack_id: 'A4', shelf_position: 1, stock_quantity: 70, reorder_threshold: 15, supplier: 'Hamdard Pakistan', weight_kg: 0.8, image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=350' },
+  { item_id: 'SKU-0020', name: 'Vital Tea 475g', price: 720, category: 'beverages', rack_id: 'A5', shelf_position: 2, stock_quantity: 50, reorder_threshold: 12, supplier: 'Eastern Products', weight_kg: 0.475, image: 'https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=350' },
 ];
 
 const UI_CATEGORIES = {
@@ -38,6 +38,129 @@ const UI_CATEGORIES = {
   'produce': { name: 'Fresh Produce', emoji: '🍎', color: '#a855f7' },
   'household': { name: 'Household Utility', emoji: '🧹', color: '#06b6d4' },
   'personal_care': { name: 'Personal Care', emoji: '🧴', color: '#ec4899' }
+};
+
+const TRANSLATIONS = {
+  en: {
+    welcome_title: "Nexus Shopkeeper",
+    welcome_subtitle: "Pakistan's Smartest Autonomous Retail Kiosk",
+    enter_mart_btn: "Check In (Enter Mart)",
+    exit_mart_btn: "Check Out (Pay)",
+    footer_note: "Touch an option to begin. No human checkout lines, 100% automated.",
+    loyalty_title: "Loyalty Verification",
+    loyalty_subtitle: "Identify yourself to apply personal discounts & credit limits",
+    loyalty_question: "Are you a premium card holder?",
+    yes_pin_btn: "Yes, I have a PIN",
+    guest_btn: "Continue as Guest",
+    back_entry_btn: "← Back to Entry",
+    enter_pin_title: "Enter Your 6-Digit PIN",
+    enter_pin_subtitle: "Type your membership PIN to retrieve your active profile",
+    verify_pin_btn: "Verify PIN →",
+    cancel_btn: "← Cancel & Go Back",
+    search_placeholder: "Search product database... (e.g. Cola, Juice, Milk)",
+    view_cart_btn: "View Cart",
+    account_label: "Account",
+    cart_sidebar_btn: "🛒 View Current Cart",
+    ai_sidebar_btn: " Ask AI Guide",
+    reset_sidebar_btn: "📋 Reset Finder",
+    exit_sidebar_btn: "🚪 Exit Mart / Logout",
+    staff_count: "Mart operated by 10 active automation technicians.",
+    staff_reduction: "Staff headcount reduced by 85% via automated IoT storage.",
+    browse_title: "Browse Store Aisle Categories",
+    ai_title: "🤖 AI Concierge Guide",
+    clear_btn: "Clear",
+    ai_greeting: "Hello! I am your AI Mart Guide. Ask me anything like \"Where is rice?\" or upload an item picture to see its shelf coordinates.",
+    sponsored_title: "⭐ Featured Purchases",
+    checkout_back_btn: "← Back to Mart",
+    cart_items_title: "🛍️ Your Cart Items",
+    checkout_count: "items",
+    checkout_empty: "Your cart is empty.",
+    grand_total: "Grand Total:",
+    payment_title: "🔒 Select Payment Method",
+    cash_pay_btn: "Cash (Insert Rupees) 💵",
+    card_pay_btn: "Mart Card (Tap reader) 💳",
+    points_pay_btn: "Store Points (Redeem) 🪙",
+    coupons_pay_btn: "Loyalty Coupons (Scan) 🎟️",
+    mobile_sync_btn: "📱 Mobile Sync",
+    mobile_sync: "Sync Kiosk to Mobile",
+    qr_instructions: "Scan this QR code with your phone camera to take your cart, aisle coordinates, and customer profile on the go!",
+    server_ip: "Mart Network IP: 192.168.10.85:8000",
+    floor_level: "Floor Level",
+    aisle_location: "Aisle Location",
+    shelf_rank: "Shelf Rank",
+    aisle_coords: "Aisle Coordinates",
+    add_to_cart: "🛒 Add to Cart",
+    smart_suggestions: "⚡ Smart Alternatives (Cheaper vs. Premium)",
+    pricing_tiers: "Real-time pricing tiers",
+    cheaper_alternative: "📉 Cheaper Option",
+    expensive_alternative: "📈 Premium Option",
+    checkout_success: "✅ Payment Approved! processed via ",
+    checkout_failed: "❌ Checkout transaction rejected. Insufficient credits."
+  },
+  ur: {
+    welcome_title: "نیکس شاپ کیپر",
+    welcome_subtitle: "پاکستان کا سب سے ذہین اور خودکار ریٹیل کیوسک",
+    enter_mart_btn: "داخل ہوں (چیک ان)",
+    exit_mart_btn: "ادائیگی کریں (چیک آؤٹ)",
+    footer_note: "شروع کرنے کے لیے ایک آپشن کو چھوئیں. کوئی انسانی کیشئیر لائن نہیں، 100٪ خودکار۔",
+    loyalty_title: "وفاداری کی تصدیق",
+    loyalty_subtitle: "ذاتی ڈسکاؤنٹ اور کریڈٹ کی حد لاگو کرنے کے لیے اپنی شناخت کروائیں",
+    loyalty_question: "کیا آپ کے پاس پریمیم ممبرشپ کارڈ ہے؟",
+    yes_pin_btn: "جی ہاں، میرے پاس پن ہے",
+    guest_btn: "مہمان صارف کے طور پر جاری رکھیں",
+    back_entry_btn: "← واپس شروع پر جائیں",
+    enter_pin_title: "اپنا 6 ہندسوں کا پن درج کریں",
+    enter_pin_subtitle: "اپنا ایکٹو پروفائل حاصل کرنے کے لیے پن کوڈ درج کریں",
+    verify_pin_btn: "تصدیق کریں پن →",
+    cancel_btn: "← منسوخ کریں اور واپس جائیں",
+    search_placeholder: "پروڈکٹ ڈیٹا بیس تلاش کریں... (جیسے: چاول، تیل، دودھ)",
+    view_cart_btn: "کارٹ دیکھیں",
+    account_label: "صارف",
+    cart_sidebar_btn: "🛒 کارٹ دیکھیں",
+    ai_sidebar_btn: " Ask AI Guide",
+    reset_sidebar_btn: "📋 سرچ بحال کریں",
+    exit_sidebar_btn: "🚪 باہر نکلیں / لاگ آؤٹ",
+    staff_count: "مارٹ 10 سرگرم خودکار تکنیکی ماہرین کے ذریعہ چلایا جاتا ہے۔",
+    staff_reduction: "خودکار آئی او ٹی اسٹوریج کی وجہ سے عملے کی تعداد میں 85 فیصد کمی۔",
+    browse_title: "اسٹور آئل کیٹیگریز براؤز کریں",
+    ai_title: "🤖 اے آئی گائیڈ اور مددگار",
+    clear_btn: "صاف کریں",
+    ai_greeting: "خوش آمدید! میں آپ کا AI اسٹور گائیڈ ہوں۔ مجھ سے کچھ بھی پوچھیں جیسے \"چاول کہاں ہے؟\" یا معلومات کے لیے تصویر اپ لوڈ کریں۔",
+    sponsored_title: "⭐ تجویز کردہ اشیاء",
+    checkout_back_btn: "← واپس مارٹ پر جائیں",
+    cart_items_title: "🛍️ آپ کے کارٹ کی اشیاء",
+    checkout_count: "اشیاء",
+    checkout_empty: "آپ کا کارٹ خالی ہے۔",
+    grand_total: "کل رقم:",
+    payment_title: "🔒 ادائیگی کا طریقہ منتخب کریں",
+    cash_pay_btn: "نقد رقم (روپے ڈالیں) 💵",
+    card_pay_btn: "مارٹ کارڈ (ٹیپ کریں) 💳",
+    points_pay_btn: "اسٹور پوائنٹس (بدلیں) 🪙",
+    coupons_pay_btn: "ڈسکاؤنٹ کوپن (اسکین کریں) 🎟️",
+    mobile_sync_btn: "📱 موبائل لنک",
+    mobile_sync: "کیوسک کو موبائل سے جوڑیں",
+    qr_instructions: "اپنے فون کیمرے سے یہ کیو آر کوڈ اسکین کریں اور اپنی کارٹ اور معلومات فون پر لے جائیں!",
+    server_ip: "نیٹ ورک آئی پی: 192.168.10.85:8000",
+    floor_level: "منزل کا لیول",
+    aisle_location: "آئل لوکیشن",
+    shelf_rank: "شیلف نمبر",
+    aisle_coords: "مقام کے کوآرڈینیٹس",
+    add_to_cart: "🛒 کارٹ میں شامل کریں",
+    smart_suggestions: "⚡ بہترین متبادلات (سستا بمقابلہ مہنگا)",
+    pricing_tiers: "قیمت کے درجات",
+    cheaper_alternative: "📉 سستا متبادل",
+    expensive_alternative: "📈 پریمیم متبادل",
+    checkout_success: "✅ ادائیگی منظور کر لی گئی ہے! بذریعہ: ",
+    checkout_failed: "❌ ادائیگی مسترد کر دی گئی۔ ناکافی بیلنس۔",
+    beverages: "مشروبات",
+    snacks: "سنیکس اور مٹھائیاں",
+    pantry: "گراسری اور راشن",
+    dairy: "دودھ اور مکھن",
+    frozen: "منجمد اشیاء",
+    produce: "تازہ سبزیاں اور پھل",
+    household: "گھریلو سامان",
+    personal_care: "ذاتی نگہداشت"
+  }
 };
 
 // ─────────────────────────────────────────────
@@ -237,6 +360,7 @@ class KioskApp {
     this.memberData = null;
     this.products = [];
     this.searchDebounce = null;
+    this.currentLang = 'en'; // default language
 
     this._cacheElements();
     this._bindEvents();
@@ -277,7 +401,7 @@ class KioskApp {
     // Product details components
     this.pdOverlay        = document.getElementById('product-details-overlay');
     this.pdName           = document.getElementById('pd-name');
-    this.pdEmoji          = document.getElementById('pd-emoji');
+    this.pdImage          = document.getElementById('pd-image'); // Replaced pdEmoji with image
     this.pdCategoryBadge  = document.getElementById('pd-category-badge');
     this.pdDescription    = document.getElementById('pd-description');
     this.pdFloor          = document.getElementById('pd-floor');
@@ -295,9 +419,42 @@ class KioskApp {
     this.supportWidget    = document.getElementById('support-widget');
     this.supportText      = document.getElementById('support-widget-text');
     this.staffIndicator   = document.getElementById('staff-count-indicator');
+
+    // Language & Mobile Sync components
+    this.langToggle       = document.getElementById('btn-language-toggle');
+    this.qrBtn            = document.getElementById('btn-qr-mobile');
+    this.qrOverlay        = document.getElementById('qr-modal-overlay');
+    this.qrClose          = document.getElementById('qr-modal-close');
+
+    // AI Concierge Chat components
+    this.aiChatMessages   = document.getElementById('ai-chat-messages');
+    this.aiChatInput      = document.getElementById('ai-chat-input');
+    this.aiSendBtn        = document.getElementById('btn-send-chat');
+    this.aiClearBtn       = document.getElementById('btn-clear-chat');
+    this.cameraUploadBtn  = document.getElementById('btn-camera-upload');
+    this.cameraFileInput  = document.getElementById('camera-file-input');
   }
 
   _bindEvents() {
+    // Language Toggle
+    this.langToggle?.addEventListener('click', () => this.toggleLanguage());
+
+    // Mobile QR Modal Toggle
+    this.qrBtn?.addEventListener('click', () => this.qrOverlay?.classList.add('visible'));
+    this.qrClose?.addEventListener('click', () => this.qrOverlay?.classList.remove('visible'));
+    this.qrOverlay?.addEventListener('click', (e) => {
+      if (e.target === this.qrOverlay) this.qrOverlay.classList.remove('visible');
+    });
+
+    // AI Chat Actions
+    this.aiSendBtn?.addEventListener('click', () => this.handleSendMessage());
+    this.aiChatInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') this.handleSendMessage();
+    });
+    this.aiClearBtn?.addEventListener('click', () => this.clearChatMessages());
+    this.cameraUploadBtn?.addEventListener('click', () => this.cameraFileInput?.click());
+    this.cameraFileInput?.addEventListener('change', (e) => this.handlePhotoUpload(e));
+
     // View transitions
     document.getElementById('btn-enter-mart').addEventListener('click', () => this._switchScreen('welcome-screen'));
     document.getElementById('btn-exit-mart').addEventListener('click', () => this._openCheckoutScreen());
@@ -318,7 +475,7 @@ class KioskApp {
         this.pinDigits.pop();
         this._updatePinDots();
       } else if (key === 'scan') {
-        this._showToast('📷 Camera scanner initializing... (Demonstration Mode)', 'info');
+        this.cameraFileInput?.click(); // Redirect card scan to image upload simulation
       } else {
         if (this.pinDigits.length < 6) {
           this.pinDigits.push(key);
@@ -345,10 +502,13 @@ class KioskApp {
     document.getElementById('btn-sidebar-view-cart').addEventListener('click', () => this._openCheckoutScreen());
     document.getElementById('btn-sidebar-catalog').addEventListener('click', () => {
       this.searchInput.value = '';
-      this._showToast('ℹ️ Store explorer reset.', 'info');
+      this._showToast(this.currentLang === 'ur' ? 'انفو: اسٹور تلاش بحال کر دی گئی ہے۔' : 'ℹ️ Store explorer reset.', 'info');
     });
     document.getElementById('btn-sidebar-help').addEventListener('click', () => {
-      this._showToast('🤖 AI: "Please browse categories or search using the search bar at the top."', 'info');
+      const msg = this.currentLang === 'ur' 
+        ? 'اے آئی: "براہ کرم دائیں جانب موجود اے آئی چیٹ گائیڈ کا استعمال کریں!"'
+        : 'AI: "Please use the AI Chat Guide on the right side!"';
+      this._showToast(msg, 'info');
     });
     document.getElementById('btn-logout').addEventListener('click', () => {
       this.memberData = null;
@@ -356,7 +516,7 @@ class KioskApp {
       this._updateCartBadge();
       this._updateProfileView();
       this._switchScreen('entry-screen');
-      this._showToast('🚪 Checked out of Mart. Thank you!', 'info');
+      this._showToast(this.currentLang === 'ur' ? 'نکاس مکمل: خریداری کا شکریہ!' : '🚪 Checked out of Mart. Thank you!', 'info');
     });
 
     // Details modal close
@@ -441,13 +601,13 @@ class KioskApp {
 
   async _verifyPinCode() {
     if (this.pinDigits.length !== 6) {
-      this.pinStatus.textContent = 'Please enter a valid 6-digit PIN';
+      this.pinStatus.textContent = this.currentLang === 'ur' ? 'براہ کرم درست 6 ہندسوں کا پن درج کریں' : 'Please enter a valid 6-digit PIN';
       this.pinStatus.className = 'pin-status error';
       this.audio.playError();
       return;
     }
     const pin = this.pinDigits.join('');
-    this.pinStatus.textContent = 'Validating Card...';
+    this.pinStatus.textContent = this.currentLang === 'ur' ? 'کارڈ کی تصدیق کی جا رہی ہے...' : 'Validating Card...';
     this.pinStatus.className = 'pin-status';
 
     const result = await this.api.verifyMembership(pin);
@@ -458,10 +618,13 @@ class KioskApp {
         dot.classList.add('success');
         dot.textContent = '✓';
       });
-      this.pinStatus.textContent = `✅ Welcome back, ${this.memberData.name}!`;
+      this.pinStatus.textContent = this.currentLang === 'ur' 
+        ? `✅ خوش آمدید، ${this.memberData.name}!`
+        : `✅ Welcome back, ${this.memberData.name}!`;
       this.pinStatus.className = 'pin-status success';
       this.audio.playSuccess();
       this._updateProfileView();
+      this._triggerVoiceWelcome(this.memberData);
       setTimeout(() => {
         this._switchScreen('main-workspace');
         this.pinDigits = [];
@@ -471,7 +634,7 @@ class KioskApp {
       // Try fallback for demo
       if (pin.startsWith('1')) {
         this.pinAttempts = 0;
-        this.memberData = { customer_id: 'CUST-DEMO', name: 'Zeeshan Malik', segment: 'Ultra-Luxury Spender', tier: 'Platinum' };
+        this.memberData = { customer_id: 'CUST-DEMO', name: 'Zeeshan Malik', segment: 'Ultra-Luxury Spender', tier: 'Platinum', store_credit_balance: 4800.0 };
         this.pinDots.forEach(dot => {
           dot.classList.add('success');
           dot.textContent = '✓';
@@ -480,6 +643,7 @@ class KioskApp {
         this.pinStatus.className = 'pin-status success';
         this.audio.playSuccess();
         this._updateProfileView();
+        this._triggerVoiceWelcome(this.memberData);
         setTimeout(() => {
           this._switchScreen('main-workspace');
           this.pinDigits = [];
@@ -493,7 +657,9 @@ class KioskApp {
         });
         
         if (this.pinAttempts >= 3) {
-          this.pinStatus.textContent = '❌ Keypad Locked. Too many failed attempts. Re-enabling in 10s.';
+          this.pinStatus.textContent = this.currentLang === 'ur'
+            ? '❌ کیپڈ لاک ہو گیا۔ 10 سیکنڈ بعد دوبارہ کوشش کریں۔'
+            : '❌ Keypad Locked. Too many failed attempts. Re-enabling in 10s.';
           this.pinStatus.className = 'pin-status error';
           this.audio.playError();
           
@@ -507,7 +673,9 @@ class KioskApp {
             this._updatePinDots();
           }, 10000);
         } else {
-          this.pinStatus.textContent = `❌ Verification failed. (Attempt ${this.pinAttempts} of 3)`;
+          this.pinStatus.textContent = this.currentLang === 'ur'
+            ? `❌ تصدیق ناکام ہو گئی۔ (کوشش ${this.pinAttempts} 3 میں سے)`
+            : `❌ Verification failed. (Attempt ${this.pinAttempts} of 3)`;
           this.pinStatus.className = 'pin-status error';
           this.audio.playError();
         }
@@ -531,11 +699,13 @@ class KioskApp {
     const cats = Object.entries(UI_CATEGORIES);
     this.categoryGrid.innerHTML = cats.map(([id, meta]) => {
       const count = this.products.filter(p => p.category === id).length;
+      const displayName = this.currentLang === 'ur' ? TRANSLATIONS.ur[id] || meta.name : meta.name;
+      const displayCount = this.currentLang === 'ur' ? `${count} اشیاء دستیاب ہیں` : `${count} items available`;
       return `
         <div class="category-card" data-category="${id}" style="--card-accent: ${meta.color}">
           <span class="category-card-emoji">${meta.emoji}</span>
-          <div class="category-card-name">${meta.name}</div>
-          <div class="category-card-count">${count} items available</div>
+          <div class="category-card-name">${displayName}</div>
+          <div class="category-card-count">${displayCount}</div>
         </div>
       `;
     }).join('');
@@ -550,16 +720,21 @@ class KioskApp {
   _openCategoryAisle(catId) {
     const catMeta = UI_CATEGORIES[catId];
     const filtered = this.products.filter(p => p.category === catId);
+    const catName = catMeta ? (this.currentLang === 'ur' ? TRANSLATIONS.ur[catId] || catMeta.name : catMeta.name) : catId;
+    const btnCoordsText = this.currentLang === 'ur' ? 'مقام' : 'Coordinates';
+    const btnAddText = this.currentLang === 'ur' ? 'شامل کریں' : 'Add';
     
-    this.productPanelTitle.textContent = `${catMeta ? catMeta.emoji : '📦'} ${catMeta ? catMeta.name : catId}`;
+    this.productPanelTitle.textContent = `${catMeta ? catMeta.emoji : '📦'} ${catName}`;
     this.productPanelGrid.innerHTML = filtered.map(p => `
       <div class="product-card">
-        <div class="product-card-emoji">${catMeta ? catMeta.emoji : '📦'}</div>
-        <div class="product-card-name">${p.name}</div>
-        <div class="product-card-price">${formatPKR(p.price)}</div>
-        <div style="display: flex; gap: 8px;">
-          <button class="btn btn-glass btn-sm view-details-btn" data-id="${p.item_id}" style="flex: 1; justify-content: center;">🔍 Coordinates</button>
-          <button class="btn btn-primary btn-sm add-cart-btn" data-id="${p.item_id}">🛒 Add</button>
+        <div class="product-card-emoji" style="padding: 0; overflow: hidden; height: 100px; display: flex; align-items: center; justify-content: center; background: #0a0b10;">
+          <img src="${p.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=200'}" alt="${p.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);" />
+        </div>
+        <div class="product-card-name" style="font-size: 11.5px; height: 32px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin-top: 6px;">${p.name}</div>
+        <div class="product-card-price" style="font-size: 12.5px; font-weight: 700; color: var(--text-primary); margin-top: 2px;">${formatPKR(p.price)}</div>
+        <div style="display: flex; gap: 6px; margin-top: 8px; width: 100%;">
+          <button class="btn btn-glass btn-sm view-details-btn" data-id="${p.item_id}" style="flex: 1.2; justify-content: center; font-size: 10px; padding: 4px 6px;">🔍 ${btnCoordsText}</button>
+          <button class="btn btn-primary btn-sm add-cart-btn" data-id="${p.item_id}" style="flex: 0.8; justify-content: center; font-size: 10px; padding: 4px 6px;">${btnAddText}</button>
         </div>
       </div>
     `).join('');
@@ -584,12 +759,20 @@ class KioskApp {
     const catMeta = UI_CATEGORIES[product.category] || { emoji: '📦', name: product.category };
     
     this.pdName.textContent = product.name;
-    this.pdEmoji.textContent = catMeta.emoji;
-    this.pdCategoryBadge.textContent = catMeta.name;
-    this.pdDescription.textContent = `Aisle item SKU ID ${product.item_id}. Maintained by automation systems. Optimal humidity and placement parameters verified. Supplied by ${product.supplier || 'Smart Logistics'}.`;
-    this.pdFloor.textContent = loc.floor;
-    this.pdAisle.textContent = loc.aisle;
-    this.pdShelf.textContent = loc.rank;
+    if (this.pdImage) {
+      this.pdImage.src = product.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=350';
+    }
+    this.pdCategoryBadge.textContent = this.currentLang === 'ur' ? TRANSLATIONS.ur[product.category] || catMeta.name : catMeta.name;
+    
+    if (this.currentLang === 'ur') {
+      this.pdDescription.textContent = `پروڈکٹ SKU ID ${product.item_id}۔ سپلائر: ${product.supplier}۔ خودکار شیلفنگ اور کوآرڈینیٹس ٹریکر فعال ہے۔`;
+    } else {
+      this.pdDescription.textContent = `Aisle item SKU ID ${product.item_id}. Maintained by automation systems. Optimal humidity and placement parameters verified. Supplied by ${product.supplier || 'Smart Logistics'}.`;
+    }
+    
+    this.pdFloor.textContent = this.currentLang === 'ur' ? (loc.floor.includes('Ground') ? 'گراؤنڈ فلور' : 'فرسٹ فلور') : loc.floor;
+    this.pdAisle.textContent = this.currentLang === 'ur' ? `آئل ${product.rack_id[0]}` : loc.aisle;
+    this.pdShelf.textContent = this.currentLang === 'ur' ? `${product.shelf_position} میں سے 5` : loc.rank;
     this.pdCoords.textContent = loc.coords;
     this.pdPrice.textContent = formatPKR(product.price);
     
@@ -597,6 +780,41 @@ class KioskApp {
       this._addToCartById(product.item_id);
       this.pdOverlay.classList.remove('visible');
     };
+
+    // Calculate smart alternatives (Cheaper vs Premium Options)
+    const sameCat = this.products.filter(p => p.category === product.category && p.item_id !== product.item_id);
+    
+    // Cheaper alternative
+    const cheaperItems = sameCat.filter(p => p.price < product.price).sort((a, b) => b.price - a.price);
+    const cheaperProd = cheaperItems.length > 0 ? cheaperItems[0] : null;
+    
+    // Expensive alternative
+    const expensiveItems = sameCat.filter(p => p.price > product.price).sort((a, b) => a.price - b.price);
+    const expensiveProd = expensiveItems.length > 0 ? expensiveItems[0] : null;
+
+    const cheaperCard = document.getElementById('alt-cheaper-card');
+    const cheaperName = document.getElementById('alt-cheaper-name');
+    const cheaperPrice = document.getElementById('alt-cheaper-price');
+    if (cheaperProd && cheaperCard) {
+      cheaperName.textContent = cheaperProd.name;
+      cheaperPrice.textContent = formatPKR(cheaperProd.price);
+      cheaperCard.style.display = 'block';
+      cheaperCard.onclick = () => this._showProductDetails(cheaperProd.item_id);
+    } else if (cheaperCard) {
+      cheaperCard.style.display = 'none';
+    }
+
+    const expensiveCard = document.getElementById('alt-expensive-card');
+    const expensiveName = document.getElementById('alt-expensive-name');
+    const expensivePrice = document.getElementById('alt-expensive-price');
+    if (expensiveProd && expensiveCard) {
+      expensiveName.textContent = expensiveProd.name;
+      expensivePrice.textContent = formatPKR(expensiveProd.price);
+      expensiveCard.style.display = 'block';
+      expensiveCard.onclick = () => this._showProductDetails(expensiveProd.item_id);
+    } else if (expensiveCard) {
+      expensiveCard.style.display = 'none';
+    }
 
     this.pdOverlay.classList.add('visible');
   }
@@ -847,6 +1065,199 @@ class KioskApp {
       toast.classList.add('removing');
       setTimeout(() => toast.remove(), 300);
     }, 3000);
+  }
+
+  toggleLanguage() {
+    this.currentLang = this.currentLang === 'en' ? 'ur' : 'en';
+    document.documentElement.lang = this.currentLang;
+    document.documentElement.dir = this.currentLang === 'ur' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.dataset.translate;
+      const trans = TRANSLATIONS[this.currentLang];
+      if (trans && trans[key]) {
+        const label = el.querySelector('.btn-label');
+        if (label) {
+          label.textContent = trans[key];
+        } else {
+          const badge = el.querySelector('.cart-badge');
+          if (badge) {
+            const count = badge.textContent;
+            el.innerHTML = `<span>🛍️</span> ${trans[key]} <span class="cart-badge" id="cart-badge">${count}</span>`;
+            this.cartBadge = document.getElementById('cart-badge'); // re-cache
+          } else {
+            el.textContent = trans[key];
+          }
+        }
+      }
+    });
+
+    const searchInp = document.getElementById('search-input');
+    if (searchInp) {
+      searchInp.placeholder = TRANSLATIONS[this.currentLang].search_placeholder;
+    }
+    const aiInp = document.getElementById('ai-chat-input');
+    if (aiInp) {
+      aiInp.placeholder = this.currentLang === 'ur' ? 'اے آئی سے پوچھیں... (انگلش / اردو)' : 'Ask AI... (English / اردو)';
+    }
+
+    this._renderCategories();
+    this._renderSidebarElements();
+    this._syncHeadcount();
+
+    const msg = this.currentLang === 'ur' ? 'زبان تبدیل کر دی گئی ہے: اردو' : 'Language changed to: English';
+    this._showToast(msg, 'info');
+  }
+
+  _triggerVoiceWelcome(customer) {
+    try {
+      if (!window.speechSynthesis) return;
+      const name = customer.name || 'Valued Customer';
+      const balance = Math.round(customer.store_credit_balance || 0);
+      
+      let speechText = '';
+      let speechLang = 'en-US';
+      
+      if (this.currentLang === 'ur') {
+        speechText = `خوش آمدید، ${name}! آپ کا اسٹور کریڈٹ بیلنس ${balance} روپے ہے۔ میں آپ کی کیا مدد کر سکتا ہوں؟`;
+        speechLang = 'ur-PK';
+      } else {
+        speechText = `Welcome back, ${name}! Your store credit balance is ${balance} Rupees. How can I assist you today?`;
+        speechLang = 'en-US';
+      }
+      
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(speechText);
+      utterance.lang = speechLang;
+      utterance.rate = 0.9;
+      
+      const voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        const voice = voices.find(v => v.lang.includes(this.currentLang === 'ur' ? 'ur' : 'en'));
+        if (voice) utterance.voice = voice;
+      }
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn("Speech synthesis failed:", e);
+    }
+  }
+
+  speakResponse(text) {
+    try {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const cleanText = text.replace(/📷|💬|⚡|Rs\.|Rs/g, '').replace(/Ground Floor/g, 'Ground Floor').replace(/1st Floor/g, 'First Floor');
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = this.currentLang === 'ur' ? 'ur-PK' : 'en-US';
+      utterance.rate = 0.95;
+      const voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        const voice = voices.find(v => v.lang.includes(this.currentLang === 'ur' ? 'ur' : 'en'));
+        if (voice) utterance.voice = voice;
+      }
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn("Speech synthesis failed:", e);
+    }
+  }
+
+  async handleSendMessage() {
+    const val = this.aiChatInput.value.trim();
+    if (!val) return;
+    
+    this.aiChatInput.value = '';
+    this.appendChatMessage(val, 'user');
+    
+    const payload = { query: val, language: this.currentLang };
+    try {
+      const res = await fetch('http://localhost:8000/api/ai/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data && data.status === 'success') {
+        this.appendChatMessage(data.response, 'ai');
+        this.speakResponse(data.response);
+        
+        if (data.matched && data.item_id) {
+          setTimeout(() => this._showProductDetails(data.item_id), 1500);
+        }
+      } else {
+        const fallbackMsg = this.currentLang === 'ur' ? 'معذرت، میں ابھی جواب دینے سے قاصر ہوں۔' : 'Sorry, I am unable to reply at this moment.';
+        this.appendChatMessage(fallbackMsg, 'ai');
+      }
+    } catch (err) {
+      console.error("AI Chat failed:", err);
+      const fallbackMsg = this.currentLang === 'ur' ? 'معذرت، نیٹ ورک کا مسئلہ ہے۔' : 'Sorry, there was a network connection issue.';
+      this.appendChatMessage(fallbackMsg, 'ai');
+    }
+  }
+
+  appendChatMessage(text, sender) {
+    if (!this.aiChatMessages) return;
+    const msgDiv = document.createElement('div');
+    msgDiv.style.padding = '8px';
+    msgDiv.style.borderRadius = 'var(--radius-sm)';
+    msgDiv.style.maxWidth = '90%';
+    msgDiv.style.fontSize = '12px';
+    
+    if (sender === 'user') {
+      msgDiv.style.background = 'rgba(255,255,255,0.05)';
+      msgDiv.style.alignSelf = 'flex-end';
+      msgDiv.style.color = 'var(--text-primary)';
+      msgDiv.style.marginLeft = 'auto';
+      msgDiv.innerHTML = `<strong>You:</strong> ${text}`;
+    } else {
+      msgDiv.style.background = 'rgba(88,101,242,0.08)';
+      msgDiv.style.borderLeft = '2px solid var(--cosmic-indigo)';
+      msgDiv.style.alignSelf = 'flex-start';
+      msgDiv.style.color = 'var(--text-secondary)';
+      msgDiv.style.marginRight = 'auto';
+      msgDiv.innerHTML = `<strong>AI:</strong> ${text}`;
+    }
+    this.aiChatMessages.appendChild(msgDiv);
+    this.aiChatMessages.scrollTop = this.aiChatMessages.scrollHeight;
+  }
+
+  clearChatMessages() {
+    if (!this.aiChatMessages) return;
+    this.aiChatMessages.innerHTML = `
+      <div style="background: rgba(88,101,242,0.1); border-left: 2px solid var(--cosmic-indigo); padding: 8px; border-radius: var(--radius-sm); color: var(--text-secondary);" data-translate="ai_greeting">
+        ${TRANSLATIONS[this.currentLang].ai_greeting}
+      </div>
+    `;
+  }
+
+  async handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    this.appendChatMessage(`📷 Scanned Photo: <em>${file.name}</em> (Analyzing...)`, 'user');
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch(`http://localhost:8000/api/ai/vision?language=${this.currentLang}`, {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      if (data && data.status === "success") {
+        this.appendChatMessage(data.response, "ai");
+        this.speakResponse(data.response);
+
+        if (data.identified && data.item_id) {
+          setTimeout(() => this._showProductDetails(data.item_id), 1800);
+        }
+      } else {
+        this.appendChatMessage(this.currentLang === 'ur' ? 'تصویر اسکیننگ ناکام رہی۔' : 'Photo scanning analysis failed.', "ai");
+      }
+    } catch (err) {
+      console.error("AI Vision upload failed:", err);
+      this.appendChatMessage(this.currentLang === 'ur' ? 'تصویر اپ لوڈ کرنے میں نیٹ ورک خرابی پیش آئی۔' : 'Network error during product photo upload.', "ai");
+    }
   }
 }
 

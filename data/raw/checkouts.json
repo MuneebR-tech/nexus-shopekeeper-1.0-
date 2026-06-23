@@ -1762,5 +1762,26 @@
     "amount": 1537.0,
     "payment_method": "Card",
     "timestamp": "2026-06-23T01:07:24.167361"
+  },
+  {
+    "checkout_id": "CH-0253",
+    "customer_id": "CUST-DEMO",
+    "amount": 1397.0,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-23T01:12:54.655700"
+  },
+  {
+    "checkout_id": "CH-0254",
+    "customer_id": "CUST-DEMO",
+    "amount": 2517.0,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-23T04:34:24.599915"
+  },
+  {
+    "checkout_id": "CH-0255",
+    "customer_id": "CUST-00001",
+    "amount": 100.0,
+    "payment_method": "Points",
+    "timestamp": "2026-06-23T05:48:00.145072"
   }
 ]

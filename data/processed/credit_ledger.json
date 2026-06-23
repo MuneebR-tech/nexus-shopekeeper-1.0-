@@ -412,5 +412,14 @@
     "amount": 100.0,
     "balance_after": 423.08,
     "reason": "Redeemed points checkout"
+  },
+  {
+    "entry_id": "2df0ab7b",
+    "timestamp": "2026-06-23T05:48:00.099793",
+    "customer_id": "CUST-00001",
+    "type": "debit",
+    "amount": 100.0,
+    "balance_after": 323.08,
+    "reason": "Redeemed points checkout"
   }
 ]

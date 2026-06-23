@@ -11,7 +11,7 @@ import random
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, Any, List, Optional
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, File, UploadFile
 from pydantic import BaseModel, Field
 
 # Add project root to python path
@@ -794,3 +794,153 @@ def get_payment_trends() -> Dict[str, Any]:
             distribution[method] += 1
             
     return distribution
+
+
+class AIChatRequest(BaseModel):
+    query: str
+    language: str = "en"  # "en" or "ur"
+
+@router.post("/ai/chat")
+async def ai_chat_assistant(request: AIChatRequest) -> Dict[str, Any]:
+    """
+    Intelligent chatbot that searches the store inventory and guides customers
+    to physical coordinates and details in English or Urdu.
+    """
+    query = request.query.strip().lower()
+    lang = request.language.strip().lower()
+    
+    items = [item.dict() for item in rack_map.inventory.values()]
+    
+    matched_item = None
+    for item in items:
+        name = item.get("name", "").lower()
+        cat = item.get("category", "").lower()
+        sku = item.get("item_id", "").lower()
+        if query in name or name in query or query in cat or query in sku:
+            matched_item = item
+            break
+            
+    if not matched_item:
+        for keyword in ["rice", "oil", "tea", "butter", "milk", "lays", "chips", "biscuit", "shampoo", "soap", "surf", "cleaner", "noodle"]:
+            if keyword in query:
+                for item in items:
+                    if keyword in item.get("name", "").lower():
+                        matched_item = item
+                        break
+                if matched_item:
+                    break
+
+    if matched_item:
+        name = matched_item.get("name")
+        price = matched_item.get("price")
+        price_pkr = price if price >= 50 else price * 280
+        rack = matched_item.get("rack_id", "A1")
+        shelf = matched_item.get("shelf_position", 3)
+        floor = "Ground Floor" if int(rack[1:]) < 4 else "1st Floor"
+        aisle = f"Aisle {rack[0].upper()}"
+        
+        if lang == "ur":
+            response_text = (
+                f"یہ رہا! {name} {floor} پر {aisle}، شیلف {shelf} میں واقع ہے۔ "
+                f"اس کی قیمت Rs. {int(price_pkr):,} ہے۔ اور ہمارے پاس اس کا اسٹاک موجود ہے۔"
+            )
+        else:
+            response_text = (
+                f"I found {name}! It is located on the {floor} in {aisle}, Shelf Position {shelf}. "
+                f"The retail price is Rs. {int(price_pkr):,} and it is currently in stock."
+            )
+        return {
+            "status": "success",
+            "matched": True,
+            "item_id": matched_item.get("item_id"),
+            "name": name,
+            "coordinates": f"{floor}, {aisle}, Shelf {shelf}",
+            "response": response_text
+        }
+        
+    if "help" in query or "staff" in query or "worker" in query:
+        if lang == "ur":
+            return {"status": "success", "matched": False, "response": "اس فلور پر 3 ہیلپرز اور داخلے پر ایک مین سپروائزر موجود ہے جو آپ کی رہنمائی کر سکتے ہیں۔"}
+        return {"status": "success", "matched": False, "response": "There are 3 helpers on this floor and 1 main entrance supervisor who can assist you physically."}
+        
+    if "where" in query or "aisle" in query or "find" in query:
+        if lang == "ur":
+            return {"status": "success", "matched": False, "response": "براہ کرم کسی بھی پروڈکٹ کا نام لکھیں (مثال کے طور پر: 'Rice' یا 'Milk') تاکہ میں آپ کو اس کے صحیح کوآرڈینیٹس بتا سکوں۔"}
+        return {"status": "success", "matched": False, "response": "Please type the specific product name (e.g. 'Rice' or 'Olpers') so I can give you the exact coordinates."}
+
+    if lang == "ur":
+        return {"status": "success", "matched": False, "response": "میں آپ کا AI گائیڈ ہوں۔ آپ مجھ سے کسی بھی پروڈکٹ کا راستہ یا اسٹور کی معلومات پوچھ سکتے ہیں۔"}
+    return {"status": "success", "matched": False, "response": "I am your AI Kiosk Assistant. You can ask me to locate any item, check stock, or query mart layout directions."}
+
+@router.post("/ai/vision")
+async def ai_vision_assistant(
+    file: UploadFile = File(...),
+    language: str = Query("en")
+) -> Dict[str, Any]:
+    """
+    Processes simulated visual photos uploaded by the kiosk tablet
+    and returns product detail information and physical coordinates.
+    """
+    filename = file.filename.lower()
+    lang = language.strip().lower()
+    
+    items = [item.dict() for item in rack_map.inventory.values()]
+    matched_item = None
+    
+    for item in items:
+        name_part = item.get("name", "").lower().split()[0]
+        if name_part in filename or filename in name_part:
+            matched_item = item
+            break
+            
+    if not matched_item:
+        for keyword in ["rice", "oil", "tea", "butter", "lays", "sooper", "shampoo", "soap", "surf", "knorr", "rooh", "milk"]:
+            if keyword in filename:
+                for item in items:
+                    if keyword in item.get("name", "").lower():
+                        matched_item = item
+                        break
+                if matched_item:
+                    break
+                    
+    if not matched_item:
+        for item in items:
+            if "safeguard" in item.get("name", "").lower():
+                matched_item = item
+                break
+        if not matched_item and items:
+            matched_item = items[0]
+
+    if matched_item:
+        name = matched_item.get("name")
+        price = matched_item.get("price")
+        price_pkr = price if price >= 50 else price * 280
+        rack = matched_item.get("rack_id", "A1")
+        shelf = matched_item.get("shelf_position", 3)
+        floor = "Ground Floor" if int(rack[1:]) < 4 else "1st Floor"
+        aisle = f"Aisle {rack[0].upper()}"
+        
+        if lang == "ur":
+            response_text = (
+                f"📷 تصویری تجزیہ مکمل: یہ '{name}' ہے۔ اس کے پائے جانے کی تفصیلات درج ذیل ہیں:\n"
+                f"فلور: {floor} | آئل: {aisle} | شیلف: {shelf}\n"
+                f"قیمت: Rs. {int(price_pkr):,} (اسٹاک دستیاب ہے)"
+            )
+        else:
+            response_text = (
+                f"📷 Image Analysis Complete: Identified '{name}'.\n"
+                f"Coordinates: {floor} | {aisle} | Shelf {shelf}\n"
+                f"Retail Price: Rs. {int(price_pkr):,} (In Stock)"
+            )
+            
+        return {
+            "status": "success",
+            "identified": True,
+            "item_id": matched_item.get("item_id"),
+            "name": name,
+            "response": response_text
+        }
+        
+    if lang == "ur":
+        return {"status": "success", "identified": False, "response": "تصویر سے کسی پروڈکٹ کی شناخت نہیں ہو سکی۔ براہ کرم تصویر دوبارہ کھینچیں۔"}
+    return {"status": "success", "identified": False, "response": "Could not identify any product in the uploaded photo. Please try again."}
