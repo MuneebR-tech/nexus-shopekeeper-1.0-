@@ -1203,18 +1203,36 @@ class DashboardUI {
 
   async loadCreditEngineSummary() {
     const analytics = await this.api.getAnalyticsSegments();
+    
+    // Update top row dashboard statistics dynamically
+    if (analytics && analytics.global_summary) {
+      const gs = analytics.global_summary;
+      
+      const statSessions = document.getElementById('stat-sessions');
+      if (statSessions) statSessions.textContent = gs.active_sessions || '0';
+      
+      const statCustomers = document.getElementById('stat-customers');
+      if (statCustomers) statCustomers.textContent = (gs.total_customers || 0).toLocaleString();
+      
+      const statRevenue = document.getElementById('stat-revenue');
+      if (statRevenue) statRevenue.textContent = formatPKR(gs.total_revenue_today || 0);
+      
+      const statK = document.getElementById('stat-k');
+      if (statK) statK.textContent = gs.optimal_k || '6';
+    }
+
     const summary = document.getElementById('credit-summary');
     if (analytics && summary) {
       const list = Object.entries(analytics.segment_analytics || {});
       summary.innerHTML = `
         <div style="display:flex; flex-direction:column; gap:10px; text-align:left;" class="body-xs">
-          <div><strong>Total Mart Revenue:</strong> <span style="color:var(--success-green); font-weight:700;">Rs. ${Math.round(analytics.global_summary?.total_revenue_today || 85400).toLocaleString()}</span></div>
-          <div><strong>Total Outstanding Loans:</strong> <span style="color:var(--error-red); font-weight:700;">Rs. ${Math.round(analytics.global_summary?.total_debt || 12000).toLocaleString()}</span></div>
+          <div><strong>Total Mart Revenue Today:</strong> <span style="color:var(--success-green); font-weight:700;">${formatPKR(analytics.global_summary?.total_revenue_today || 85400)}</span></div>
+          <div><strong>Total Outstanding Loans:</strong> <span style="color:var(--error-red); font-weight:700;">${formatPKR(analytics.global_summary?.total_debt || 12000)}</span></div>
           <div style="border-top:1px solid var(--border-subtle); padding-top:8px; margin-top:4px;"><strong>Segments Overview:</strong></div>
           ${list.slice(0, 4).map(([name, data]) => `
             <div class="flex justify-between items-center">
               <span class="text-secondary">${name.substring(0, 15)}:</span>
-              <span style="font-weight:700; color:var(--text-primary);">Avg Rs. ${Math.round(data.avg_spend).toLocaleString()}</span>
+              <span style="font-weight:700; color:var(--text-primary);">${formatPKR(data.avg_spend)}</span>
             </div>
           `).join('')}
         </div>
