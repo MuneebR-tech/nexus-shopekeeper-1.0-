@@ -1,7 +1,14 @@
 import json
 import os
+import random
+import numpy as np
 
-products = [
+# Set seeds for reproducibility
+np.random.seed(42)
+random.seed(42)
+
+# Statically defined premium Pakistani products with verified catalog images
+premium_products = [
     {
         "item_id": "SKU-0001",
         "name": "Guard Basmati Rice 5kg",
@@ -344,8 +351,305 @@ products = [
     }
 ]
 
+premium_names = {p["name"].lower() for p in premium_products}
+
+CATEGORY_ITEMS = {
+    "beverages": [
+        ("Spring Water 1L", 1.29, 0.45, 0.8, None, False, False),
+        ("Sparkling Water 750ml", 2.49, 1.10, 0.75, None, False, True),
+        ("Orange Juice 1L", 4.99, 2.80, 1.05, 21, False, True),
+        ("Cold-Pressed Green Juice", 8.99, 4.50, 0.5, 7, True, False),
+        ("Craft Root Beer 6pk", 9.99, 5.20, 2.4, None, False, True),
+        ("Organic Kombucha 16oz", 4.49, 2.20, 0.48, 60, False, False),
+        ("Coconut Water 330ml", 3.29, 1.60, 0.35, 180, False, True),
+        ("Artisan Cold Brew Coffee", 6.99, 3.20, 0.35, 30, True, False),
+        ("Energy Drink 4pk", 7.99, 4.10, 1.6, 365, False, True),
+        ("Sparkling Lemonade 750ml", 3.99, 1.80, 0.8, None, False, True),
+        ("Protein Shake Vanilla", 4.29, 2.30, 0.35, 180, False, True),
+        ("Almond Milk 1L", 4.49, 2.40, 1.05, 60, False, True),
+        ("Oat Milk Barista Blend", 5.49, 2.80, 1.0, 90, False, True),
+        ("Matcha Latte Ready-to-Drink", 5.99, 2.80, 0.35, 90, True, False),
+        ("Elderflower Tonic Water", 3.49, 1.60, 0.5, None, False, True),
+        ("Premium Mineral Water 1L", 4.99, 2.00, 1.05, None, True, False),
+        ("Iced Tea Peach 500ml", 2.99, 1.30, 0.52, 180, False, True),
+        ("Ginger Beer 4pk", 6.49, 3.20, 1.6, None, False, True),
+        ("Probiotic Berry Smoothie", 5.49, 2.80, 0.35, 14, False, False),
+        ("Alkaline Water 1.5L", 3.79, 1.50, 1.55, None, False, True),
+        ("Hibiscus Iced Tea 1L", 4.29, 2.00, 1.05, 30, False, False),
+        ("Vitamin Water Citrus", 2.49, 1.10, 0.55, 270, False, True),
+        ("Coconut Milk 400ml", 2.99, 1.40, 0.42, 365, False, True),
+        ("Sparkling Rose Water", 3.99, 1.80, 0.35, None, True, False),
+        ("Classic Lemonade 2L", 3.49, 1.50, 2.1, 14, False, True),
+    ],
+    "snacks": [
+        ("Organic Tortilla Chips 300g", 4.49, 2.20, 0.3, 180, False, True),
+        ("Dark Chocolate Bar 85%", 5.99, 2.80, 0.1, 365, True, False),
+        ("Mixed Nuts 500g", 12.99, 7.50, 0.5, 180, False, True),
+        ("Rice Crackers Wasabi", 3.99, 1.80, 0.15, 270, False, False),
+        ("Protein Bar Variety 12pk", 24.99, 14.00, 0.72, 365, False, True),
+        ("Gourmet Popcorn Truffle", 6.99, 3.20, 0.18, 120, True, False),
+        ("Trail Mix Energy Blend", 7.49, 3.80, 0.4, 180, False, True),
+        ("Pretzel Thins Sea Salt", 3.49, 1.60, 0.2, 270, False, True),
+        ("Dried Mango Slices 200g", 5.49, 2.80, 0.2, 180, False, False),
+        ("Seaweed Snack 6pk", 4.99, 2.40, 0.06, 365, False, True),
+        ("Artisan Cheese Crackers", 5.99, 2.80, 0.2, 180, False, False),
+        ("Veggie Chips Beetroot", 4.29, 2.10, 0.15, 120, False, True),
+        ("Granola Bites Honey", 4.99, 2.40, 0.25, 180, False, True),
+        ("Peanut Butter Pretzels", 4.49, 2.20, 0.35, 270, False, True),
+        ("Chocolate Covered Almonds", 8.99, 4.50, 0.3, 180, True, False),
+        ("Kale Chips Original", 5.49, 2.80, 0.05, 90, False, False),
+        ("Fruit Leather Strips 10pk", 6.49, 3.20, 0.15, 365, False, True),
+        ("Spicy Cashews 400g", 9.99, 5.20, 0.4, 180, False, True),
+        ("Mini Rice Cakes 12pk", 3.79, 1.80, 0.18, 270, False, True),
+        ("Belgian Chocolate Truffles", 14.99, 7.50, 0.2, 180, True, False),
+        ("Plantain Chips 200g", 3.49, 1.60, 0.2, 180, False, True),
+        ("Macadamia Nut Mix 300g", 11.99, 6.50, 0.3, 120, True, False),
+        ("Yogurt Covered Raisins", 4.99, 2.40, 0.3, 180, False, True),
+        ("Sesame Sticks 250g", 3.29, 1.50, 0.25, 270, False, True),
+        ("Coconut Chips Toasted", 4.49, 2.10, 0.1, 180, False, False),
+    ],
+    "pantry": [
+        ("Extra Virgin Olive Oil 750ml", 12.99, 7.00, 0.82, 730, False, False),
+        ("Basmati Rice 2kg", 8.49, 4.50, 2.0, 730, False, True),
+        ("Organic Pasta Penne 500g", 3.49, 1.60, 0.5, 730, False, True),
+        ("Canned Black Beans 400g", 1.79, 0.80, 0.42, 1095, False, True),
+        ("Coconut Flour 500g", 6.99, 3.50, 0.5, 365, False, False),
+        ("Truffle Infused Olive Oil", 24.99, 12.00, 0.28, 365, True, False),
+        ("Quinoa 1kg", 9.99, 5.20, 1.0, 730, False, True),
+        ("Honey Raw Organic 500g", 11.99, 6.00, 0.55, 1095, False, False),
+        ("Soy Sauce Naturally Brewed", 4.49, 2.00, 0.35, 730, False, False),
+        ("Balsamic Vinegar Aged", 8.99, 4.20, 0.28, 1095, False, False),
+        ("Coconut Oil Virgin 500ml", 7.49, 3.80, 0.52, 730, False, False),
+        ("Canned Diced Tomatoes 800g", 2.49, 1.10, 0.85, 730, False, True),
+        ("Peanut Butter Natural 400g", 5.49, 2.80, 0.42, 365, False, True),
+        ("Maple Syrup Grade A 375ml", 13.99, 7.20, 0.42, 730, True, False),
+        ("Sea Salt Flakes 250g", 4.99, 2.20, 0.25, None, False, False),
+        ("Whole Wheat Flour 2kg", 4.49, 2.00, 2.0, 365, False, True),
+        ("Arborio Risotto Rice 1kg", 6.99, 3.50, 1.0, 730, False, False),
+        ("Tahini Paste 300g", 5.99, 2.80, 0.32, 365, False, False),
+        ("Dried Red Lentils 1kg", 4.99, 2.40, 1.0, 730, False, True),
+        ("Premium Saffron 1g", 14.99, 8.50, 0.01, 730, True, False),
+        ("Apple Cider Vinegar 500ml", 4.99, 2.20, 0.52, 730, False, False),
+        ("Chickpea Flour 500g", 3.99, 1.80, 0.5, 365, False, True),
+        ("Almond Butter 350g", 9.99, 5.00, 0.38, 270, False, False),
+        ("Panko Breadcrumbs 200g", 2.99, 1.30, 0.2, 365, False, True),
+        ("Black Pepper Whole 100g", 5.49, 2.50, 0.1, 1095, False, False),
+    ],
+    "dairy": [
+        ("Organic Whole Milk 1L", 5.49, 3.20, 1.05, 14, False, True),
+        ("Greek Yogurt Plain 500g", 4.99, 2.60, 0.52, 21, False, True),
+        ("Aged Cheddar Block 400g", 8.99, 4.80, 0.4, 90, False, False),
+        ("Cream Cheese 250g", 3.49, 1.80, 0.26, 30, False, True),
+        ("Grass-Fed Butter 250g", 5.99, 3.20, 0.26, 90, False, True),
+        ("Artisan Gouda 200g", 9.99, 5.20, 0.2, 60, True, False),
+        ("Cottage Cheese 400g", 4.29, 2.20, 0.42, 14, False, True),
+        ("Heavy Cream 500ml", 4.49, 2.40, 0.52, 14, False, False),
+        ("Mozzarella Fresh 250g", 5.99, 3.00, 0.26, 10, False, False),
+        ("Parmesan Reggiano 200g", 12.99, 7.00, 0.2, 365, True, False),
+        ("Skyr Icelandic Yogurt", 5.49, 2.80, 0.4, 28, False, False),
+        ("Goat Cheese Log 150g", 7.99, 4.00, 0.16, 30, True, False),
+        ("Sour Cream 300ml", 2.99, 1.40, 0.32, 21, False, True),
+        ("Brie Wheel 200g", 8.49, 4.20, 0.2, 28, True, False),
+        ("Whipped Cream Cheese", 3.99, 1.80, 0.2, 30, False, False),
+        ("A2 Whole Milk 1L", 6.49, 3.50, 1.05, 14, False, True),
+        ("Ricotta Cheese 450g", 5.49, 2.80, 0.47, 14, False, False),
+        ("Kefir Plain 1L", 5.99, 3.00, 1.05, 21, False, False),
+        ("Mascarpone 250g", 6.49, 3.20, 0.26, 14, True, False),
+        ("Smoked Gouda 200g", 8.99, 4.50, 0.2, 90, True, False),
+        ("Vanilla Greek Yogurt 4pk", 6.99, 3.50, 0.6, 21, False, True),
+        ("Clotted Cream 200g", 7.49, 3.80, 0.22, 14, True, False),
+        ("Halloumi 250g", 6.99, 3.50, 0.26, 60, False, False),
+        ("Unsalted Butter 500g", 7.99, 4.20, 0.5, 90, False, True),
+        ("Low-Fat Milk 2L", 4.49, 2.40, 2.05, 10, False, True),
+    ],
+    "frozen": [
+        ("Mixed Berries 1kg", 8.99, 4.80, 1.0, 365, False, True),
+        ("Veggie Stir-Fry Mix 750g", 5.49, 2.80, 0.75, 365, False, True),
+        ("Premium Ice Cream Vanilla", 7.99, 3.80, 0.5, 365, False, False),
+        ("Frozen Pizza Margherita", 6.49, 3.20, 0.45, 180, False, True),
+        ("Edamame Shelled 500g", 4.99, 2.40, 0.5, 365, False, True),
+        ("Artisan Gelato Pistachio", 12.99, 6.50, 0.5, 365, True, False),
+        ("Fish Fillets Wild-Caught 4pk", 14.99, 8.00, 0.6, 365, False, True),
+        ("Cauliflower Rice 500g", 4.49, 2.20, 0.5, 365, False, True),
+        ("Frozen Croissants 6pk", 8.49, 4.20, 0.42, 180, False, True),
+        ("Wagyu Beef Burgers 4pk", 22.99, 12.00, 0.6, 180, True, False),
+        ("Frozen Acai Smoothie Packs", 9.99, 5.00, 0.4, 365, False, True),
+        ("Spinach Ravioli 500g", 5.99, 2.80, 0.5, 180, False, True),
+        ("Mango Chunks 750g", 6.99, 3.50, 0.75, 365, False, True),
+        ("Frozen Waffles 8pk", 4.99, 2.40, 0.35, 270, False, True),
+        ("Thai Green Curry Meal", 7.49, 3.80, 0.4, 180, False, False),
+        ("Frozen Avocado Halves 6pk", 8.99, 4.50, 0.5, 365, False, True),
+        ("Chicken Tenders Organic 500g", 9.99, 5.20, 0.52, 270, False, True),
+        ("Frozen Blueberries 500g", 5.99, 3.00, 0.5, 365, False, True),
+        ("Lobster Tails 2pk", 29.99, 16.00, 0.35, 180, True, False),
+        ("Vegan Nuggets 400g", 6.49, 3.20, 0.4, 270, False, True),
+        ("Frozen Dumplings 20pk", 7.99, 4.00, 0.5, 365, False, True),
+        ("Sorbet Raspberry 500ml", 6.49, 3.20, 0.5, 365, False, False),
+        ("Frozen Broccoli Florets 1kg", 4.49, 2.20, 1.0, 365, False, True),
+        ("Premium Puff Pastry Sheets", 5.99, 2.80, 0.5, 180, False, False),
+        ("Frozen Shrimp Large 500g", 16.99, 9.00, 0.52, 365, False, True),
+    ],
+    "produce": [
+        ("Organic Bananas 1kg", 2.99, 1.40, 1.0, 7, False, True),
+        ("Avocados Hass 4pk", 5.99, 3.20, 0.8, 5, False, True),
+        ("Baby Spinach 200g", 3.99, 2.00, 0.2, 5, False, False),
+        ("Roma Tomatoes 1kg", 4.49, 2.20, 1.0, 7, False, True),
+        ("Blueberries 250g", 5.49, 2.80, 0.25, 7, False, False),
+        ("Organic Kale Bunch", 3.49, 1.80, 0.3, 5, False, False),
+        ("Sweet Potatoes 1kg", 3.99, 1.80, 1.0, 14, False, True),
+        ("Red Bell Peppers 3pk", 4.99, 2.40, 0.6, 10, False, True),
+        ("Fuji Apples 1kg", 4.49, 2.20, 1.0, 14, False, True),
+        ("Fresh Herbs Basil Pack", 2.99, 1.40, 0.03, 5, False, False),
+        ("Dragon Fruit 2pk", 8.99, 4.80, 0.7, 5, True, False),
+        ("Organic Lemons 6pk", 4.49, 2.20, 0.6, 14, False, True),
+        ("Cremini Mushrooms 250g", 3.99, 2.00, 0.25, 7, False, False),
+        ("English Cucumber", 1.99, 0.90, 0.4, 7, False, True),
+        ("Mixed Salad Greens 300g", 4.99, 2.40, 0.3, 5, False, False),
+        ("Heirloom Tomatoes 500g", 6.99, 3.50, 0.5, 5, True, False),
+        ("Broccoli Crown", 2.49, 1.20, 0.5, 7, False, True),
+        ("Fresh Ginger Root 200g", 2.99, 1.40, 0.2, 21, False, False),
+        ("Organic Strawberries 400g", 6.99, 3.50, 0.4, 5, False, False),
+        ("Garlic 3-Head Pack", 2.49, 1.10, 0.15, 30, False, True),
+        ("Seedless Grapes 500g", 4.99, 2.40, 0.5, 7, False, False),
+        ("Zucchini 3pk", 3.49, 1.60, 0.6, 7, False, True),
+        ("Mango 2pk", 4.99, 2.40, 0.7, 5, False, False),
+        ("Artichokes 2pk", 5.99, 3.00, 0.6, 7, False, False),
+        ("Fresh Corn 4-Ear Pack", 3.99, 1.80, 1.2, 5, False, True),
+    ],
+    "household": [
+        ("Eco Dish Soap 750ml", 4.99, 2.40, 0.8, None, False, True),
+        ("Bamboo Paper Towels 6pk", 8.99, 4.50, 1.2, None, False, True),
+        ("All-Purpose Cleaner 1L", 5.49, 2.80, 1.05, None, False, True),
+        ("Trash Bags 30-Count", 6.99, 3.50, 0.8, None, False, True),
+        ("Laundry Pods 42ct", 14.99, 7.50, 1.2, None, False, True),
+        ("Premium Soy Candle Lavender", 24.99, 11.00, 0.4, None, True, False),
+        ("Sponge Set 5pk", 3.49, 1.60, 0.15, None, False, True),
+        ("Glass Cleaner 750ml", 4.49, 2.20, 0.8, None, False, True),
+        ("Aluminum Foil 100ft", 5.99, 2.80, 0.45, None, False, True),
+        ("Parchment Paper Roll", 4.49, 2.00, 0.2, None, False, True),
+        ("Food Storage Bags Gallon 50ct", 5.99, 2.80, 0.3, None, False, True),
+        ("Toilet Bowl Cleaner", 3.99, 1.80, 0.7, None, False, True),
+        ("Bamboo Cutting Board", 19.99, 9.50, 0.8, None, False, False),
+        ("Stainless Steel Scrubbers 3pk", 4.49, 2.00, 0.1, None, False, True),
+        ("Linen Spray Eucalyptus", 9.99, 4.80, 0.3, None, True, False),
+        ("Reusable Produce Bags 8pk", 12.99, 6.00, 0.2, None, False, False),
+        ("Floor Cleaner Concentrate", 7.49, 3.50, 0.55, None, False, True),
+        ("Beeswax Food Wraps 3pk", 14.99, 7.00, 0.1, None, True, False),
+        ("Microfiber Cloths 10pk", 8.99, 4.20, 0.25, None, False, True),
+        ("Hand Soap Refill 1L", 6.49, 3.00, 1.05, None, False, True),
+        ("Dish Drying Rack Bamboo", 29.99, 14.00, 1.5, None, True, False),
+        ("Compostable Trash Bags 25ct", 7.99, 3.80, 0.4, None, False, True),
+        ("Multi-Surface Wipes 80ct", 5.49, 2.60, 0.5, None, False, True),
+        ("Silicone Baking Mat Set", 16.99, 8.00, 0.3, None, False, False),
+        ("LED Light Bulbs 4pk", 9.99, 5.00, 0.2, None, False, True),
+    ],
+    "personal_care": [
+        ("Natural Shampoo 400ml", 8.99, 4.20, 0.42, None, False, False),
+        ("Charcoal Toothpaste 120g", 5.99, 2.80, 0.14, None, False, False),
+        ("Organic Lip Balm 3pk", 7.49, 3.50, 0.03, None, False, True),
+        ("Aloe Vera Body Lotion 500ml", 9.99, 4.80, 0.55, None, False, False),
+        ("Bamboo Toothbrush 4pk", 6.99, 3.20, 0.08, None, False, True),
+        ("Luxury Face Serum 30ml", 34.99, 15.00, 0.05, None, True, False),
+        ("Deodorant Natural Stone", 8.49, 4.00, 0.08, None, False, False),
+        ("Sunscreen SPF50 200ml", 12.99, 6.50, 0.22, None, False, False),
+        ("Conditioner Argan Oil 400ml", 9.49, 4.50, 0.42, None, False, False),
+        ("Hand Cream Shea Butter 100ml", 6.99, 3.20, 0.12, None, False, False),
+        ("Facial Cleanser Foam 150ml", 11.99, 5.50, 0.18, None, False, False),
+        ("Bath Bombs Gift Set 6pk", 18.99, 8.50, 0.6, None, True, False),
+        ("Dental Floss Eco 3pk", 5.49, 2.60, 0.05, None, False, True),
+        ("Hair Oil Treatment 100ml", 14.99, 7.00, 0.12, None, True, False),
+        ("Body Wash Citrus 500ml", 7.99, 3.80, 0.55, None, False, True),
+        ("Eye Cream Anti-Aging 15ml", 29.99, 13.00, 0.03, None, True, False),
+        ("Razor Refill Cartridges 8pk", 19.99, 10.00, 0.1, None, False, True),
+        ("Micellar Water 400ml", 8.99, 4.20, 0.42, None, False, False),
+        ("Night Cream Retinol 50ml", 24.99, 11.00, 0.08, None, True, False),
+        ("Cotton Rounds 100ct", 3.99, 1.80, 0.15, None, False, True),
+        ("Beard Oil Cedar 30ml", 12.99, 6.00, 0.05, None, True, False),
+        ("Dry Shampoo Spray 200ml", 7.49, 3.50, 0.22, None, False, False),
+        ("Vitamin E Moisturizer 200ml", 10.99, 5.00, 0.22, None, False, False),
+        ("Leave-In Conditioner 250ml", 9.99, 4.80, 0.28, None, False, False),
+        ("Exfoliating Scrub 200g", 11.49, 5.50, 0.22, None, False, False),
+    ],
+}
+
+CATEGORY_RACK_MAP = {
+    "beverages":      ["A1", "A2", "A3"],
+    "snacks":         ["A4", "A5", "B1"],
+    "pantry":         ["B2", "B3", "B4", "B5"],
+    "dairy":          ["C1", "C2", "C3"],
+    "frozen":         ["C4", "C5", "D1"],
+    "produce":        ["D2", "D3", "D4"],
+    "household":      ["D5", "E1", "E2", "E3"],
+    "personal_care":  ["E4", "E5", "F1", "F2"],
+}
+
+SUPPLIERS = {
+    "beverages":     ["Cascade Springs", "GreenLeaf Beverages", "Pacific Drinks Co."],
+    "snacks":        ["CrunchWorks", "NutHarvest Inc.", "Artisan Bites Co."],
+    "pantry":        ["Global Pantry Supply", "Heritage Foods", "Mediterranean Imports"],
+    "dairy":         ["Green Valley Farms", "Alpine Creamery", "Sunrise Dairy"],
+    "frozen":        ["FrostPack Foods", "IceField Premium", "DeepFreeze Supply"],
+    "produce":       ["Morning Harvest", "Organic Fields Direct", "Valley Fresh Farms"],
+    "household":     ["CleanCo Supply", "EcoHome Goods", "BrightLife Products"],
+    "personal_care": ["Pure Glow Labs", "NatureSkin Co.", "Wellness Essentials"],
+}
+
+# Collect all items
+all_inventory_items = []
+sku_counter = 0
+
+for category, product_list in CATEGORY_ITEMS.items():
+    racks_for_cat = CATEGORY_RACK_MAP[category]
+    suppliers_for_cat = SUPPLIERS[category]
+    for idx, (name, price, cost, weight, expiry, is_lux, is_bulk) in enumerate(product_list):
+        sku_counter += 1
+        sku = f"SKU-{sku_counter:04d}"
+        
+        # Skip generating if it is already covered by one of the 20 premium ones
+        if name.lower() in premium_names:
+            continue
+            
+        rack = racks_for_cat[idx % len(racks_for_cat)]
+        shelf = (idx % 5) + 1
+        stock = int(np.random.lognormal(mean=3.5, sigma=0.6))
+        stock = max(5, min(stock, 300))
+        reorder = max(3, stock // 4)
+        
+        # Scale prices to PKR (1 USD = 200 PKR, rounded to nearest 10 PKR)
+        scaled_price = round(price * 200, -1)
+        scaled_cost = round(cost * 200, -1)
+        
+        all_inventory_items.append({
+            "item_id": sku,
+            "name": name,
+            "category": category,
+            "price": float(scaled_price),
+            "cost": float(scaled_cost),
+            "stock_quantity": stock,
+            "rack_id": rack,
+            "shelf_position": shelf,
+            "reorder_threshold": reorder,
+            "supplier": random.choice(suppliers_for_cat),
+            "weight_kg": weight,
+            "is_luxury": is_lux,
+            "is_bulk_eligible": is_bulk,
+            "expiry_days": expiry,
+            "image": "https://placehold.co/350x350/111827/ffffff?text=Pic+will+be+added+soon"
+        })
+
+# Combine premium items and remaining generated ones
+final_inventory = []
+for p in premium_products:
+    final_inventory.append(p)
+
+sku_idx = 21
+for item in all_inventory_items:
+    item["item_id"] = f"SKU-{sku_idx:04d}"
+    final_inventory.append(item)
+    sku_idx += 1
+
 db_path = os.path.join("data", "raw", "inventory.json")
 with open(db_path, "w", encoding="utf-8") as f:
-    json.dump(products, f, indent=2)
+    json.dump(final_inventory, f, indent=2, ensure_ascii=False)
 
-print("Inventory seeded successfully with 20 premium Pakistani products!")
+print(f"Inventory seeded successfully with {len(final_inventory)} items total!")
