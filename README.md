@@ -1,48 +1,83 @@
-# Nexus Shopkeeper (Commercial SaaS Baseline)
+# 🏪 Nexus Shopkeeper (Pakistani SaaS Edition) — Version 1.0
 
-**Nexus Shopkeeper** is an advanced, commercial-ready, web-based GUI smart-mart management system and robotic kiosk controller. It utilizes machine learning clustering and autonomous agent loops to personalize modern retail spaces.
+**Nexus Shopkeeper** is a production-grade, commercial-ready smart-mart kiosk controller and administration dashboard. Designed for fully automated retail environments, it integrates real-time K-Means customer segmentation, a reactive store credit ledger, 3D rack-to-aisle coordinates tracking, high-fidelity Web Audio API chimes, and dual AI assistants.
 
 ---
 
-## 🏗️ Architecture Footprint
+## 🚀 Key Features
 
-This repository is designed to scale comfortably into a modular, production-ready codebase (targeted at 16,000 to 20,000 lines). The modular multi-tiered layout is structured as follows:
+*   **Urdu-First Kiosk UI**: Localized from the start with standard right-to-left layout direction (`dir="rtl"`), voice-assisted greetings, and fluid transition animations.
+*   **Dual AI Assistants**:
+    1.  *Customer Concierge*: Embedded in the kiosk to guide shoppers, answer product searches, and analyze uploaded package pictures to return floor layout coordinates.
+    2.  *Manager Telemetry Guide*: Embedded in the administration panel to query inventory shortages, shifts attendance, revenue counts, and default risk analytics.
+*   **Settings Modal & Themes**:
+    -   *Kiosk preferences*: Easily toggle system language (English / Urdu) and display themes (Dark Mode / Light Mode) dynamically.
+    -   *Admin preferences*: Configure store brand name, base interest rates, and robotic headcount rosters that immediately update the kiosk interfaces.
+*   **Mobile Session Sync**: Scannable QR codes that encode active carts, customer IDs, and language preferences into dynamic URLs, enabling shoppers to take their checkout session on the go.
+*   **PKR Revenue Seeding**: Generates realistic daily shopping transactions ranging from Rs. 350 to Rs. 12,500.
+
+---
+
+## 🏗️ Repository Layout
 
 ```
 ├── backend/
-│   ├── core/         # Matrix mathematics, custom clustering engines, schemas
-│   ├── agents/       # Antigravity agent loops, persona managers, concierge tools
-│   └── api/          # FastAPI router endpoints and session handshake handlers
-└── frontend/
-    ├── assets/
-    │   ├── js/       # Vanilla JavaScript asynchronous web state workers
-    │   └── css/      # Custom HSL design parameters & styling tokens
-    └── templates/    # Top-notch UI views (kiosk.html & dashboard.html)
+│   ├── core/         # Matrix math utilities, error ledger, atomic file writing
+│   ├── agents/       # AI concierge loops, telemetry analyzer persona
+│   └── api/          # FastAPI REST endpoints and status handshakes
+├── data/
+│   ├── raw/          # Persistent databases (inventory, checkouts, customers)
+│   └── schemas/      # Pydantic validation models
+├── frontend/
+│   ├── assets/       # CSS stylesheet (dark/light theme rules), JS controller
+│   └── templates/    # UI Views (kiosk.html & dashboard.html)
+├── phase_1/          # Dataset seeding, TSP rack routes, classification
+├── phase_2/          # Vectorized K-Means, Credit engine, API server launch
+├── requirements.txt  # Project Python dependencies
+└── start_app.bat     # Windows automated startup launcher
 ```
 
 ---
 
-## 🗓️ 3-Day Development Roadmap
+## 🛠️ Installation & Getting Started
 
-### 📦 DAY 1: Environment Initialization & Scaffolding (Today)
-- **Repo Setup:** Configured standard Git parameters, global `.gitconfig`, and local `.gitignore` rules.
-- **Directory Skeleton:** Established physical folders for all tiers.
-- **Health Checks:** Verified local Python PATH and execution capabilities using `py`. Installed and verified library imports (`numpy`, `pydantic`, `fastapi`, `uvicorn`, `google.antigravity` via mock stubs).
-- **Template Outlines:** Left descriptive skeletal modules in place for api routes, state workers, and the concierge loops.
+### 📋 Prerequisites
+- **Python 3.9+** must be installed and added to your system `PATH`.
+- A modern web browser (Chrome, Edge, or Firefox).
 
-### 📊 DAY 2: Dense Data Schema & 6-Tier Personas
-- **Data Models:** Design robust, serialized schemas for `customers.json` and `inventory.json` utilizing Pydantic.
-- **Physical Layouts:** Establish physical rack-to-coordinate mapping (product shelves and dispensing hardware limits).
-- **Segmentation Taxonomy:** Integrate the 6-Tier Customer Classification Framework:
-  1. **Ultra-Luxury Spender:** High margins, premium service, bespoke agent recommendations.
-  2. **Mid-Tier Consistent:** Steady subscription items, brand loyalty, predictable volume.
-  3. **High-Value Impulse:** Triggered by flashing discount counters and targeted recommendations.
-  4. **Essential Bulk Buyer:** Bulk quantities, volume discounts, automatic replenishment tracking.
-  5. **Strict Budget Spender:** Hard caps, credit/loan allowances, basic essentials mapping.
-  6. **Strategic Deal-Hunter:** Maximizing coupons, temporal sales, and bundle configurations.
+### ⚡ Quick Start
+1.  Double-click or run `start_app.bat` in your project root directory:
+    ```cmd
+    C:\path\to\nexus-shopkeeper> start_app.bat
+    ```
+2.  The script will:
+    - Automatically check and install missing dependencies.
+    - Launch the FastAPI Backend Server on port `8000`.
+    - Automatically open both the **Kiosk Navigator** (`http://localhost:8000/`) and **Administration Dashboard** (`http://localhost:8000/dashboard`) in your default web browser.
 
-### ⚡ DAY 3: Vectorized Clustering, Credit Engine & Web Integration
-- **Clustering Engine:** Script vectorized 16-dimensional K-Means distance calculations using NumPy to map active shoppers to centroids. Integrate silhouette score validation based on the `K-segmemtation-basic-ML` concepts.
-- **Store Credit Engine:** Implement the reactive logic for budget balances, ledger accounts, and credit limits.
-- **Dark-Themed GUI:** Polish the glassmorphism kiosk and dashboard user interfaces.
-- **API Wiring:** Connect the HTML template actions to the backend via FastAPI session handshakes, WebSockets, and the `google.antigravity` concierge agent chat API.
+---
+
+## 📊 Core System Modules
+
+### 1. Vectorized K-Means Engine
+- **Algorithm**: Implements vectorized Euclidean distance segmentation from scratch using NumPy.
+- **Tiers**: Groups customer behavioral features into 6 loyalty tiers (Ultra-Luxury Spender, Mid-Tier Consistent, High-Value Impulse, Essential Bulk Buyer, Strict Budget Spender, and Strategic Deal-Hunter).
+
+### 2. Store Credit & Debt Ledger
+- Manages active customer credit lines, interest rate updates, default risks, and coupon discounts.
+- Updates database saves atomically to prevent data corruption.
+
+### 3. Robotic coordinate locator
+- Maps product items to a 6x5 3D store grid layout (Floor levels, Aisle zones A-F, and Shelf levels 1-5).
+- Computes coordinates ($X$, $Y$, $Z$ in meters) and shortest TSP paths for shelf-stocking and collection.
+
+---
+
+## 📦 Dependencies
+Configured in `requirements.txt`:
+*   `fastapi` (API core)
+*   `uvicorn` (ASGI Server)
+*   `numpy` (Vector calculations)
+*   `pydantic` (Data schemas)
+*   `python-dotenv` (Configurations)
+*   `python-multipart` (Form image uploads)
