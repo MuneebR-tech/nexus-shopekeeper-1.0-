@@ -12,7 +12,7 @@
   <nav class="navbar">
     <div class="navbar__logo">
       <div class="navbar__logo-icon">⚡</div>
-      <span class="text-gradient">Nexus Shopkeeper</span>
+      <span class="text-gradient" id="dash-logo-text">Nexus Shopkeeper</span>
     </div>
     <div class="navbar__links">
       <a href="dashboard.html" class="active">📊 Dashboard</a>
@@ -342,6 +342,39 @@
   </div>
   </div>
 
+  <!-- ═══════════ SETTINGS MODAL ═══════════ -->
+  <div class="modal-overlay" id="settings-modal-overlay">
+    <div class="modal glass-card" id="settings-modal" style="max-width: 440px; width: 92%;">
+      <div class="modal-header">
+        <h2 style="font-size: 18px; font-weight: 700;">⚙️ System Administration Settings</h2>
+        <button class="modal-close" id="settings-modal-close">✕</button>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 16px;">
+        <form id="dashboard-settings-form">
+          <div class="flex-col gap-xs" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+            <label class="body-xs text-secondary" style="font-weight: 600;" for="settings-store-name">Store Name</label>
+            <input type="text" id="settings-store-name" class="search-input" placeholder="e.g. Nexus Shopkeeper" required style="padding-left: 16px;">
+          </div>
+          
+          <div class="flex-col gap-xs" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+            <label class="body-xs text-secondary" style="font-weight: 600;" for="settings-interest-rate">Base Interest Rate (%)</label>
+            <input type="number" step="0.1" min="0" max="25" id="settings-interest-rate" class="search-input" placeholder="e.g. 2.5" required style="padding-left: 16px;">
+          </div>
+          
+          <div class="flex-col gap-xs" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+            <label class="body-xs text-secondary" style="font-weight: 600;" for="settings-headcount">Technician Headcount</label>
+            <input type="number" min="1" max="100" id="settings-headcount" class="search-input" placeholder="e.g. 10" required style="padding-left: 16px;">
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1; justify-content: center;">Save Settings</button>
+            <button type="button" class="btn btn-outline" style="flex: 1; justify-content: center;" id="settings-cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══════════ FOOTER ═══════════ -->
   <footer class="bottom-bar">
     <div class="flex items-center gap-md">
@@ -366,8 +399,58 @@
       tick(); setInterval(tick, 1000);
     })();
 
-    // Settings placeholder
-    document.getElementById('settings-link')?.addEventListener('click', e => { e.preventDefault(); Toast.info('Settings panel coming in v1.1'); });
+    // Initialize branding from localStorage on load
+    const storedStoreName = localStorage.getItem('settings-store-name') || 'Nexus Shopkeeper';
+    const logoText = document.getElementById('dash-logo-text');
+    if (logoText) {
+      logoText.innerHTML = storedStoreName.replace('Shopkeeper', '<span class="text-gradient">Shopkeeper</span>');
+    }
+
+    // Settings modal interactions
+    const settingsLink = document.getElementById('settings-link');
+    const settingsOverlay = document.getElementById('settings-modal-overlay');
+    const settingsClose = document.getElementById('settings-modal-close');
+    const settingsCancel = document.getElementById('settings-cancel-btn');
+    const settingsForm = document.getElementById('dashboard-settings-form');
+    
+    const storeNameInp = document.getElementById('settings-store-name');
+    const interestRateInp = document.getElementById('settings-interest-rate');
+    const headcountInp = document.getElementById('settings-headcount');
+
+    settingsLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Prefill fields
+      storeNameInp.value = localStorage.getItem('settings-store-name') || 'Nexus Shopkeeper';
+      interestRateInp.value = localStorage.getItem('settings-interest-rate') || '2.5';
+      headcountInp.value = localStorage.getItem('settings-headcount') || '10';
+      
+      settingsOverlay.classList.add('visible');
+    });
+
+    const closeSettings = () => {
+      settingsOverlay.classList.remove('visible');
+    };
+
+    settingsClose?.addEventListener('click', closeSettings);
+    settingsCancel?.addEventListener('click', closeSettings);
+    settingsOverlay?.addEventListener('click', (e) => {
+      if (e.target === settingsOverlay) closeSettings();
+    });
+
+    settingsForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      localStorage.setItem('settings-store-name', storeNameInp.value);
+      localStorage.setItem('settings-interest-rate', interestRateInp.value);
+      localStorage.setItem('settings-headcount', headcountInp.value);
+      
+      // Update local branding if present
+      if (logoText) {
+        logoText.innerHTML = storeNameInp.value.replace('Shopkeeper', '<span class="text-gradient">Shopkeeper</span>');
+      }
+      
+      closeSettings();
+      Toast.success('Administration settings saved successfully!');
+    });
 
     // Table sorting
     document.querySelectorAll('.data-table thead th').forEach((th, colIndex) => {

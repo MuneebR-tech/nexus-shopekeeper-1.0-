@@ -392,6 +392,13 @@ class KioskApp {
       document.body.classList.remove('light-theme');
     }
 
+    // Initialize branding from localStorage on load
+    const storedStoreName = localStorage.getItem('settings-store-name') || 'Nexus Shopkeeper';
+    const kioskLogoText = document.getElementById('kiosk-logo-text');
+    if (kioskLogoText) {
+      kioskLogoText.innerHTML = storedStoreName.replace('Shopkeeper', '<span class="gradient-text">Shopkeeper</span>');
+    }
+
     this._cacheElements();
     this._bindEvents();
     this._loadInitialData();
@@ -655,6 +662,16 @@ class KioskApp {
     if (target) {
       target.classList.add('active-screen');
       this.currentScreen = screenId;
+    }
+
+    // Toggle floating language & sync controls visibility based on screen
+    const floating = document.getElementById('floating-controls');
+    if (floating) {
+      if (screenId === 'main-workspace' || screenId === 'checkout-screen') {
+        floating.style.display = 'none';
+      } else {
+        floating.style.display = 'flex';
+      }
     }
   }
 
@@ -1023,10 +1040,16 @@ class KioskApp {
 
   async _syncHeadcount() {
     const list = await this.api.getEmployees();
+    const settingsHeadcount = localStorage.getItem('settings-headcount');
     if (list) {
-      const activeCount = list.filter(e => e.status === 'Active Shift').length;
+      let activeCount = list.filter(e => e.status === 'Active Shift').length;
+      if (settingsHeadcount) {
+        activeCount = parseInt(settingsHeadcount, 10) || activeCount;
+      }
       if (this.staffIndicator) {
-        this.staffIndicator.textContent = `Mart operated by ${activeCount} active automation technicians.`;
+        this.staffIndicator.textContent = this.currentLang === 'ur'
+          ? `مارٹ ${activeCount} سرگرم خودکار تکنیکی ماہرین کے ذریعہ چلایا جاتا ہے۔`
+          : `Mart operated by ${activeCount} active automation technicians.`;
       }
     }
   }
@@ -1150,10 +1173,16 @@ class KioskApp {
     document.documentElement.lang = this.currentLang;
     document.documentElement.dir = this.currentLang === 'ur' ? 'rtl' : 'ltr';
 
+    const storeName = localStorage.getItem('settings-store-name') || 'Nexus Shopkeeper';
     document.querySelectorAll('[data-translate]').forEach(el => {
       const key = el.dataset.translate;
       const trans = TRANSLATIONS[this.currentLang];
       if (trans && trans[key]) {
+        // Fallback for custom store name in English
+        if (key === 'welcome_title' && this.currentLang === 'en') {
+          el.textContent = storeName;
+          return;
+        }
         const label = el.querySelector('.btn-label');
         if (label) {
           label.textContent = trans[key];
@@ -1508,6 +1537,14 @@ class DashboardUI {
     this.api = new NexusAPI();
     this.inventory = [];
     this.employees = [];
+
+    // Initialize Theme Preference
+    const preferredTheme = localStorage.getItem('kiosk-theme') || 'dark';
+    if (preferredTheme === 'light') {
+      document.body.classList.add('light-theme');
+    } else {
+      document.body.classList.remove('light-theme');
+    }
 
     this._cacheElements();
     this._bindEvents();

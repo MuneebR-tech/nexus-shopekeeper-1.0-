@@ -1550,3 +1550,42 @@ body.light-theme .modal-close {
   color: var(--text-primary);
 }
 
+/* Fix background cover gradients */
+body.light-theme .welcome-bg-anim {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 25%, #e0e7ff 50%, #dbeafe 75%, #f3f4f6 100%) !important;
+}
+body.light-theme .welcome-bg-anim::after {
+  background: radial-gradient(ellipse at 50% 40%, rgba(88, 101, 242, 0.05) 0%, transparent 70%) !important;
+}
+
+/* Header & Footer bars */
+body.light-theme .topbar, body.light-theme .navbar {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+}
+body.light-theme .bottombar, body.light-theme .bottom-bar {
+  background: rgba(243, 244, 246, 0.9) !important;
+  border-top-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Buttons / widgets */
+body.light-theme .keypad-btn--backspace, 
+body.light-theme .keypad-btn--scan {
+  background: var(--bg-surface) !important;
+}
+body.light-theme .support-widget {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(88, 101, 242, 0.3);
+}
+
+/* Text overrides */
+body.light-theme .search-input::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+/* Modals */
+body.light-theme .modal {
+  background: var(--bg-base);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15) !important;
+}
+

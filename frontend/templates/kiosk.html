@@ -16,7 +16,7 @@
 <body class="kiosk-body">
 
   <!-- Persistent Floating Language & Mobile Sync Controls -->
-  <div style="position: fixed; top: 24px; left: 24px; z-index: 999; display: flex; gap: 10px;" class="no-print">
+  <div id="floating-controls" style="position: fixed; top: 24px; left: 24px; z-index: 999; display: flex; gap: 10px;" class="no-print">
     <button id="btn-language-toggle" class="btn btn-glass btn-sm" style="border: 1px solid var(--border-subtle); background: rgba(10,11,16,0.65); backdrop-filter: blur(8px); font-weight: 700; height: 36px; padding: 0 16px;">🌐 EN / اردو</button>
     <button id="btn-qr-mobile" class="btn btn-glass btn-sm" style="border: 1px solid var(--border-subtle); background: rgba(10,11,16,0.65); backdrop-filter: blur(8px); font-weight: 700; height: 36px; padding: 0 16px;" data-translate="mobile_sync_btn">📱 Mobile Sync</button>
   </div>
@@ -134,7 +134,7 @@
     <header class="topbar">
       <div class="topbar-left">
         <span class="topbar-logo-icon">🏪</span>
-        <span class="topbar-brand">Nexus <span class="gradient-text">Shopkeeper</span></span>
+        <span class="topbar-brand" id="kiosk-logo-text">Nexus <span class="gradient-text">Shopkeeper</span></span>
       </div>
       <div class="topbar-center">
         <div class="search-wrapper" id="search-wrapper">
