@@ -56,7 +56,7 @@ def run_pipeline():
     rack_map.print_layout_map()
     
     # Run a quick routing calculation
-    sample_items = [list(rack_map.inventory.keys())[idx] for idx in [12, 45, 87]]
+    sample_items = [list(rack_map.inventory.keys())[idx % len(rack_map.inventory)] for idx in [12, 45, 87]]
     route, dist = rack_map.calculate_shopping_route(sample_items)
     print(f"  Sample Shopping Route calculated for {len(sample_items)} items:")
     print(f"    Path: Entrance -> {' -> '.join(route)} -> Entrance")

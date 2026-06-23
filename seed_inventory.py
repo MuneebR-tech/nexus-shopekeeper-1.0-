@@ -17,7 +17,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": True,
         "expiry_days": 365,
-        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1053437-1.jpg"
     },
     {
         "item_id": "SKU-0002",
@@ -34,7 +34,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": True,
         "expiry_days": 270,
-        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/2/1270205-1.jpg"
     },
     {
         "item_id": "SKU-0003",
@@ -51,7 +51,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 540,
-        "image": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1037609-1.jpg"
     },
     {
         "item_id": "SKU-0004",
@@ -68,7 +68,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 730,
-        "image": "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/i/u/iu1119375-1.jpg"
     },
     {
         "item_id": "SKU-0005",
@@ -85,7 +85,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 730,
-        "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/1/1119332-1.jpg"
     },
     {
         "item_id": "SKU-0006",
@@ -102,7 +102,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 90,
-        "image": "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/2/1264607-1.jpg"
     },
     {
         "item_id": "SKU-0007",
@@ -119,7 +119,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 60,
-        "image": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1016930-1.jpg"
     },
     {
         "item_id": "SKU-0008",
@@ -136,7 +136,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 365,
-        "image": "https://images.unsplash.com/photo-1628163182830-27e91136b6d2?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/1/1153992-junerpl-1.jpg"
     },
     {
         "item_id": "SKU-0009",
@@ -153,7 +153,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 180,
-        "image": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/3/1336317-1.jpg"
     },
     {
         "item_id": "SKU-0010",
@@ -170,7 +170,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 180,
-        "image": "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/s/n/snack_pack_-_classic_1.jpg"
     },
     {
         "item_id": "SKU-0011",
@@ -187,7 +187,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 1095,
-        "image": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/a/b/ab1332672-1.jpg"
     },
     {
         "item_id": "SKU-0012",
@@ -204,7 +204,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 1095,
-        "image": "https://images.unsplash.com/photo-1607006342411-91f158557978?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1019220-rpl-1.jpg"
     },
     {
         "item_id": "SKU-0013",
@@ -221,7 +221,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 1095,
-        "image": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/a/b/ab1310124-1.jpg"
     },
     {
         "item_id": "SKU-0014",
@@ -238,7 +238,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 730,
-        "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/1/1128054-1.jpg"
     },
     {
         "item_id": "SKU-0015",
@@ -255,7 +255,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": True,
         "expiry_days": 270,
-        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/2/1287390-1.jpg"
     },
     {
         "item_id": "SKU-0016",
@@ -289,7 +289,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 365,
-        "image": "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/a/b/ab1282828-1.jpg"
     },
     {
         "item_id": "SKU-0018",
@@ -306,7 +306,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 540,
-        "image": "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/w/h/whatsapp_image_2022-12-28_at_1.40.06_pm.jpegjpg03_1.jpg"
     },
     {
         "item_id": "SKU-0019",
@@ -323,7 +323,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 730,
-        "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1025967-1_1.jpg"
     },
     {
         "item_id": "SKU-0020",
@@ -340,7 +340,7 @@ products = [
         "is_luxury": False,
         "is_bulk_eligible": False,
         "expiry_days": 540,
-        "image": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=350"
+        "image": "https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/2/1297907-1.jpg"
     }
 ]
 
