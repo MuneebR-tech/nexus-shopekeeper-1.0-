@@ -189,8 +189,15 @@ class NexusAPI {
       headers: { 'Content-Type': 'application/json' },
     };
     if (body) opts.body = JSON.stringify(body);
+    
+    let url = `${this.baseURL}${path}`;
+    if (method === 'GET') {
+      const buster = `_t=${Date.now()}`;
+      url += url.includes('?') ? `&${buster}` : `?${buster}`;
+    }
+
     try {
-      const res = await fetch(`${this.baseURL}${path}`, opts);
+      const res = await fetch(url, opts);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
     } catch (err) {
@@ -855,6 +862,11 @@ class DashboardUI {
     this._cacheElements();
     this._bindEvents();
     this.init();
+
+    // Auto-refresh metrics every 30 seconds matching footer spec
+    this.refreshInterval = setInterval(() => {
+      this.init();
+    }, 30000);
   }
 
   _cacheElements() {
