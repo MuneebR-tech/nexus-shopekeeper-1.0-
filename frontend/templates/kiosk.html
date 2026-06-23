@@ -425,11 +425,10 @@
       </div>
       <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-bottom: 20px;">
         <p class="body-xs text-secondary" style="font-size:12px; line-height: 1.4;" data-translate="qr_instructions">Scan this QR code with your phone camera to take your cart, aisle coordinates, and customer profile on the go!</p>
-        <svg width="180" height="180" viewBox="0 0 29 29" style="background: white; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
-          <path d="M0 0h7v7H0zm2 2v3h3V2zm5 5h3v3H7zm3-7h7v7h-7zm2 2v3h3V2zm8-2h9v9h-9zm2 2v5h5V2zm-12 8h7v7h-7zm2 2v3h3v-3zm11-2h9v9h-9zm2 2v5h5V2zm-15 9h3v3H7zm11 0h3v3h-3zm-6 2h3v3h-3zm5 2h3v3h-3zm-9 3h3v3H2zm7 0h3v3H9zm5 0h3v3h-3zm4 0h3v3h-3zm7 0h3v3h-3zm-17 3h3v3H5zm6 0h3v3h-3zm5 0h3v3h-3zm4 0h3v3h-3zm-12 3h3v3H8zm7 0h3v3h-3zm4 0h3v3h-3z" fill="#0a0b10"/>
-        </svg>
-        <span style="font-size: 11px; font-weight: 700; color: var(--cyber-teal);" data-translate="server_ip">Mart Network IP: 192.168.10.85:8000</span>
+        <img id="mobile-sync-qr" src="" width="180" height="180" style="background: white; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: block;" alt="Sync QR Code" />
+        <span style="font-size: 11px; font-weight: 700; color: var(--cyber-teal);" id="mart-network-ip-label" data-translate="server_ip">Mart Network IP: 192.168.10.85:8000</span>
       </div>
+
     </div>
   </div>
 

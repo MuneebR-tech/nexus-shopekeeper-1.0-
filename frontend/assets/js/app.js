@@ -430,6 +430,8 @@ class KioskApp {
     this.qrBtn            = document.getElementById('btn-qr-mobile');
     this.qrOverlay        = document.getElementById('qr-modal-overlay');
     this.qrClose          = document.getElementById('qr-modal-close');
+    this.mobileSyncQr     = document.getElementById('mobile-sync-qr');
+    this.martNetworkIpLabel = document.getElementById('mart-network-ip-label');
 
     // AI Concierge Chat components
     this.aiChatMessages   = document.getElementById('ai-chat-messages');
@@ -520,9 +522,11 @@ class KioskApp {
       this.cart = [];
       this._updateCartBadge();
       this._updateProfileView();
+      this.updateSyncQRCode();
       this._switchScreen('entry-screen');
       this._showToast(this.currentLang === 'ur' ? 'نکاس مکمل: خریداری کا شکریہ!' : '🚪 Checked out of Mart. Thank you!', 'info');
     });
+
 
     // Details modal close
     document.getElementById('pd-close').addEventListener('click', () => this.pdOverlay.classList.remove('visible'));
@@ -576,10 +580,16 @@ class KioskApp {
     } else {
       this.products = [...FALLBACK_PRODUCTS];
     }
+    
+    // Parse URL params for scannable dynamic QR mobile synchronization
+    this._parseUrlParams();
+    
     this._renderCategories();
     this._renderSidebarElements();
     this._syncHeadcount();
+    this.updateSyncQRCode();
   }
+
 
   _switchScreen(screenId) {
     Object.keys(this.screens).forEach(key => {
@@ -629,6 +639,7 @@ class KioskApp {
       this.pinStatus.className = 'pin-status success';
       this.audio.playSuccess();
       this._updateProfileView();
+      this.updateSyncQRCode();
       this._triggerVoiceWelcome(this.memberData);
       setTimeout(() => {
         this._switchScreen('main-workspace');
@@ -648,12 +659,14 @@ class KioskApp {
         this.pinStatus.className = 'pin-status success';
         this.audio.playSuccess();
         this._updateProfileView();
+        this.updateSyncQRCode();
         this._triggerVoiceWelcome(this.memberData);
         setTimeout(() => {
           this._switchScreen('main-workspace');
           this.pinDigits = [];
           this._updatePinDots();
         }, 1200);
+
       } else {
         this.pinAttempts++;
         this.pinDots.forEach(dot => {
@@ -836,8 +849,10 @@ class KioskApp {
     }
     this.audio.playAddToCart();
     this._updateCartBadge();
+    this.updateSyncQRCode();
     this._showToast(`🛒 Added ${product.name} to cart.`, 'success');
   }
+
 
   _updateCartBadge() {
     const count = this.cart.reduce((sum, item) => sum + item.qty, 0);
@@ -898,12 +913,14 @@ class KioskApp {
       this.cart = this.cart.filter(i => i.item_id !== id);
     }
     this._updateCartBadge();
+    this.updateSyncQRCode();
     this._renderCheckoutItems();
   }
 
   _removeFromCart(id) {
     this.cart = this.cart.filter(i => i.item_id !== id);
     this._updateCartBadge();
+    this.updateSyncQRCode();
     this._renderCheckoutItems();
     this._showToast('🗑️ Item removed from cart.', 'info');
   }
@@ -938,8 +955,10 @@ class KioskApp {
       setTimeout(() => {
         this.cart = [];
         this._updateCartBadge();
+        this.updateSyncQRCode();
         this._switchScreen('entry-screen');
       }, 3000);
+
     } else {
       this.paymentStatusMsg.style.color = 'var(--error-red)';
       this.paymentStatusMsg.textContent = '❌ Checkout transaction rejected. Insufficient credits.';
@@ -1108,7 +1127,9 @@ class KioskApp {
     this._renderCategories();
     this._renderSidebarElements();
     this._syncHeadcount();
+    this.updateSyncQRCode();
   }
+
 
   toggleLanguage() {
     this.currentLang = this.currentLang === 'en' ? 'ur' : 'en';
@@ -1268,7 +1289,81 @@ class KioskApp {
       this.appendChatMessage(this.currentLang === 'ur' ? 'تصویر اپ لوڈ کرنے میں نیٹ ورک خرابی پیش آئی۔' : 'Network error during product photo upload.', "ai");
     }
   }
+
+  _parseUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    
+    // 1. Language sync
+    const lang = params.get('lang');
+    if (lang === 'en' || lang === 'ur') {
+      this.currentLang = lang;
+    }
+    
+    // 2. Customer ID session sync
+    const customerId = params.get('customer_id');
+    if (customerId) {
+      this.memberData = {
+        customer_id: customerId,
+        name: customerId === 'CUST-DEMO' ? 'Zeeshan Malik' : 'Smart Shopper',
+        segment: customerId === 'CUST-DEMO' ? 'Ultra-Luxury Spender' : 'Loyalty Member',
+        store_credit_balance: 5000.0
+      };
+      this._updateProfileView();
+      setTimeout(() => {
+        this._switchScreen('main-workspace');
+        this._showToast(this.currentLang === 'ur' ? 'سیشن لنک ہو گیا!' : 'Mobile session synchronized!', 'success');
+      }, 300);
+    }
+    
+    // 3. Cart items sync
+    const cartStr = params.get('cart');
+    if (cartStr) {
+      this.cart = [];
+      const items = cartStr.split(',');
+      items.forEach(itemPair => {
+        const [id, qty] = itemPair.split(':');
+        const product = this.products.find(p => p.item_id === id);
+        if (product) {
+          this.cart.push({ ...product, qty: parseInt(qty, 10) || 1 });
+        }
+      });
+      this._updateCartBadge();
+    }
+  }
+
+  updateSyncQRCode() {
+    if (!this.mobileSyncQr) return;
+    
+    const host = window.location.hostname || 'localhost';
+    const port = window.location.port || '8000';
+    const path = window.location.pathname || '/templates/kiosk.html';
+    
+    let syncURL = `http://${host}:${port}${path}`;
+    
+    const params = [];
+    params.push(`lang=${this.currentLang}`);
+    
+    if (this.memberData && this.memberData.customer_id) {
+      params.push(`customer_id=${this.memberData.customer_id}`);
+    }
+    
+    if (this.cart && this.cart.length > 0) {
+      const cartStr = this.cart.map(item => `${item.item_id}:${item.qty}`).join(',');
+      params.push(`cart=${cartStr}`);
+    }
+    
+    syncURL += '?' + params.join('&');
+    
+    this.mobileSyncQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(syncURL)}`;
+    
+    if (this.martNetworkIpLabel) {
+      this.martNetworkIpLabel.textContent = this.currentLang === 'ur'
+        ? `مارٹ نیٹ ورک آئی پی: ${host}:${port}`
+        : `Mart Network IP: ${host}:${port}`;
+    }
+  }
 }
+
 
 // ═════════════════════════════════════════════
 // DashboardUI — Administration Dashboard Controller
