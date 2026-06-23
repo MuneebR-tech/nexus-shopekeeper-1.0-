@@ -360,18 +360,23 @@ class KioskApp {
     this.memberData = null;
     this.products = [];
     this.searchDebounce = null;
-    this.currentLang = 'en'; // default language
+    this.currentLang = 'ur'; // default language: Urdu
 
     this._cacheElements();
     this._bindEvents();
     this._loadInitialData();
     this._initSupport();
+    
+    // Apply default language translations on boot
+    this.applyLanguage();
+
     this._updateClock();
     setInterval(() => this._updateClock(), 1000);
     setInterval(() => this._syncHeadcount(), 10000);
 
     setTimeout(() => this.audio.playWelcome(), 500);
   }
+
 
   _cacheElements() {
     this.screens = {
@@ -1067,8 +1072,7 @@ class KioskApp {
     }, 3000);
   }
 
-  toggleLanguage() {
-    this.currentLang = this.currentLang === 'en' ? 'ur' : 'en';
+  applyLanguage() {
     document.documentElement.lang = this.currentLang;
     document.documentElement.dir = this.currentLang === 'ur' ? 'rtl' : 'ltr';
 
@@ -1104,10 +1108,15 @@ class KioskApp {
     this._renderCategories();
     this._renderSidebarElements();
     this._syncHeadcount();
+  }
 
+  toggleLanguage() {
+    this.currentLang = this.currentLang === 'en' ? 'ur' : 'en';
+    this.applyLanguage();
     const msg = this.currentLang === 'ur' ? 'زبان تبدیل کر دی گئی ہے: اردو' : 'Language changed to: English';
     this._showToast(msg, 'info');
   }
+
 
   _triggerVoiceWelcome(customer) {
     try {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ur" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,21 +34,21 @@
       <div class="welcome-logo-ring">
         <span class="welcome-logo-icon">🏪</span>
       </div>
-      <h1 class="welcome-title">Nexus <span class="gradient-text">Shopkeeper</span></h1>
-      <p class="welcome-subtitle">Pakistan's Smartest Autonomous Retail Kiosk</p>
+      <h1 class="welcome-title" data-translate="welcome_title">نیکس شاپ کیپر</h1>
+      <p class="welcome-subtitle" data-translate="welcome_subtitle">پاکستان کا سب سے ذہین اور خودکار ریٹیل کیوسک</p>
       <div class="welcome-divider"></div>
       
       <div class="welcome-actions" style="flex-direction: column; align-items: center; gap: 16px;">
-        <button id="btn-enter-mart" class="btn btn-primary btn-xl" style="width: 340px; justify-content: center;">
+        <button id="btn-enter-mart" class="btn btn-primary btn-xl" style="width: 340px; justify-content: center;" data-translate="enter_mart_btn">
           <span class="btn-icon">🛒</span>
           <span class="btn-label">Check In (Enter Mart)</span>
         </button>
-        <button id="btn-exit-mart" class="btn btn-outline btn-xl" style="width: 340px; justify-content: center; backdrop-filter: blur(8px);">
+        <button id="btn-exit-mart" class="btn btn-outline btn-xl" style="width: 340px; justify-content: center; backdrop-filter: blur(8px);" data-translate="exit_mart_btn">
           <span class="btn-icon">💳</span>
           <span class="btn-label">Check Out (Pay)</span>
         </button>
       </div>
-      <p class="welcome-footer-note">Touch an option to begin. No human checkout lines, 100% automated.</p>
+      <p class="welcome-footer-note" data-translate="footer_note">Touch an option to begin. No human checkout lines, 100% automated.</p>
     </div>
   </section>
 
@@ -61,23 +61,23 @@
       <div class="welcome-logo-ring">
         <span class="welcome-logo-icon">💳</span>
       </div>
-      <h1 class="welcome-title">Loyalty Verification</h1>
-      <p class="welcome-subtitle">Identify yourself to apply personal discounts & credit limits</p>
+      <h1 class="welcome-title" data-translate="loyalty_title">Loyalty Verification</h1>
+      <p class="welcome-subtitle" data-translate="loyalty_subtitle">Identify yourself to apply personal discounts & credit limits</p>
       <div class="welcome-divider"></div>
-      <h2 class="welcome-question">Are you a premium card holder?</h2>
+      <h2 class="welcome-question" data-translate="loyalty_question">Are you a premium card holder?</h2>
       
       <div class="welcome-actions">
-        <button id="btn-has-card" class="btn btn-primary btn-xl">
+        <button id="btn-has-card" class="btn btn-primary btn-xl" data-translate="yes_pin_btn">
           <span class="btn-icon">🔑</span>
           <span class="btn-label">Yes, I have a PIN</span>
         </button>
-        <button id="btn-guest" class="btn btn-outline btn-xl">
+        <button id="btn-guest" class="btn btn-outline btn-xl" data-translate="guest_btn">
           <span class="btn-icon">👤</span>
           <span class="btn-label">Continue as Guest</span>
         </button>
       </div>
       
-      <button class="btn-link" id="btn-welcome-back" style="margin-top: 36px; display: block; margin-left: auto; margin-right: auto;">
+      <button class="btn-link" id="btn-welcome-back" style="margin-top: 36px; display: block; margin-left: auto; margin-right: auto;" data-translate="back_entry_btn">
         ← Back to Entry
       </button>
     </div>
@@ -89,8 +89,8 @@
   <section id="keypad-screen" class="screen">
     <div class="keypad-wrapper">
       <div class="keypad-header">
-        <h2 class="keypad-title">Enter Your 6-Digit PIN</h2>
-        <p class="keypad-subtitle">Type your membership PIN to retrieve your active profile</p>
+        <h2 class="keypad-title" data-translate="enter_pin_title">Enter Your 6-Digit PIN</h2>
+        <p class="keypad-subtitle" data-translate="enter_pin_subtitle">Type your membership PIN to retrieve your active profile</p>
       </div>
 
       <div class="pin-display" id="pin-display">
@@ -118,10 +118,11 @@
         <button class="keypad-btn keypad-btn--backspace" data-key="backspace">⌫</button>
       </div>
 
-      <button class="btn btn-primary btn-lg keypad-submit" id="keypad-submit">Verify PIN →</button>
-      <button class="btn-link keypad-cancel" id="keypad-cancel">← Cancel &amp; Go Back</button>
+      <button class="btn btn-primary btn-lg keypad-submit" id="keypad-submit" data-translate="verify_pin_btn">Verify PIN →</button>
+      <button class="btn-link keypad-cancel" id="keypad-cancel" data-translate="cancel_btn">← Cancel &amp; Go Back</button>
     </div>
   </section>
+
 
   <!-- ═══════════════════════════════════════════════════════════════
        VIEW 3 — MAIN WIDESCREEN WORKSPACE
@@ -142,12 +143,12 @@
         </div>
       </div>
       <div class="topbar-right">
-        <button class="btn btn-accent btn-topbar" id="btn-workspace-checkout">
+        <button class="btn btn-accent btn-topbar" id="btn-workspace-checkout" data-translate="view_cart_btn">
           <span>🛍️</span> View Cart
           <span class="cart-badge" id="cart-badge">0</span>
         </button>
         <button class="btn btn-glass btn-topbar" id="btn-account">
-          <span>👤</span> <span id="account-label">Account</span>
+          <span>👤</span> <span id="account-label" data-translate="account_label">Account</span>
         </button>
       </div>
     </header>
@@ -163,10 +164,10 @@
           <p class="profile-tier" id="profile-tier">Standard</p>
         </div>
         <nav class="sidebar-actions">
-          <button class="sidebar-btn" id="btn-sidebar-view-cart">🛒 View Current Cart</button>
-          <button class="sidebar-btn" id="btn-sidebar-help">❓ Ask AI Guide</button>
-          <button class="sidebar-btn" id="btn-sidebar-catalog">📋 Reset Finder</button>
-          <button class="sidebar-btn" id="btn-logout">🚪 Exit Mart / Logout</button>
+          <button class="sidebar-btn" id="btn-sidebar-view-cart" data-translate="cart_sidebar_btn">🛒 View Current Cart</button>
+          <button class="sidebar-btn" id="btn-sidebar-help" data-translate="ai_sidebar_btn">❓ Ask AI Guide</button>
+          <button class="sidebar-btn" id="btn-sidebar-catalog" data-translate="reset_sidebar_btn">📋 Reset Finder</button>
+          <button class="sidebar-btn" id="btn-logout" data-translate="exit_sidebar_btn">🚪 Exit Mart / Logout</button>
         </nav>
       </aside>
 
@@ -175,15 +176,17 @@
         <!-- Headcount / Statistics bar -->
         <div class="glass-card" style="margin-bottom: var(--space-md); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-left: 3px solid var(--cyber-teal);">
           <span style="font-size: 14px; font-weight: 500; display: flex; items-center; gap: 8px;">
-            🤖 <span id="staff-count-indicator">Mart operated by 10 active automation technicians.</span>
+            🤖 <span id="staff-count-indicator" data-translate="staff_count">Mart operated by 10 active automation technicians.</span>
           </span>
-          <span style="font-size: 12px; color: var(--text-secondary); font-weight: 600;">
+          <span style="font-size: 12px; color: var(--text-secondary); font-weight: 600;" data-translate="staff_reduction">
             📉 Staff headcount reduced by 85% via automated IoT storage.
           </span>
         </div>
 
-        <h2 class="section-heading">Browse Store Aisle Categories</h2>
+
+        <h2 class="section-heading" data-translate="browse_title">Browse Store Aisle Categories</h2>
         <div class="category-grid" id="category-grid">
+
           <!-- Rendered by JS -->
         </div>
       </main>
