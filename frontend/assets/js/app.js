@@ -59,7 +59,18 @@ const TRANSLATIONS = {
     cancel_btn: "← Cancel & Go Back",
     search_placeholder: "Search product database... (e.g. Cola, Juice, Milk)",
     view_cart_btn: "View Cart",
-    account_label: "Account",
+    account_label: "Settings ⚙️",
+    settings_sidebar_btn: "⚙️ Settings & Sync",
+    settings_title: "⚙️ Settings & Account",
+    account_info_title: "👤 Customer Profile",
+    acc_name_label: "Name:",
+    acc_id_label: "ID:",
+    acc_segment_label: "Segment:",
+    acc_balance_label: "Credit Balance:",
+    settings_lang_title: "🌐 System Language",
+    settings_theme_title: "🌓 Display Theme",
+    settings_sync_title: "📱 Live Mobile Session Sync",
+    settings_sync_desc: "Scan this QR code to take your current Urdu/English shopper session, coordinates, and active cart on your phone.",
     cart_sidebar_btn: "🛒 View Current Cart",
     ai_sidebar_btn: " Ask AI Guide",
     reset_sidebar_btn: "📋 Reset Finder",
@@ -115,7 +126,18 @@ const TRANSLATIONS = {
     cancel_btn: "← منسوخ کریں اور واپس جائیں",
     search_placeholder: "پروڈکٹ ڈیٹا بیس تلاش کریں... (جیسے: چاول، تیل، دودھ)",
     view_cart_btn: "کارٹ دیکھیں",
-    account_label: "صارف",
+    account_label: "ترتیبات ⚙️",
+    settings_sidebar_btn: "⚙️ ترتیبات اور سنک",
+    settings_title: "⚙️ ترتیبات اور اکاؤنٹ",
+    account_info_title: "👤 کسٹمر پروفائل",
+    acc_name_label: "نام:",
+    acc_id_label: "آئی ڈی:",
+    acc_segment_label: "طبقہ:",
+    acc_balance_label: "کریڈٹ بیلنس:",
+    settings_lang_title: "🌐 نظام کی زبان",
+    settings_theme_title: "🌓 ڈسپلے تھیم",
+    settings_sync_title: "📱 لائیو موبائل سیشن سنک",
+    settings_sync_desc: "اپنے فون پر اردو/انگریزی سیشن، آئل کی تفصیلات اور کارٹ منتقل کرنے کے لیے یہ کیو آر کوڈ اسکین کریں۔",
     cart_sidebar_btn: "🛒 کارٹ دیکھیں",
     ai_sidebar_btn: " Ask AI Guide",
     reset_sidebar_btn: "📋 سرچ بحال کریں",
@@ -362,6 +384,14 @@ class KioskApp {
     this.searchDebounce = null;
     this.currentLang = 'ur'; // default language: Urdu
 
+    // Initialize Theme Preference
+    const preferredTheme = localStorage.getItem('kiosk-theme') || 'dark';
+    if (preferredTheme === 'light') {
+      document.body.classList.add('light-theme');
+    } else {
+      document.body.classList.remove('light-theme');
+    }
+
     this._cacheElements();
     this._bindEvents();
     this._loadInitialData();
@@ -440,6 +470,14 @@ class KioskApp {
     this.aiClearBtn       = document.getElementById('btn-clear-chat');
     this.cameraUploadBtn  = document.getElementById('btn-camera-upload');
     this.cameraFileInput  = document.getElementById('camera-file-input');
+
+    // Settings Components
+    this.settingsModalOverlay = document.getElementById('settings-modal-overlay');
+    this.settingsModalClose   = document.getElementById('settings-modal-close');
+    this.settingsLangEn       = document.getElementById('btn-settings-lang-en');
+    this.settingsLangUr       = document.getElementById('btn-settings-lang-ur');
+    this.settingsThemeDark    = document.getElementById('btn-settings-theme-dark');
+    this.settingsThemeLight   = document.getElementById('btn-settings-theme-light');
   }
 
   _bindEvents() {
@@ -448,6 +486,22 @@ class KioskApp {
 
     // Mobile QR Modal Toggle
     this.qrBtn?.addEventListener('click', () => this.qrOverlay?.classList.add('visible'));
+
+    // Settings Modal Toggle
+    const btnAccount = document.getElementById('btn-account');
+    const btnSidebarSettings = document.getElementById('btn-sidebar-settings');
+    btnAccount?.addEventListener('click', () => this.openSettingsModal());
+    btnSidebarSettings?.addEventListener('click', () => this.openSettingsModal());
+    this.settingsModalClose?.addEventListener('click', () => this.closeSettingsModal());
+    this.settingsModalOverlay?.addEventListener('click', (e) => {
+      if (e.target === this.settingsModalOverlay) this.closeSettingsModal();
+    });
+
+    // Settings actions
+    this.settingsLangEn?.addEventListener('click', () => this.setLanguage('en'));
+    this.settingsLangUr?.addEventListener('click', () => this.setLanguage('ur'));
+    this.settingsThemeDark?.addEventListener('click', () => this.setTheme('dark'));
+    this.settingsThemeLight?.addEventListener('click', () => this.setTheme('light'));
     this.qrClose?.addEventListener('click', () => this.qrOverlay?.classList.remove('visible'));
     this.qrOverlay?.addEventListener('click', (e) => {
       if (e.target === this.qrOverlay) this.qrOverlay.classList.remove('visible');
@@ -711,6 +765,7 @@ class KioskApp {
       this.profileTier.textContent = 'Standard';
       this.accountLabel.textContent = 'Account';
     }
+    this._updateSettingsModalProfile();
   }
 
   _renderCategories() {
@@ -1333,37 +1388,117 @@ class KioskApp {
 
   updateSyncQRCode() {
     if (!this.mobileSyncQr) return;
-    
+
     const host = window.location.hostname || 'localhost';
     const port = window.location.port || '8000';
     const path = window.location.pathname || '/templates/kiosk.html';
-    
+
     let syncURL = `http://${host}:${port}${path}`;
-    
+
     const params = [];
     params.push(`lang=${this.currentLang}`);
-    
+
     if (this.memberData && this.memberData.customer_id) {
       params.push(`customer_id=${this.memberData.customer_id}`);
     }
-    
+
     if (this.cart && this.cart.length > 0) {
       const cartStr = this.cart.map(item => `${item.item_id}:${item.qty}`).join(',');
       params.push(`cart=${cartStr}`);
     }
-    
+
     syncURL += '?' + params.join('&');
-    
+
     this.mobileSyncQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(syncURL)}`;
-    
+
+    const settingsSyncQr = document.getElementById('settings-sync-qr');
+    if (settingsSyncQr) {
+      settingsSyncQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(syncURL)}`;
+    }
+
     if (this.martNetworkIpLabel) {
       this.martNetworkIpLabel.textContent = this.currentLang === 'ur'
         ? `مارٹ نیٹ ورک آئی پی: ${host}:${port}`
         : `Mart Network IP: ${host}:${port}`;
     }
   }
-}
 
+  openSettingsModal() {
+    this._updateSettingsModalProfile();
+    this.updateSyncQRCode();
+    this.settingsModalOverlay?.classList.add('visible');
+    this._updateSettingsButtonsHighlight();
+  }
+
+  closeSettingsModal() {
+    this.settingsModalOverlay?.classList.remove('visible');
+  }
+
+  _updateSettingsModalProfile() {
+    const accName = document.getElementById('settings-acc-name');
+    const accId = document.getElementById('settings-acc-id');
+    const accSegment = document.getElementById('settings-acc-segment');
+    const accBalance = document.getElementById('settings-acc-balance');
+    
+    if (accName && accId && accSegment && accBalance) {
+      if (this.memberData) {
+        accName.textContent = this.memberData.name;
+        accId.textContent = this.memberData.customer_id;
+        accSegment.textContent = this.memberData.segment || 'Premium';
+        accBalance.textContent = `Rs. ${Math.round(this.memberData.store_credit_balance || 0).toLocaleString()}`;
+      } else {
+        accName.textContent = this.currentLang === 'ur' ? 'مہمان صارف' : 'Guest Shopper';
+        accId.textContent = 'N/A';
+        accSegment.textContent = this.currentLang === 'ur' ? 'معیاری' : 'Standard';
+        accBalance.textContent = 'Rs. 0';
+      }
+    }
+  }
+
+  _updateSettingsButtonsHighlight() {
+    // Language buttons
+    if (this.currentLang === 'en') {
+      this.settingsLangEn?.classList.add('btn-accent');
+      this.settingsLangUr?.classList.remove('btn-accent');
+    } else {
+      this.settingsLangUr?.classList.add('btn-accent');
+      this.settingsLangEn?.classList.remove('btn-accent');
+    }
+    
+    // Theme buttons
+    const activeTheme = localStorage.getItem('kiosk-theme') || 'dark';
+    if (activeTheme === 'dark') {
+      this.settingsThemeDark?.classList.add('btn-accent');
+      this.settingsThemeLight?.classList.remove('btn-accent');
+    } else {
+      this.settingsThemeLight?.classList.add('btn-accent');
+      this.settingsThemeDark?.classList.remove('btn-accent');
+    }
+  }
+
+  setLanguage(lang) {
+    if (this.currentLang === lang) return;
+    this.currentLang = lang;
+    this.applyLanguage();
+    this._updateSettingsModalProfile();
+    this._updateSettingsButtonsHighlight();
+    const msg = this.currentLang === 'ur' ? 'زبان تبدیل کر دی گئی ہے: اردو' : 'Language changed to: English';
+    this._showToast(msg, 'info');
+  }
+
+  setTheme(theme) {
+    if (theme === 'light') {
+      document.body.classList.add('light-theme');
+      localStorage.setItem('kiosk-theme', 'light');
+    } else {
+      document.body.classList.remove('light-theme');
+      localStorage.setItem('kiosk-theme', 'dark');
+    }
+    this._updateSettingsButtonsHighlight();
+    const msg = theme === 'light' ? 'Theme set to Light Mode' : 'Theme set to Dark Mode';
+    this._showToast(this.currentLang === 'ur' ? (theme === 'light' ? 'تھیم تبدیل: لائٹ موڈ' : 'تھیم تبدیل: ڈارک موڈ') : msg, 'info');
+  }
+}
 
 // ═════════════════════════════════════════════
 // DashboardUI — Administration Dashboard Controller

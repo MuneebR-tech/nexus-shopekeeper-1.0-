@@ -168,6 +168,7 @@
           <button class="sidebar-btn" id="btn-sidebar-view-cart" data-translate="cart_sidebar_btn">🛒 View Current Cart</button>
           <button class="sidebar-btn" id="btn-sidebar-help" data-translate="ai_sidebar_btn">❓ Ask AI Guide</button>
           <button class="sidebar-btn" id="btn-sidebar-catalog" data-translate="reset_sidebar_btn">📋 Reset Finder</button>
+          <button class="sidebar-btn" id="btn-sidebar-settings" data-translate="settings_sidebar_btn">⚙️ Settings & Sync</button>
           <button class="sidebar-btn" id="btn-logout" data-translate="exit_sidebar_btn">🚪 Exit Mart / Logout</button>
         </nav>
       </aside>
@@ -431,6 +432,60 @@
 
     </div>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SETTINGS & ACCOUNT MODAL
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="settings-modal-overlay">
+    <div class="modal glass-card" id="settings-modal" style="max-width: 480px; width: 92%;">
+      <div class="modal-header">
+        <h2 style="font-size: 20px; font-weight: 800; font-family: var(--font-heading);" data-translate="settings_title">⚙️ Settings & Account</h2>
+        <button class="modal-close" id="settings-modal-close">✕</button>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 20px; padding-bottom: 10px;">
+        
+        <!-- Account Info Section -->
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 14px; border-radius: var(--radius-md);">
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; font-family: var(--font-heading);" data-translate="account_info_title">👤 Customer Profile</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
+            <div><span class="text-secondary" data-translate="acc_name_label">Name:</span> <strong id="settings-acc-name">Guest</strong></div>
+            <div><span class="text-secondary" data-translate="acc_id_label">ID:</span> <strong id="settings-acc-id">N/A</strong></div>
+            <div><span class="text-secondary" data-translate="acc_segment_label">Segment:</span> <strong id="settings-acc-segment" style="color: var(--cyber-teal);">Standard</strong></div>
+            <div><span class="text-secondary" data-translate="acc_balance_label">Credit Balance:</span> <strong id="settings-acc-balance">Rs. 0.00</strong></div>
+          </div>
+        </div>
+
+        <!-- Language Preference Section -->
+        <div>
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; font-family: var(--font-heading);" data-translate="settings_lang_title">🌐 System Language</h3>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-glass" id="btn-settings-lang-en" style="flex: 1; font-weight: 600; font-size: 13px; height: 38px;">English</button>
+            <button class="btn btn-glass" id="btn-settings-lang-ur" style="flex: 1; font-weight: 600; font-size: 13px; height: 38px;">اردو (Urdu)</button>
+          </div>
+        </div>
+
+        <!-- Theme Mode Preference Section -->
+        <div>
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; font-family: var(--font-heading);" data-translate="settings_theme_title">🌓 Display Theme</h3>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-glass" id="btn-settings-theme-dark" style="flex: 1; font-weight: 600; font-size: 13px; height: 38px;"><span>🌙</span> Dark Mode</button>
+            <button class="btn btn-glass" id="btn-settings-theme-light" style="flex: 1; font-weight: 600; font-size: 13px; height: 38px;"><span>☀️</span> Light Mode</button>
+          </div>
+        </div>
+
+        <!-- Mobile Sync Section -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;">
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-primary); font-family: var(--font-heading); margin-bottom: 2px;" data-translate="settings_sync_title">📱 Live Mobile Session Sync</h3>
+          <p class="text-secondary" style="font-size: 11px; line-height: 1.4; max-width: 320px;" data-translate="settings_sync_desc">Scan this QR code to take your current Urdu/English shopper session, coordinates, and active cart on your phone.</p>
+          <div style="background: white; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <img id="settings-sync-qr" src="" width="140" height="140" style="display: block;" alt="Sync QR Code" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 
   <div class="toast-container" id="toast-container"></div>
 

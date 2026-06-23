@@ -1473,3 +1473,80 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; lin
   font-weight: 700;
   background: rgba(255, 255, 255, 0.05);
 }
+
+/* ─── LIGHT THEME OVERRIDES ─── */
+body.light-theme {
+  --bg-deepest: #f3f4f6;
+  --bg-deep: #f9fafb;
+  --bg-base: #ffffff;
+  --bg-raised: #f3f4f6;
+  --bg-surface: #e5e7eb;
+  --bg-hover: #d1d5db;
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(88, 101, 242, 0.2);
+  --glass-blur: 20px;
+
+  /* Text */
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --text-accent: var(--cosmic-indigo);
+
+  /* Borders & Shadows */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-glow: rgba(88, 101, 242, 0.25);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.08);
+  --shadow-glow: 0 0 20px rgba(88, 101, 242, 0.1);
+}
+
+/* Specific Light Theme fixes to maintain high readability */
+body.light-theme .glass-card {
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.06) !important;
+}
+
+body.light-theme .sidebar-btn {
+  color: var(--text-secondary);
+}
+
+body.light-theme .sidebar-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+body.light-theme input, body.light-theme select {
+  background: var(--bg-deep) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+body.light-theme .btn-glass {
+  background: rgba(255, 255, 255, 0.4);
+  color: var(--text-primary);
+}
+
+body.light-theme .btn-glass:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-primary);
+}
+
+body.light-theme .search-autocomplete {
+  background: var(--bg-base);
+  border-color: var(--border-subtle);
+}
+
+body.light-theme .sponsored-card {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+body.light-theme .product-details-modal .modal {
+  background: var(--bg-base);
+}
+
+body.light-theme .modal-close {
+  color: var(--text-primary);
+}
+
