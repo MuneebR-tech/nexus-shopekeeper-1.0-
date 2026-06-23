@@ -214,7 +214,36 @@
             <div class="flex justify-center" style="padding:var(--space-lg)"><div class="spinner"></div></div>
           </div>
         </div>
+
+        <!-- Manager AI Assistant -->
+        <div class="glass-card animate-in" style="border-left: 3px solid var(--cosmic-indigo); margin-top: 10px;">
+          <div class="panel-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span>🤖 Manager AI Assistant</span>
+            <button class="btn btn-glass btn-sm" id="btn-clear-manager-chat" style="padding: 2px 6px; font-size: 10px;">Clear</button>
+          </div>
+          <div class="body-xs text-muted" style="margin-bottom: var(--space-sm)">Ask about sales, stock status, shifts, or default risks. Uses live store telemetry.</div>
+          
+          <div id="manager-chat-messages" style="overflow-y: auto; display: flex; flex-direction: column; gap: 8px; max-height: 200px; min-height: 140px; padding-right: 4px; font-size: 12px; margin-bottom: 8px; scroll-behavior: smooth;">
+            <div style="background: rgba(88,101,242,0.08); border-left: 2px solid var(--cosmic-indigo); padding: 8px; border-radius: var(--radius-sm); color: var(--text-secondary);">
+              Welcome, Manager! Ask me about <strong>sales trends</strong>, <strong>low stock items</strong>, <strong>employee shifts</strong>, or <strong>credit risks</strong>.
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+            <button class="manager-chip btn btn-glass btn-xs" data-query="low stock" style="padding: 4px 8px; font-size: 10px;">⚠️ Low Stock</button>
+            <button class="manager-chip btn btn-glass btn-xs" data-query="sales trends" style="padding: 4px 8px; font-size: 10px;">📈 Sales Trends</button>
+            <button class="manager-chip btn btn-glass btn-xs" data-query="revenue today" style="padding: 4px 8px; font-size: 10px;">💰 Today's Sales</button>
+            <button class="manager-chip btn btn-glass btn-xs" data-query="technician status" style="padding: 4px 8px; font-size: 10px;">👥 Shifts</button>
+            <button class="manager-chip btn btn-glass btn-xs" data-query="credit risks" style="padding: 4px 8px; font-size: 10px;">🧠 Credit Risk</button>
+          </div>
+          
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <input type="text" id="manager-chat-input" class="search-input" placeholder="Ask manager assistant..." style="flex: 1; height: 36px; font-size: 12px; padding-left: 10px;" />
+            <button class="btn btn-primary btn-sm" id="btn-send-manager-chat" style="padding: 6px 12px; height: 36px;">➔</button>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 

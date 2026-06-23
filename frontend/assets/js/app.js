@@ -1305,6 +1305,12 @@ class DashboardUI {
     this.invSupplier      = document.getElementById('inv-supplier');
     this.invWeight        = document.getElementById('inv-weight');
     this.invExpiry        = document.getElementById('inv-expiry');
+
+    // Manager AI Assistant components
+    this.managerChatMessages = document.getElementById('manager-chat-messages');
+    this.managerChatInput    = document.getElementById('manager-chat-input');
+    this.managerSendBtn      = document.getElementById('btn-send-manager-chat');
+    this.managerClearBtn     = document.getElementById('btn-clear-manager-chat');
   }
 
   _bindEvents() {
@@ -1337,7 +1343,24 @@ class DashboardUI {
       e.preventDefault();
       this.handleFormSubmit();
     });
+
+    // Manager AI Chat actions
+    this.managerSendBtn?.addEventListener('click', () => this.handleManagerSendMessage());
+    this.managerChatInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') this.handleManagerSendMessage();
+    });
+    this.managerClearBtn?.addEventListener('click', () => this.clearManagerChatMessages());
+    
+    // Bind quick prompt chips
+    document.querySelectorAll('.manager-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const query = chip.dataset.query;
+        if (this.managerChatInput) this.managerChatInput.value = query;
+        this.handleManagerSendMessage();
+      });
+    });
   }
+
 
   async init() {
     await this.loadSystemHealth();
@@ -1754,7 +1777,74 @@ class DashboardUI {
       }
     }
   }
+
+  async handleManagerSendMessage() {
+    if (!this.managerChatInput) return;
+    const val = this.managerChatInput.value.trim();
+    if (!val) return;
+    
+    this.managerChatInput.value = '';
+    this.appendManagerChatMessage(val, 'user');
+    
+    try {
+      const res = await fetch('http://localhost:8000/api/ai/manager', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: val })
+      });
+      const data = await res.json();
+      if (data && data.response) {
+        // Format bold markdown and list bullet points
+        let formatted = data.response
+          .replace(/\n/g, '<br>')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        this.appendManagerChatMessage(formatted, 'ai');
+      } else {
+        this.appendManagerChatMessage('Sorry, I encountered an error processing your query.', 'ai');
+      }
+    } catch (err) {
+      console.error("Manager AI Chat failed:", err);
+      this.appendManagerChatMessage('Sorry, there was a network connection issue.', 'ai');
+    }
+  }
+
+  appendManagerChatMessage(text, sender) {
+    if (!this.managerChatMessages) return;
+    const msgDiv = document.createElement('div');
+    msgDiv.style.padding = '8px';
+    msgDiv.style.borderRadius = 'var(--radius-sm)';
+    msgDiv.style.maxWidth = '90%';
+    msgDiv.style.fontSize = '12px';
+    msgDiv.style.lineHeight = '1.4';
+    
+    if (sender === 'user') {
+      msgDiv.style.background = 'rgba(255,255,255,0.05)';
+      msgDiv.style.alignSelf = 'flex-end';
+      msgDiv.style.color = 'var(--text-primary)';
+      msgDiv.style.marginLeft = 'auto';
+      msgDiv.innerHTML = `<strong>You:</strong> ${text}`;
+    } else {
+      msgDiv.style.background = 'rgba(88,101,242,0.08)';
+      msgDiv.style.borderLeft = '2px solid var(--cosmic-indigo)';
+      msgDiv.style.alignSelf = 'flex-start';
+      msgDiv.style.color = 'var(--text-secondary)';
+      msgDiv.style.marginRight = 'auto';
+      msgDiv.innerHTML = `<strong>AI:</strong> ${text}`;
+    }
+    this.managerChatMessages.appendChild(msgDiv);
+    this.managerChatMessages.scrollTop = this.managerChatMessages.scrollHeight;
+  }
+
+  clearManagerChatMessages() {
+    if (!this.managerChatMessages) return;
+    this.managerChatMessages.innerHTML = `
+      <div style="background: rgba(88,101,242,0.08); border-left: 2px solid var(--cosmic-indigo); padding: 8px; border-radius: var(--radius-sm); color: var(--text-secondary);">
+        Welcome, Manager! Ask me about <strong>sales trends</strong>, <strong>low stock items</strong>, <strong>employee shifts</strong>, or <strong>credit risks</strong>.
+      </div>
+    `;
+  }
 }
+
 
 // ═════════════════════════════════════════════
 // Toast Utilities
