@@ -49,6 +49,10 @@ def redirect_clean_kiosk():
 def redirect_clean_dashboard():
     return RedirectResponse(url="/templates/dashboard.html")
 
+@app.get("/phase1")
+def redirect_clean_phase1():
+    return RedirectResponse(url="/templates/phase1.html")
+
 # Mount frontend directory for static serving
 frontend_path = PROJECT_ROOT / "frontend"
 if frontend_path.exists():

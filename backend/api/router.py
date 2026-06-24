@@ -8,6 +8,7 @@ import sys
 import json
 import hashlib
 import random
+import math
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -54,6 +55,10 @@ class ClassifyRequest(BaseModel):
 class MembershipVerifyRequest(BaseModel):
     pin: str = Field(..., description="6-digit membership PIN")
 
+class RouteRequest(BaseModel):
+    rack_ids: Optional[List[str]] = None
+    item_ids: Optional[List[str]] = None
+
 
 # ---------------------------------------------------------------------------
 # Endpoints
@@ -68,6 +73,92 @@ def get_system_status() -> Dict[str, Any]:
         "day": 2,
         "scaffolding": "verified",
         "database_connected": len(credit_engine.customers) > 0
+    }
+
+@router.get("/layout/coordinates")
+def get_coordinates(rack_id: str = Query(..., min_length=2), shelf_position: int = Query(3, ge=1, le=5)) -> Dict[str, Any]:
+    """Translates a rack ID and shelf position into meters."""
+    try:
+        x, y, z = rack_map.get_rack_coordinates(rack_id, shelf_position)
+        section_num = int(rack_id[1:])
+        floor = "1st Floor" if section_num >= 4 else "Ground Floor"
+        aisle = f"Aisle {rack_id[0].upper()}"
+        return {
+            "status": "success",
+            "rack_id": rack_id,
+            "shelf_position": shelf_position,
+            "coordinates": {"x": x, "y": y, "z": z},
+            "floor": floor,
+            "aisle": aisle
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@router.post("/layout/route")
+def get_optimized_route(req: RouteRequest) -> Dict[str, Any]:
+    """Calculates optimized route for a list of rack_ids or item_ids."""
+    if not req.rack_ids and not req.item_ids:
+        raise HTTPException(status_code=400, detail="Must provide rack_ids or item_ids.")
+    
+    current_loc = (0.0, 0.0, 0.0)
+    total_distance = 0.0
+    targets = []
+    
+    if req.item_ids:
+        for item_id in req.item_ids:
+            item = rack_map.inventory.get(item_id)
+            if item:
+                loc = rack_map.get_item_location(item_id)
+                if loc:
+                    targets.append({
+                        "id": item_id,
+                        "name": item.name,
+                        "rack_id": item.rack_id,
+                        "coords": loc
+                    })
+    elif req.rack_ids:
+        for rack_id in req.rack_ids:
+            try:
+                loc = rack_map.get_rack_coordinates(rack_id, 3)
+                targets.append({
+                    "id": rack_id,
+                    "name": f"Rack {rack_id}",
+                    "rack_id": rack_id,
+                    "coords": loc
+                })
+            except Exception:
+                continue
+                
+    if not targets:
+        return {"route": [], "total_distance_m": 0.0}
+        
+    ordered_route = []
+    while targets:
+        nearest_idx = -1
+        min_dist = float("inf")
+        for idx, t in enumerate(targets):
+            loc = t["coords"]
+            dist = math.sqrt(
+                (current_loc[0] - loc[0]) ** 2 +
+                (current_loc[1] - loc[1]) ** 2 +
+                (current_loc[2] - loc[2]) ** 2
+            )
+            if dist < min_dist:
+                min_dist = dist
+                nearest_idx = idx
+        
+        step = targets.pop(nearest_idx)
+        ordered_route.append(step)
+        total_distance += min_dist
+        current_loc = step["coords"]
+        
+    # Return to entrance (0, 0, 0)
+    final_dist = math.sqrt(current_loc[0]**2 + current_loc[1]**2 + current_loc[2]**2)
+    total_distance += final_dist
+    
+    return {
+        "route": ordered_route,
+        "total_distance_m": round(total_distance, 2)
     }
 
 # --- Customers endpoints ---
