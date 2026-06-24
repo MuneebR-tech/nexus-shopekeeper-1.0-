@@ -212,7 +212,7 @@ def create_phase_1_document(output_path):
     
     meta_lines = [
         "PROJECT SPECIFICATION ARCHIVE",
-        "Presented By: Classroom Presenter (Milestone 1 Lead)",
+        "Presented By: Haseeb, Ali Haider, Saad Mughal, Ibrahim Zahid (Group A)",
         "Affiliation: Department of Software Engineering",
         "Date: June 2026",
         "Software Release: Nexus Shopkeeper v1.0.0 (Pakistani Retail SaaS)",
@@ -366,7 +366,7 @@ def create_phase_2_document(output_path):
     
     meta_lines = [
         "PROJECT SPECIFICATION ARCHIVE",
-        "Presented By: Classroom Presenter (Milestone 2 Lead)",
+        "Presented By: Muneeb ur Rehman, Muhammad Ibrahim, Hassaan Ikram (Group 2)",
         "Affiliation: Department of Software Engineering",
         "Date: June 2026",
         "Software Release: Nexus Shopkeeper v1.0.0 (Pakistani Retail SaaS)",
