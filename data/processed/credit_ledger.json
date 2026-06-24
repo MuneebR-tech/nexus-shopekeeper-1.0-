@@ -781,5 +781,14 @@
     "amount": 154.5,
     "balance_after": 216.27,
     "reason": "Loan payment of $154.50 received. Remaining: $154.50"
+  },
+  {
+    "entry_id": "a1bfcab1",
+    "timestamp": "2026-06-23T14:52:48.976582",
+    "customer_id": "CUST-00001",
+    "type": "debit",
+    "amount": 100.0,
+    "balance_after": 423.08,
+    "reason": "Redeemed points checkout"
   }
 ]

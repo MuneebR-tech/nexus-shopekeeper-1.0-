@@ -38,8 +38,12 @@ app.include_router(api_router, prefix="/api")
 
 # Redirect root and clean paths to the static HTML templates
 @app.get("/")
-def redirect_to_kiosk():
-    return RedirectResponse(url="/templates/kiosk.html")
+def redirect_to_portal():
+    return RedirectResponse(url="/templates/index.html")
+
+@app.get("/index")
+def redirect_clean_portal():
+    return RedirectResponse(url="/templates/index.html")
 
 @app.get("/kiosk")
 def redirect_clean_kiosk():

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Shopkeeper — Presentation Portal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: var(--bg-deepest);
+      color: var(--text-primary);
+      overflow-y: auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    /* Background grid effect */
+    .portal-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(88, 101, 242, 0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                  linear-gradient(185deg, #07080c 0%, #0d0f1a 100%);
+      z-index: -1;
+    }
+
+    .portal-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - var(--bottombar-h));
+      flex: 1;
+      width: 100%;
+    }
+
+    .portal-header {
+      text-align: center;
+      margin-bottom: 48px;
+      max-width: 800px;
+      animation: fade-up 0.6s var(--ease-out);
+    }
+
+    .portal-logo {
+      font-size: 52px;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: float-up 4s ease-in-out infinite;
+    }
+
+    .portal-title {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+      font-family: var(--font-heading);
+    }
+
+    .portal-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      width: 100%;
+      margin-bottom: 40px;
+      animation: fade-up 0.8s var(--ease-out) 0.1s both;
+    }
+
+    @media (max-width: 968px) {
+      .portal-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    .portal-card {
+      background: rgba(27, 30, 50, 0.45);
+      border: 1px solid rgba(88, 101, 242, 0.15);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(12px);
+    }
+
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      transition: all var(--transition-base);
+    }
+
+    /* Card coloring variants */
+    .portal-card--phase1::before {
+      background: linear-gradient(90deg, var(--cosmic-indigo), var(--cyber-teal));
+    }
+    .portal-card--phase2::before {
+      background: linear-gradient(90deg, var(--neon-purple), var(--amber-gold));
+    }
+    .portal-card--kiosk::before {
+      background: linear-gradient(90deg, var(--cyber-teal), var(--success-green));
+    }
+
+    .portal-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(88, 101, 242, 0.35);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(88, 101, 242, 0.1);
+      background: rgba(27, 30, 50, 0.65);
+    }
+
+    .portal-card--phase1:hover {
+      border-color: rgba(0, 242, 254, 0.35);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.1);
+    }
+
+    .portal-card--phase2:hover {
+      border-color: rgba(245, 158, 11, 0.35);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(245, 158, 11, 0.1);
+    }
+
+    .card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card-icon-container {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .portal-card--phase1 .card-icon-container {
+      background: rgba(0, 242, 254, 0.08);
+      border-color: rgba(0, 242, 254, 0.2);
+      color: var(--cyber-teal);
+    }
+
+    .portal-card--phase2 .card-icon-container {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245, 158, 11, 0.2);
+      color: var(--amber-gold);
+    }
+
+    .portal-card--kiosk .card-icon-container {
+      background: rgba(88, 101, 242, 0.08);
+      border-color: rgba(88, 101, 242, 0.2);
+      color: var(--cosmic-indigo);
+    }
+
+    .card-presenter {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      align-self: flex-start;
+      margin-bottom: 4px;
+    }
+
+    .portal-card--phase1 .card-presenter {
+      background: rgba(0, 242, 254, 0.12);
+      color: var(--cyber-teal);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+    }
+
+    .portal-card--phase2 .card-presenter {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--amber-gold);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .portal-card--kiosk .card-presenter {
+      background: rgba(88, 101, 242, 0.12);
+      color: var(--text-primary);
+      border: 1px solid rgba(88, 101, 242, 0.2);
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-heading);
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .card-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-features li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .card-features li strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .card-features li::before {
+      content: '✦';
+      color: var(--cyber-teal);
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    .portal-card--phase2 .card-features li::before {
+      color: var(--amber-gold);
+    }
+
+    .portal-card--kiosk .card-features li::before {
+      color: var(--cosmic-indigo);
+    }
+
+    .card-btn {
+      width: 100%;
+      justify-content: center;
+      font-weight: 700;
+      height: 48px;
+    }
+
+    /* Footer styling */
+    .portal-footer {
+      width: 100%;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(10, 11, 16, 0.6);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-bg"></div>
+
+  <div class="portal-container">
+    <header class="portal-header">
+      <span class="portal-logo">🏪</span>
+      <h1 class="portal-title">Nexus <span class="gradient-text">Shopkeeper</span></h1>
+      <p class="portal-subtitle">
+        Commercial Retail Management & Algorithmic Shopper System.<br>
+        Please select a presentation module below to evaluate specific milestone phases.
+      </p>
+    </header>
+
+    <div class="portal-grid">
+      
+      <!-- CARD 1: PHASE 1 -->
+      <div class="portal-card portal-card--phase1">
+        <div class="card-top">
+          <span class="card-presenter">Milestone Part 1</span>
+          <div class="card-icon-container">📍</div>
+          <h2 class="card-title">Phase 1: Layout & Route Solver</h2>
+          <p class="card-desc">Classroom presentation system demonstrating mathematical layout translation and robotic cart route optimization.</p>
+          
+          <ul class="card-features">
+            <li><span><strong>3D Coordinates Calc:</strong> Translates aisles & shelves to precise physical distances (in meters).</span></li>
+            <li><span><strong>TSP Tour solver:</strong> Solves path loops using Nearest Neighbor algorithms to minimize transit metrics.</span></li>
+            <li><span><strong>Visual Canvas:</strong> Dynamic store grid plotting route sequences and directional lines.</span></li>
+          </ul>
+        </div>
+        <a href="phase1.html" class="btn btn-primary card-btn">Launch Phase 1 Console &rarr;</a>
+      </div>
+
+      <!-- CARD 2: PHASE 2 -->
+      <div class="portal-card portal-card--phase2">
+        <div class="card-top">
+          <span class="card-presenter">Milestone Part 2</span>
+          <div class="card-icon-container">📊</div>
+          <h2 class="card-title">Phase 2: Admin Dashboard</h2>
+          <p class="card-desc">Comprehensive administrative interface focusing on machine learning analytics, store credit engines, and operations.</p>
+          
+          <ul class="card-features">
+            <li><span><strong>K-Means Clustering:</strong> Dynamic loyalty fits (6 profiles) tracking silhouettes and convergence.</span></li>
+            <li><span><strong>Store Credit & Loans:</strong> Transaction ledgers and interest-bearing loan limits.</span></li>
+            <li><span><strong>Analytics Graphs:</strong> Payment trends and profit forecasts rendered via custom SVG indicators.</span></li>
+            <li><span><strong>Manager AI:</strong> Operations advisor leveraging live database & inventory logs.</span></li>
+          </ul>
+        </div>
+        <a href="dashboard.html" class="btn btn-primary card-btn" style="background:linear-gradient(135deg, var(--neon-purple), var(--cosmic-indigo)); border-color:var(--neon-purple);">Launch Phase 2 Admin &rarr;</a>
+      </div>
+
+      <!-- CARD 3: KIOSK -->
+      <div class="portal-card portal-card--kiosk">
+        <div class="card-top">
+          <span class="card-presenter">Interactive shopper UI</span>
+          <div class="card-icon-container">🖥️</div>
+          <h2 class="card-title">Retail Checkout Kiosk</h2>
+          <p class="card-desc">Full customer-facing retail automation kiosk simulator with multilingual checkout controls and sync features.</p>
+          
+          <ul class="card-features">
+            <li><span><strong>PIN Profile Check-in:</strong> Loyalty cards verification with deterministic PIN hashes.</span></li>
+            <li><span><strong>Dual Language support:</strong> Instant full UI toggle between English & Nastaliq Urdu (اردو).</span></li>
+            <li><span><strong>Mobile Session Sync:</strong> QR-based session transfer of current carts and product location coordinates.</span></li>
+            <li><span><strong>Acoustic Feedback:</strong> Distinct Web Audio payment alerts (coins, card swipes, beeps).</span></li>
+          </ul>
+        </div>
+        <a href="kiosk.html" class="btn btn-outline card-btn">Launch Customer Kiosk &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="portal-footer">
+    <div>
+      <span>Nexus Shopkeeper v1.0.0 — Pakistan Retail SaaS Edition</span>
+    </div>
+    <div>
+      <span id="portal-clock"></span>
+    </div>
+  </footer>
+
+  <script>
+    // Portal clock
+    (function portalClock() {
+      const el = document.getElementById('portal-clock');
+      if (!el) return;
+      const tick = () => { el.textContent = new Date().toLocaleString('en-US', { hour12: true, hour:'2-digit', minute:'2-digit', second:'2-digit', month:'short', day:'numeric' }); };
+      tick(); setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
