@@ -13,6 +13,14 @@ import os
 import json
 from pathlib import Path
 
+# Force UTF-8 encoding for standard streams on Windows to prevent print/logging crashes
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except AttributeError:
+        pass
+
 # Add project root to python path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))

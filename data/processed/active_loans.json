@@ -56,6 +56,17 @@
       "total_due": 375.0,
       "is_active": true,
       "reason": "Instant micro-loan approved for Ultra-Luxury Spender"
+    },
+    {
+      "loan_id": "LOAN-1CDFCD",
+      "timestamp": "2026-06-23T21:10:08.096945",
+      "customer_id": "CUST-00001",
+      "principal": 750.0,
+      "interest_rate": 0.0,
+      "interest_accrued": 0.0,
+      "total_due": 375.0,
+      "is_active": true,
+      "reason": "Instant micro-loan approved for Ultra-Luxury Spender"
     }
   ],
   "CUST-00100": [
@@ -95,6 +106,17 @@
     {
       "loan_id": "LOAN-8E34B5",
       "timestamp": "2026-06-23T14:27:33.164958",
+      "customer_id": "CUST-00100",
+      "principal": 150.0,
+      "interest_rate": 0.02,
+      "interest_accrued": 0.0,
+      "total_due": 76.5,
+      "is_active": true,
+      "reason": "Instant micro-loan approved for Mid-Tier Consistent"
+    },
+    {
+      "loan_id": "LOAN-87849F",
+      "timestamp": "2026-06-23T21:10:08.218967",
       "customer_id": "CUST-00100",
       "principal": 150.0,
       "interest_rate": 0.02,
@@ -148,6 +170,17 @@
       "total_due": 76.5,
       "is_active": true,
       "reason": "Instant micro-loan approved for Mid-Tier Consistent"
+    },
+    {
+      "loan_id": "LOAN-97E196",
+      "timestamp": "2026-06-23T21:10:08.343958",
+      "customer_id": "CUST-00200",
+      "principal": 150.0,
+      "interest_rate": 0.02,
+      "interest_accrued": 0.0,
+      "total_due": 76.5,
+      "is_active": true,
+      "reason": "Instant micro-loan approved for Mid-Tier Consistent"
     }
   ],
   "CUST-00300": [
@@ -194,6 +227,17 @@
       "total_due": 39.37,
       "is_active": true,
       "reason": "Instant micro-loan approved for High-Value Impulse"
+    },
+    {
+      "loan_id": "LOAN-F08661",
+      "timestamp": "2026-06-23T21:10:08.465962",
+      "customer_id": "CUST-00300",
+      "principal": 75.0,
+      "interest_rate": 0.05,
+      "interest_accrued": 0.0,
+      "total_due": 39.37,
+      "is_active": true,
+      "reason": "Instant micro-loan approved for High-Value Impulse"
     }
   ],
   "CUST-00400": [
@@ -233,6 +277,17 @@
     {
       "loan_id": "LOAN-9210D6",
       "timestamp": "2026-06-23T14:27:33.519368",
+      "customer_id": "CUST-00400",
+      "principal": 300.0,
+      "interest_rate": 0.03,
+      "interest_accrued": 0.0,
+      "total_due": 154.5,
+      "is_active": true,
+      "reason": "Instant micro-loan approved for Essential Bulk Buyer"
+    },
+    {
+      "loan_id": "LOAN-A14E7D",
+      "timestamp": "2026-06-23T21:10:08.588931",
       "customer_id": "CUST-00400",
       "principal": 300.0,
       "interest_rate": 0.03,

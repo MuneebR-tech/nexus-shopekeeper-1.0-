@@ -20,9 +20,8 @@ echo.
 echo Waiting 3 seconds for server to initialize...
 timeout /t 3 /nobreak >nul
 echo.
-echo Opening Kiosk and Admin Dashboard in your browser...
-start http://localhost:8000/templates/kiosk.html
-start http://localhost:8000/templates/dashboard.html
+echo Opening Presentation Portal in your browser...
+start http://localhost:8000/
 echo.
 echo =======================================================================
 echo   Application launched! Keep the server command window open to shop.
