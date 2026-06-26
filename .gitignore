@@ -4,3 +4,4 @@ __pycache__/
 customer_features.npy
 logs/*
 !logs/.gitkeep
+*.zip
