@@ -12,7 +12,7 @@ from typing import Tuple
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
-from phase_2.kmeans_engine import KMeansEngine
+from backend.core.kmeans_engine import KMeansEngine
 
 
 def calculate_distance_matrix(data: np.ndarray) -> np.ndarray:

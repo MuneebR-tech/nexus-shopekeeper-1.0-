@@ -29,17 +29,17 @@ This system's architecture, physical 3D rack coordinate calculations, and automa
 
 ```
 ├── backend/
-│   ├── core/         # Matrix math utilities, error ledger, atomic file writing
+│   ├── core/         # Dataset seeding, TSP rack routes, vectorized K-Means, credit engine
 │   ├── agents/       # AI concierge loops, telemetry analyzer persona
-│   └── api/          # FastAPI REST endpoints and status handshakes
+│   ├── api/          # FastAPI REST endpoints and status handshakes
+│   ├── api_server.py # FastAPI Server Launcher
+│   └── run_pipeline.py # Master orchestration pipeline runner
 ├── data/
 │   ├── raw/          # Persistent databases (inventory, checkouts, customers)
 │   └── schemas/      # Pydantic validation models
 ├── frontend/
 │   ├── assets/       # CSS stylesheet (dark/light theme rules), JS controller
 │   └── templates/    # UI Views (kiosk.html & dashboard.html)
-├── phase_1/          # Dataset seeding, TSP rack routes, classification
-├── phase_2/          # Vectorized K-Means, Credit engine, API server launch
 ├── requirements.txt  # Project Python dependencies
 └── start_app.bat     # Windows automated startup launcher
 ```

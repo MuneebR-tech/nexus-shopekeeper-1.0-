@@ -970,5 +970,185 @@
     "amount": 154.5,
     "balance_after": 216.27,
     "reason": "Loan payment of $154.50 received. Remaining: $154.50"
+  },
+  {
+    "entry_id": "b199efc1",
+    "timestamp": "2026-06-26T10:24:44.135206",
+    "customer_id": "CUST-00001",
+    "type": "credit",
+    "amount": 50.0,
+    "balance_after": 148.08,
+    "reason": "Loyalty bonus reward (Ultra-Luxury Spender tier)"
+  },
+  {
+    "entry_id": "2133624d",
+    "timestamp": "2026-06-26T10:24:44.171840",
+    "customer_id": "CUST-00001",
+    "type": "credit",
+    "amount": 750.0,
+    "balance_after": 898.08,
+    "reason": "Loan disbursement: LOAN-430CC4 ($750.00 principal, 0% interest)"
+  },
+  {
+    "entry_id": "75c984a9",
+    "timestamp": "2026-06-26T10:24:44.210627",
+    "customer_id": "CUST-00001",
+    "type": "debit",
+    "amount": 375.0,
+    "balance_after": 523.08,
+    "reason": "Loan payment for LOAN-430CC4"
+  },
+  {
+    "entry_id": "c8e215f7",
+    "timestamp": "2026-06-26T10:24:44.240638",
+    "customer_id": "CUST-00001",
+    "type": "loan_payment",
+    "amount": 375.0,
+    "balance_after": 523.08,
+    "reason": "Loan payment of $375.00 received. Remaining: $375.00"
+  },
+  {
+    "entry_id": "b68c2eb6",
+    "timestamp": "2026-06-26T10:24:44.245637",
+    "customer_id": "CUST-00100",
+    "type": "credit",
+    "amount": 20.0,
+    "balance_after": 77.18,
+    "reason": "Loyalty bonus reward (Mid-Tier Consistent tier)"
+  },
+  {
+    "entry_id": "43f3a7dc",
+    "timestamp": "2026-06-26T10:24:44.278685",
+    "customer_id": "CUST-00100",
+    "type": "credit",
+    "amount": 150.0,
+    "balance_after": 227.18,
+    "reason": "Loan disbursement: LOAN-52364C ($150.00 principal, 2% interest)"
+  },
+  {
+    "entry_id": "441045d8",
+    "timestamp": "2026-06-26T10:24:44.314329",
+    "customer_id": "CUST-00100",
+    "type": "debit",
+    "amount": 76.5,
+    "balance_after": 150.68,
+    "reason": "Loan payment for LOAN-52364C"
+  },
+  {
+    "entry_id": "e4618f8d",
+    "timestamp": "2026-06-26T10:24:44.348234",
+    "customer_id": "CUST-00100",
+    "type": "loan_payment",
+    "amount": 76.5,
+    "balance_after": 150.68,
+    "reason": "Loan payment of $76.50 received. Remaining: $76.50"
+  },
+  {
+    "entry_id": "874920f4",
+    "timestamp": "2026-06-26T10:24:44.354090",
+    "customer_id": "CUST-00200",
+    "type": "credit",
+    "amount": 20.0,
+    "balance_after": 53.82,
+    "reason": "Loyalty bonus reward (Mid-Tier Consistent tier)"
+  },
+  {
+    "entry_id": "86c1ee98",
+    "timestamp": "2026-06-26T10:24:44.383890",
+    "customer_id": "CUST-00200",
+    "type": "credit",
+    "amount": 150.0,
+    "balance_after": 203.82,
+    "reason": "Loan disbursement: LOAN-27B3EB ($150.00 principal, 2% interest)"
+  },
+  {
+    "entry_id": "9f3bb151",
+    "timestamp": "2026-06-26T10:24:44.419445",
+    "customer_id": "CUST-00200",
+    "type": "debit",
+    "amount": 76.5,
+    "balance_after": 127.32,
+    "reason": "Loan payment for LOAN-27B3EB"
+  },
+  {
+    "entry_id": "39f46c93",
+    "timestamp": "2026-06-26T10:24:44.451176",
+    "customer_id": "CUST-00200",
+    "type": "loan_payment",
+    "amount": 76.5,
+    "balance_after": 127.32,
+    "reason": "Loan payment of $76.50 received. Remaining: $76.50"
+  },
+  {
+    "entry_id": "0f6739c9",
+    "timestamp": "2026-06-26T10:24:44.458702",
+    "customer_id": "CUST-00300",
+    "type": "credit",
+    "amount": 15.0,
+    "balance_after": 99.08,
+    "reason": "Loyalty bonus reward (High-Value Impulse tier)"
+  },
+  {
+    "entry_id": "9993fe92",
+    "timestamp": "2026-06-26T10:24:44.494073",
+    "customer_id": "CUST-00300",
+    "type": "credit",
+    "amount": 75.0,
+    "balance_after": 174.08,
+    "reason": "Loan disbursement: LOAN-55DCBA ($75.00 principal, 5% interest)"
+  },
+  {
+    "entry_id": "419435c3",
+    "timestamp": "2026-06-26T10:24:44.526177",
+    "customer_id": "CUST-00300",
+    "type": "debit",
+    "amount": 39.38,
+    "balance_after": 134.7,
+    "reason": "Loan payment for LOAN-55DCBA"
+  },
+  {
+    "entry_id": "92c20171",
+    "timestamp": "2026-06-26T10:24:44.557137",
+    "customer_id": "CUST-00300",
+    "type": "loan_payment",
+    "amount": 39.38,
+    "balance_after": 134.7,
+    "reason": "Loan payment of $39.38 received. Remaining: $39.37"
+  },
+  {
+    "entry_id": "a85a94af",
+    "timestamp": "2026-06-26T10:24:44.564135",
+    "customer_id": "CUST-00400",
+    "type": "credit",
+    "amount": 10.0,
+    "balance_after": 70.77,
+    "reason": "Loyalty bonus reward (Essential Bulk Buyer tier)"
+  },
+  {
+    "entry_id": "993c5579",
+    "timestamp": "2026-06-26T10:24:44.595652",
+    "customer_id": "CUST-00400",
+    "type": "credit",
+    "amount": 300.0,
+    "balance_after": 370.77,
+    "reason": "Loan disbursement: LOAN-A90F6D ($300.00 principal, 3% interest)"
+  },
+  {
+    "entry_id": "020b0ecd",
+    "timestamp": "2026-06-26T10:24:44.628677",
+    "customer_id": "CUST-00400",
+    "type": "debit",
+    "amount": 154.5,
+    "balance_after": 216.27,
+    "reason": "Loan payment for LOAN-A90F6D"
+  },
+  {
+    "entry_id": "381625a6",
+    "timestamp": "2026-06-26T10:24:44.663186",
+    "customer_id": "CUST-00400",
+    "type": "loan_payment",
+    "amount": 154.5,
+    "balance_after": 216.27,
+    "reason": "Loan payment of $154.50 received. Remaining: $154.50"
   }
 ]

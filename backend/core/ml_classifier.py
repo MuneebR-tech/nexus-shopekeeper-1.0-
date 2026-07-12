@@ -17,13 +17,13 @@ from typing import Dict, List, Tuple, Any, Optional
 import numpy as np
 
 # ─── Project paths ───────────────────────────────────────────────────────────
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW_DIR = os.path.join(BASE_DIR, "data", "raw")
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
 sys.path.insert(0, BASE_DIR)
-from phase_2.kmeans_engine import KMeansEngine, FEATURE_COLUMNS, SEGMENT_NAMES
+from backend.core.kmeans_engine import KMeansEngine, FEATURE_COLUMNS, SEGMENT_NAMES
 from backend.core.support import atomic_write_json
 
 # ─── Valid value ranges for each of the 16 features (for clamping) ───────────

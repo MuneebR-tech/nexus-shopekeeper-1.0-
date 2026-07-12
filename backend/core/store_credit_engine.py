@@ -14,7 +14,7 @@ from typing import Dict, List, Any, Optional
 from pydantic import BaseModel, Field
 
 # Add project root to python path
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from backend.core.support import atomic_write_json

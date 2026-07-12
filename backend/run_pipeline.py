@@ -26,11 +26,11 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 # Import engines and utilities
-from phase_1.schema_validation import validate_customers, validate_inventory
-from phase_1.rack_mapping import RackMap
-from phase_1.classification_framework import classify_all
-from phase_2.kmeans_engine import KMeansEngine, load_customer_features
-from phase_2.store_credit_engine import StoreCreditEngine
+from backend.core.schema_validation import validate_customers, validate_inventory
+from backend.core.rack_mapping import RackMap
+from backend.core.classification_framework import classify_all
+from backend.core.kmeans_engine import KMeansEngine, load_customer_features
+from backend.core.store_credit_engine import StoreCreditEngine
 from backend.core.support import atomic_write_json
 
 

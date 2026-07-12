@@ -14,7 +14,7 @@ echo   [+] Dependencies verified.
 echo.
 echo Launching FastAPI Backend Server...
 echo.
-start "Nexus Shopkeeper Backend" cmd /k "py -X utf8 phase_2\api_server.py"
+start "Nexus Shopkeeper Backend" cmd /k "py -X utf8 backend\api_server.py"
 echo   [+] Backend started in background.
 echo.
 echo Waiting 3 seconds for server to initialize...

@@ -20,10 +20,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from data.schemas.inventory_schema import InventoryItem
-from phase_1.rack_mapping import RackMap
-from phase_2.kmeans_engine import KMeansEngine, load_customer_features
-from phase_2.store_credit_engine import StoreCreditEngine
-from phase_2.ml_classifier import classify_unknown_vector_detailed, train_pipeline
+from backend.core.rack_mapping import RackMap
+from backend.core.kmeans_engine import KMeansEngine, load_customer_features
+from backend.core.store_credit_engine import StoreCreditEngine
+from backend.core.ml_classifier import classify_unknown_vector_detailed, train_pipeline
 from backend.agents.concierge import ConciergeAgentManager
 from backend.core.support import SupportTracker, atomic_write_json
 

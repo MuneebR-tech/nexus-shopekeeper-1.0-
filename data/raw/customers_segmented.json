@@ -1266,7 +1266,7 @@
     "phone": "+1-942-201-4506",
     "rfid_token": "RFID-74RZGYD4",
     "segment_label": "Essential Bulk Buyer",
-    "store_credit_balance": 216.27,
+    "store_credit_balance": 60.77,
     "features": {
       "total_spend": 6836.02,
       "avg_transaction_value": 112.11,
@@ -2078,7 +2078,7 @@
     "phone": "+1-982-748-8054",
     "rfid_token": "RFID-3LITNT0M",
     "segment_label": "High-Value Impulse",
-    "store_credit_balance": 134.7,
+    "store_credit_balance": 84.08,
     "features": {
       "total_spend": 8653.73,
       "avg_transaction_value": 158.25,
@@ -2750,7 +2750,7 @@
     "phone": "+1-342-854-2679",
     "rfid_token": "RFID-Y6DPBHSA",
     "segment_label": "Ultra-Luxury Spender",
-    "store_credit_balance": 523.08,
+    "store_credit_balance": 98.08,
     "features": {
       "total_spend": 35973.71,
       "avg_transaction_value": 202.4,
@@ -10590,7 +10590,7 @@
     "phone": "+1-928-826-3852",
     "rfid_token": "RFID-2SEHE2AT",
     "segment_label": "Mid-Tier Consistent",
-    "store_credit_balance": 150.68,
+    "store_credit_balance": 57.18,
     "features": {
       "total_spend": 10473.08,
       "avg_transaction_value": 41.42,
@@ -13950,7 +13950,7 @@
     "phone": "+1-469-550-8619",
     "rfid_token": "RFID-J4UFZDY3",
     "segment_label": "Mid-Tier Consistent",
-    "store_credit_balance": 127.32,
+    "store_credit_balance": 33.82,
     "features": {
       "total_spend": 12580.96,
       "avg_transaction_value": 87.12,

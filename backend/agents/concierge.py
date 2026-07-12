@@ -13,7 +13,7 @@ from google.antigravity import Agent, LocalAgentConfig
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
-from phase_2.store_credit_engine import StoreCreditEngine
+from backend.core.store_credit_engine import StoreCreditEngine
 
 
 class ConciergeAgentManager:

@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Dict, List, Any
 
 # Add project root to python path
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from data.schemas.customer_schema import CustomerProfile, CustomerFeatures
