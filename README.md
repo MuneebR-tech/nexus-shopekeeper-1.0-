@@ -4,15 +4,6 @@
 
 ---
 
-## 📢 Note to Grader / Instructor
-
-Welcome to the project demonstration! To review and evaluate this work:
-1.  **Run the Live Application**: You can easily run this code on your local machine by double-clicking the `start_app.bat` script at the root folder (it automatically installs standard Python dependencies and launches the browser UI).
-2.  **Interactive Code Review**: You are welcome to compose, tweak, and run any of the underlying backend scripts (e.g., executing the master orchestration pipeline via `py phase_2\run_pipeline.py`).
-3.  **Git Access & Collaboration**: If you want to check my active development logs, branches, and full commit histories, **I can invite you as a collaborator on my private GitHub repository**. 
-4.  **In-Person / Office Demo**: Alternatively, **I can bring my laptop to demonstrate the live working code during office hours or in class over the coming days**—or we can arrange both virtual git review and in-person demonstration.
-
----
 
 ## 💡 Internship Inspiration & Design
 
