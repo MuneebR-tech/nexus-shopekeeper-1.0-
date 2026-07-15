@@ -1,5 +1,8 @@
 @echo off
 title Nexus Shopkeeper - Launcher
+:: Force current working directory to the directory where start_app.bat is located
+cd /d "%~dp0"
+
 echo =======================================================================
 echo   NEXUS SHOPKEEPER (PAKISTANI SAAS EDITION) - STARTUP UTILITY
 echo =======================================================================
@@ -28,8 +31,6 @@ if %errorlevel% equ 0 set PYTHON_EXE=py
 
 if "%PYTHON_EXE%"=="" (
     where python >nul 2>nul
-)
-if "%PYTHON_EXE%"=="" (
     if %errorlevel% equ 0 set PYTHON_EXE=python
 )
 
@@ -43,47 +44,53 @@ if "%PYTHON_EXE%"=="" (
 
 :: Default port
 set APP_PORT=8000
-
-:: Parse .env file for PORT configuration
 if exist .env (
     for /f "usebackq tokens=1,2 delims==" %%i in (".env") do (
-        if "%%i"=="PORT" (
-            set APP_PORT=%%j
-        )
+        if "%%i"=="PORT" set APP_PORT=%%j
     )
 )
 
 echo   [+] Python environment detected: %PYTHON_EXE%
-echo   [+] Target application port: %APP_PORT%
-echo   [+] Checking Python dependencies...
-%PYTHON_EXE% -m pip install -r requirements.txt --user >nul 2>nul
+echo   [+] Checking core libraries (fastapi, uvicorn)...
+
+%PYTHON_EXE% -c "import fastapi, uvicorn" >nul 2>nul
 if %errorlevel% neq 0 (
-    echo   [!] Retrying dependency installation without --user flag...
-    %PYTHON_EXE% -m pip install -r requirements.txt
-)
-if %errorlevel% neq 0 (
-    pip install -r requirements.txt --user
-)
-echo   [+] Dependencies verified.
-echo.
-echo Launching FastAPI Backend Server...
-echo.
-start "Nexus Shopkeeper Backend" cmd /k "%PYTHON_EXE% -X utf8 backend\api_server.py"
-echo   [+] Backend started in background.
-echo.
-echo Waiting 4 seconds for server to initialize and bind port...
-timeout /t 4 /nobreak >nul
-echo.
-if exist "data\active_port.txt" (
-    for /f "usebackq tokens=1 delims=" %%p in ("data\active_port.txt") do (
-        if not "%%p"=="" set APP_PORT=%%p
+    echo   [!] Core libraries missing. Installing requirements via pip...
+    %PYTHON_EXE% -m pip install -r requirements.txt --user >nul 2>nul
+    if %errorlevel% neq 0 (
+        %PYTHON_EXE% -m pip install -r requirements.txt
     )
 )
-echo Opening Presentation Portal on verified port http://localhost:%APP_PORT%/ ...
-start http://localhost:%APP_PORT%/
+
+%PYTHON_EXE% -c "import fastapi, uvicorn" >nul 2>nul
+if %errorlevel% neq 0 (
+    echo.
+    echo [!] ===================================================================
+    echo [!] ERROR: MISSING PYTHON LIBRARIES (fastapi or uvicorn not installed^)
+    echo [!] ===================================================================
+    echo [!] We tried to install dependencies automatically, but pip failed
+    echo [!] (possibly due to no internet connection or firewall rules on this PC^).
+    echo [!]
+    echo [!] Please open Command Prompt or Terminal and run:
+    echo [!]     %PYTHON_EXE% -m pip install fastapi uvicorn pydantic python-dotenv
+    echo [!] ===================================================================
+    echo.
+    pause
+    exit /b 1
+)
+
+echo   [+] Dependencies verified.
 echo.
-echo =======================================================================
-echo   Application launched! Keep the server command window open to shop.
-echo   Press any key to close this launcher.
-echo =======================================================================
+echo Launching FastAPI Server...
+echo Keep this command window OPEN while using the application!
+echo.
+
+:: Start background timer to open browser once server initializes and writes active_port.txt
+start /b cmd /c "timeout /t 3 /nobreak >nul && (if exist data\active_port.txt (for /f "usebackq tokens=1 delims=" %%p in ("data\active_port.txt") do (if not "%%p"=="" set APP_PORT=%%p))) && start http://localhost:%APP_PORT%/"
+
+:: Run server directly inside this primary window
+%PYTHON_EXE% -X utf8 main.py
+
+echo.
+echo [!] Server stopped. Press any key to close launcher...
 pause >nul
