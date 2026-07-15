@@ -24,7 +24,7 @@ if not exist "frontend\" (
     exit /b 1
 )
 
-:: Detect Python executable (py vs python)
+:: Detect Python executable (py vs python vs python3)
 set PYTHON_EXE=
 where py >nul 2>nul
 if %errorlevel% equ 0 set PYTHON_EXE=py
@@ -35,11 +35,72 @@ if "%PYTHON_EXE%"=="" (
 )
 
 if "%PYTHON_EXE%"=="" (
-    echo [!] ERROR: Python was not found on your system PATH.
-    echo Please install Python 3.8+ and check "Add Python to PATH" during installation.
+    where python3 >nul 2>nul
+    if %errorlevel% equ 0 set PYTHON_EXE=python3
+)
+
+:: If still not found on PATH, automatically scan all common Windows installation directories
+if "%PYTHON_EXE%"=="" (
+    for %%p in (
+        "%LOCALAPPDATA%\Programs\Python\Python312\python.exe"
+        "%LOCALAPPDATA%\Programs\Python\Python311\python.exe"
+        "%LOCALAPPDATA%\Programs\Python\Python310\python.exe"
+        "%LOCALAPPDATA%\Programs\Python\Python39\python.exe"
+        "%LOCALAPPDATA%\Programs\Python\Python38\python.exe"
+        "C:\Python312\python.exe"
+        "C:\Python311\python.exe"
+        "C:\Python310\python.exe"
+        "C:\Python39\python.exe"
+        "C:\Python38\python.exe"
+        "C:\Program Files\Python312\python.exe"
+        "C:\Program Files\Python311\python.exe"
+        "C:\Program Files\Python310\python.exe"
+        "C:\Program Files\Python39\python.exe"
+        "C:\Program Files\Python38\python.exe"
+        "C:\Anaconda3\python.exe"
+        "C:\ProgramData\Anaconda3\python.exe"
+        "%USERPROFILE%\Anaconda3\python.exe"
+        "%USERPROFILE%\Miniconda3\python.exe"
+        "%LOCALAPPDATA%\Microsoft\WindowsApps\python.exe"
+    ) do (
+        if exist %%p (
+            if "%PYTHON_EXE%"=="" set PYTHON_EXE=%%p
+        )
+    )
+)
+
+if "%PYTHON_EXE%"=="" (
     echo.
+    echo [!] ===================================================================
+    echo [!] WARNING: Python was not found on your system PATH or standard folders.
+    echo [!] ===================================================================
+    echo [!] If Python IS installed on this PC in a custom location, please type
+    echo [!] or paste the exact full path to python.exe below and press Enter
+    echo [!] (for example: C:\Users\YourName\Python\python.exe^)
+    echo [!]
+    echo [!] If Python is NOT installed on this PC yet, press Enter to exit,
+    echo [!] download Python from https://python.org/downloads/ and check the
+    echo [!] "Add Python to PATH" box during installation!
+    echo [!] ===================================================================
+    echo.
+    set /p PYTHON_EXE="Enter full path to python.exe (or press Enter to exit): "
+)
+
+if "%PYTHON_EXE%"=="" (
+    echo [!] No Python executable provided. Exiting launcher.
     pause
     exit /b 1
+)
+
+:: Clean up quotes if user pasted path with surrounding quotes
+set PYTHON_EXE=%PYTHON_EXE:"=%
+if not exist "%PYTHON_EXE%" (
+    where %PYTHON_EXE% >nul 2>nul
+    if %errorlevel% neq 0 (
+        echo [!] ERROR: Could not locate python executable at "%PYTHON_EXE%".
+        pause
+        exit /b 1
+    )
 )
 
 :: Default port
