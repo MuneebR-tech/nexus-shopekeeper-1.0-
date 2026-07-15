@@ -8,18 +8,18 @@ echo.
 :: Detect Python executable (py vs python)
 set PYTHON_EXE=
 where py >nul 2>nul
-if %errorlevel% equ 0 (
-    set PYTHON_EXE=py
-) else (
+if %errorlevel% equ 0 set PYTHON_EXE=py
+
+if "%PYTHON_EXE%"=="" (
     where python >nul 2>nul
-    if %errorlevel% equ 0 (
-        set PYTHON_EXE=python
-    )
+)
+if "%PYTHON_EXE%"=="" (
+    if %errorlevel% equ 0 set PYTHON_EXE=python
 )
 
 if "%PYTHON_EXE%"=="" (
     echo [!] ERROR: Python was not found on your system PATH.
-    echo Please install Python 3.9+ and check "Add Python to PATH" during installation.
+    echo Please install Python 3.8+ and check "Add Python to PATH" during installation.
     echo.
     pause
     exit /b 1
