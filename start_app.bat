@@ -40,10 +40,10 @@ if exist .env (
 echo   [+] Python environment detected: %PYTHON_EXE%
 echo   [+] Target application port: %APP_PORT%
 echo   [+] Checking Python dependencies...
-%PYTHON_EXE% -m pip install -r requirements.txt --quiet
+%PYTHON_EXE% -m pip install -r requirements.txt --user
 if %errorlevel% neq 0 (
-    echo   [!] Warning: Dependency check returned non-zero code. Trying standard pip...
-    pip install -r requirements.txt --quiet
+    echo   [!] Warning: Default installer failed. Trying standard pip...
+    pip install -r requirements.txt --user
 )
 echo   [+] Dependencies verified.
 echo.
