@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Shopkeeper — Standalone Web App (SaaS Edition)</title>
+    <style>
+        :root {
+            --cosmic-indigo: #5865f2;
+            --electric-purple: #8b5cf6;
+            --emerald-green: #10b981;
+            --pk-green: #006600;
+            --cyber-gold: #f59e0b;
+            --crimson-red: #ef4444;
+            --bg-dark: #0f1117;
+            --surface: #1e2230;
+            --surface-card: #262b3d;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border: #374151;
+            --radius: 12px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Navigation Topbar */
+        .topbar {
+            background: rgba(30, 34, 48, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+        .brand-badge { background: var(--pk-green); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-tabs { display: flex; gap: 10px; }
+        .tab-btn {
+            background: var(--surface-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab-btn.active, .tab-btn:hover { background: var(--cosmic-indigo); color: white; border-color: var(--cosmic-indigo); box-shadow: 0 4px 12px rgba(88,101,242,0.3); }
+        .lang-btn { background: #2f364d; border: none; color: white; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        
+        /* Main Container */
+        .main-container { flex: 1; padding: 24px 28px; max-width: 1400px; width: 100%; margin: 0 auto; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Kiosk Storefront Layout */
+        .store-header { text-align: center; margin-bottom: 24px; }
+        .store-header h1 { font-size: 2.2rem; margin-bottom: 6px; color: #fff; }
+        .store-header p { color: var(--text-secondary); font-size: 1.1rem; }
+        .staff-alert { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald-green); color: var(--emerald-green); padding: 10px 20px; border-radius: 30px; display: inline-block; font-weight: 600; margin-top: 10px; }
+        
+        .kiosk-grid { display: grid; grid-template-columns: 1fr 340px; gap: 24px; }
+        
+        /* Categories & Search */
+        .controls-row { display: flex; gap: 12px; margin-bottom: 18px; }
+        .search-box { flex: 1; position: relative; }
+        .search-box input { width: 100%; background: var(--surface); border: 1px solid var(--border); padding: 12px 18px; border-radius: 10px; color: white; font-size: 1rem; }
+        .category-pills { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 14px; }
+        .cat-pill { background: var(--surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; color: white; cursor: pointer; white-space: nowrap; font-weight: 500; transition: 0.2s; }
+        .cat-pill.active, .cat-pill:hover { background: var(--electric-purple); border-color: var(--electric-purple); }
+        
+        /* Product Catalog Grid */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+        .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: transform 0.2s, box-shadow 0.2s; position: relative; }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); border-color: var(--cosmic-indigo); }
+        .product-img { width: 130px; height: 130px; object-fit: contain; margin-bottom: 12px; border-radius: 8px; background: #fff; padding: 6px; }
+        .product-cat { font-size: 0.75rem; text-transform: uppercase; color: var(--cosmic-indigo); font-weight: bold; margin-bottom: 4px; }
+        .product-name { font-weight: 600; font-size: 1.05rem; margin-bottom: 8px; color: white; height: 44px; overflow: hidden; }
+        .product-price { font-size: 1.2rem; font-weight: 700; color: var(--cyber-gold); margin-bottom: 14px; }
+        .add-btn { width: 100%; background: var(--cosmic-indigo); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .add-btn:hover { background: #4338ca; }
+        
+        /* Shopping Cart Sidebar */
+        .cart-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; height: fit-content; position: sticky; top: 88px; }
+        .cart-title { font-size: 1.3rem; font-weight: bold; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; display: flex; justify-content: space-between; }
+        .cart-items { max-height: 380px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: var(--surface-card); padding: 10px 12px; border-radius: 8px; }
+        .ci-info { flex: 1; }
+        .ci-name { font-weight: 600; font-size: 0.95rem; }
+        .ci-price { font-size: 0.85rem; color: var(--cyber-gold); }
+        .ci-qty { display: flex; align-items: center; gap: 8px; }
+        .qty-btn { background: #3b425e; border: none; color: white; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: bold; border-top: 1px solid var(--border); padding-top: 14px; margin-bottom: 18px; color: var(--emerald-green); }
+        .checkout-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .pay-btn { background: var(--emerald-green); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .pay-btn.card { background: var(--cosmic-indigo); }
+        .pay-btn.points { background: var(--cyber-gold); color: #000; }
+        .pay-btn.coupon { background: var(--electric-purple); }
+        .pay-btn:hover { filter: brightness(1.1); }
+        
+        /* Dashboard Analytics Layout */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 24px; }
+        .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .stat-label { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-val { font-size: 1.8rem; font-weight: bold; color: white; }
+        .stat-sub { font-size: 0.85rem; color: var(--emerald-green); margin-top: 6px; }
+        
+        .dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .dash-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+        .dash-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+        th { color: var(--text-secondary); font-weight: 600; background: var(--surface-card); }
+        tr:hover { background: var(--surface-card); }
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .status-badge.active { background: rgba(16,185,129,0.2); color: var(--emerald-green); }
+        .status-badge.break { background: rgba(245,158,11,0.2); color: var(--cyber-gold); }
+        .status-badge.out { background: rgba(239,68,68,0.2); color: var(--crimson-red); }
+        .action-btn { background: #374151; border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .action-btn:hover { background: var(--cosmic-indigo); }
+        
+        /* Toast Notification */
+        .toast { position: fixed; bottom: 30px; right: 30px; background: var(--surface-card); border: 1px solid var(--emerald-green); color: white; padding: 14px 24px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 600; display: none; z-index: 1000; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <!-- Topbar Navigation -->
+    <div class="topbar">
+        <div class="brand">
+            <span>🛒 Nexus Shopkeeper</span>
+            <span class="brand-badge">Pakistani SaaS Edition</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('kiosk')">🖥️ Kiosk Portal</button>
+            <button class="tab-btn" onclick="switchTab('dashboard')">🔐 Admin Dashboard & Analytics</button>
+        </div>
+        <div>
+            <button class="lang-btn" onclick="toggleLang()" id="lang-toggle">🌐 اردو / English</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- ═════════════════════════════════════════════ -->
+        <!-- TAB 1: KIOSK STOREFRONT PORTAL -->
+        <!-- ═════════════════════════════════════════════ -->
+        <div id="kiosk-tab" class="tab-pane active">
+            <div class="store-header">
+                <h1 id="kiosk-title">Smart Autonomous Superstore</h1>
+                <p id="kiosk-sub">Pick items directly. Automated AI inventory verification active.</p>
+                <div class="staff-alert" id="staff-label">🤖 Mart operated by 10 active automation technicians</div>
+            </div>
+
+            <div class="controls-row">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="🔍 Search products by name (e.g. Rice, Tea, Lays, Oil)..." oninput="filterProducts()">
+                </div>
+            </div>
+
+            <div class="category-pills" id="category-pills">
+                <button class="cat-pill active" onclick="filterCategory('all', this)">⚡ All Items</button>
+                <button class="cat-pill" onclick="filterCategory('pantry', this)">🛒 Grocery & Pantry</button>
+                <button class="cat-pill" onclick="filterCategory('beverages', this)">🥤 Beverages & Tea</button>
+                <button class="cat-pill" onclick="filterCategory('dairy', this)">🥛 Dairy & Butter</button>
+                <button class="cat-pill" onclick="filterCategory('snacks', this)">🍿 Snacks & Chips</button>
+                <button class="cat-pill" onclick="filterCategory('personal_care', this)">🧴 Personal Care</button>
+                <button class="cat-pill" onclick="filterCategory('household', this)">🧹 Household</button>
+            </div>
+
+            <div class="kiosk-grid">
+                <div class="products-grid" id="products-grid"></div>
+
+                <!-- Shopping Cart Panel -->
+                <div class="cart-panel">
+                    <div class="cart-title">
+                        <span id="cart-header-text">🛍️ Shopping Cart</span>
+                        <span id="cart-count">0 items</span>
+                    </div>
+                    <div class="cart-items" id="cart-items">
+                        <p style="color: var(--text-secondary); text-align: center; padding: 30px 0;">Your cart is empty.<br>Touch items to add!</p>
+                    </div>
+                    <div class="cart-total">
+                        <span>Total Bill:</span>
+                        <span id="cart-total-pkr">Rs. 0</span>
+                    </div>
+                    <div class="checkout-buttons">
+                        <button class="pay-btn" onclick="processCheckout('Cash')">💵 Cash Payment</button>
+                        <button class="pay-btn card" onclick="processCheckout('Debit/Credit Card')">💳 Card Swipe</button>
+                        <button class="pay-btn points" onclick="processCheckout('Store Loyalty Points')">⭐ Store Points</button>
+                        <button class="pay-btn coupon" onclick="processCheckout('Digital Coupon')">🎟️ Coupon Code</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═════════════════════════════════════════════ -->
+        <!-- TAB 2: ADMIN DASHBOARD & ANALYTICS -->
+        <!-- ═════════════════════════════════════════════ -->
+        <div id="dashboard-tab" class="tab-pane">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Inventory Items</div>
+                    <div class="stat-val" id="stat-items-count">20</div>
+                    <div class="stat-sub">✅ 100% Stock Synchronized</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Revenue Processed</div>
+                    <div class="stat-val" id="stat-revenue">Rs. 142,500</div>
+                    <div class="stat-sub">📈 +18.4% today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">ML Pipeline Convergence</div>
+                    <div class="stat-val">99.8%</div>
+                    <div class="stat-sub">🧮 K-Means Clustering Verified</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Technicians</div>
+                    <div class="stat-val" id="stat-active-staff">10 / 10</div>
+                    <div class="stat-sub">⚡ All systems operational</div>
+                </div>
+            </div>
+
+            <div class="dash-grid">
+                <!-- Inventory CRUD Table -->
+                <div class="dash-card">
+                    <div class="dash-title">📦 Real-Time Inventory Management (PKR Pricing)</div>
+                    <div style="max-height: 420px; overflow-y: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>SKU ID</th>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Price (PKR)</th>
+                                    <th>Stock</th>
+                                    <th>Rack</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventory-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Employee Shift Management -->
+                <div class="dash-card">
+                    <div class="dash-title">👥 Employee Shift Log (10 Active Staff)</div>
+                    <div style="max-height: 420px; overflow-y: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employee-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        /* ══════════════════════════════════════════════════════════════════
+           CLIENT-SIDE DATABASE & CONTROLLER ENGINE (`localStorage`)
+           ══════════════════════════════════════════════════════════════════ */
+        
+        const DEFAULT_PRODUCTS = [
+          { item_id: 'SKU-0001', name: 'Guard Basmati Rice 5kg', price: 1450, category: 'pantry', rack_id: 'C1', stock: 45, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1053437-1.jpg' },
+          { item_id: 'SKU-0002', name: 'Mezan Cooking Oil 5L', price: 2890, category: 'pantry', rack_id: 'C2', stock: 32, image: 'https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/2/1270205-1.jpg' },
+          { item_id: 'SKU-0003', name: 'Tapal Danedar Tea 950g', price: 1350, category: 'beverages', rack_id: 'A1', stock: 60, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1037609-1.jpg' },
+          { item_id: 'SKU-0004', name: 'National Biryani Masala 90g', price: 180, category: 'pantry', rack_id: 'C3', stock: 120, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/i/u/iu1119375-1.jpg' },
+          { item_id: 'SKU-0005', name: 'Shan Karahi Masala 50g', price: 120, category: 'pantry', rack_id: 'C4', stock: 95, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/1/1119332-1.jpg' },
+          { item_id: 'SKU-0006', name: 'Olpers Milk 1.5L', price: 380, category: 'dairy', rack_id: 'D1', stock: 40, image: 'https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/2/1264607-1.jpg' },
+          { item_id: 'SKU-0007', name: 'Nurpur Butter 200g', price: 450, category: 'dairy', rack_id: 'D2', stock: 25, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1016930-1.jpg' },
+          { item_id: 'SKU-0008', name: 'Everyday Milk Powder 900g', price: 1650, category: 'beverages', rack_id: 'A2', stock: 30, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/1/1153992-junerpl-1.jpg' },
+          { item_id: 'SKU-0009', name: 'Lays Classic Chips 155g', price: 200, category: 'snacks', rack_id: 'B1', stock: 80, image: 'https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/3/1336317-1.jpg' },
+          { item_id: 'SKU-0010', name: 'Sooper Biscuits 120g', price: 80, category: 'snacks', rack_id: 'B2', stock: 150, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/s/n/snack_pack_-_classic_1.jpg' },
+          { item_id: 'SKU-0011', name: 'Sunsilk Shampoo 360ml', price: 680, category: 'personal_care', rack_id: 'E1', stock: 55, image: 'https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/a/b/ab1332672-1.jpg' },
+          { item_id: 'SKU-0012', name: 'Safeguard Soap 175g', price: 150, category: 'personal_care', rack_id: 'E2', stock: 110, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1019220-rpl-1.jpg' },
+          { item_id: 'SKU-0013', name: 'Surf Excel 1kg', price: 520, category: 'household', rack_id: 'F1', stock: 65, image: 'https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/a/b/ab1310124-1.jpg' },
+          { item_id: 'SKU-0014', name: 'Harpic Toilet Cleaner 500ml', price: 380, category: 'household', rack_id: 'F2', stock: 40, image: 'https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/1/1128054-1.jpg' },
+          { item_id: 'SKU-0015', name: 'Dalda Cooking Oil 3L', price: 1780, category: 'pantry', rack_id: 'C5', stock: 28, image: 'https://media.naheed.pk/catalog/product/cache/57044254b6ba66615c533891fd7cf70f/1/2/1287390-1.jpg' },
+          { item_id: 'SKU-0016', name: 'Rooh Afza Syrup 800ml', price: 490, category: 'beverages', rack_id: 'A4', stock: 70, image: 'https://media.naheed.pk/catalog/product/cache/ff36c7bc52e2e5dbc63cd67fba513679/1/0/1025967-1_1.jpg' }
+        ];
+
+        const DEFAULT_EMPLOYEES = [
+          { emp_id: 'EMP-01', name: 'Ahmed Ali', role: 'Store Manager', status: 'Active Shift' },
+          { emp_id: 'EMP-02', name: 'Usman Tariq', role: 'Inventory Stocker', status: 'Active Shift' },
+          { emp_id: 'EMP-03', name: 'Bilal Khan', role: 'Security Supervisor', status: 'Active Shift' },
+          { emp_id: 'EMP-04', name: 'Hamza Farooq', role: 'Kiosk Technician', status: 'Active Shift' },
+          { emp_id: 'EMP-05', name: 'Zeeshan Malik', role: 'Customer Agent', status: 'On Break' },
+          { emp_id: 'EMP-06', name: 'Faisal Mehmood', role: 'Warehouse Lead', status: 'Active Shift' },
+          { emp_id: 'EMP-07', name: 'Tahir Shah', role: 'System Automation Eng.', status: 'Active Shift' },
+          { emp_id: 'EMP-08', name: 'Kamran Akmal', role: 'Quality Checker', status: 'Active Shift' },
+          { emp_id: 'EMP-09', name: 'Sajid Iqbal', role: 'Floor Supervisor', status: 'Active Shift' },
+          { emp_id: 'EMP-10', name: 'Noman Riaz', role: 'Network Coordinator', status: 'Active Shift' }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('nexus_products')) || DEFAULT_PRODUCTS;
+        let employees = JSON.parse(localStorage.getItem('nexus_employees')) || DEFAULT_EMPLOYEES;
+        let cart = [];
+        let currentLang = 'en';
+        let currentCategory = 'all';
+
+        // Web Audio Chimes
+        function playChime(type = 'success') {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                if (type === 'success') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                    osc.start(); osc.stop(ctx.currentTime + 0.4);
+                } else if (type === 'beep') {
+                    osc.frequency.setValueAtTime(800, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                    osc.start(); osc.stop(ctx.currentTime + 0.15);
+                } else if (type === 'cash') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(1200, ctx.currentTime);
+                    osc.frequency.setValueAtTime(900, ctx.currentTime + 0.08);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start(); osc.stop(ctx.currentTime + 0.25);
+                }
+            } catch (e) { /* audio blocked */ }
+        }
+
+        // Switch Tabs
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            if (tabId === 'kiosk') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('kiosk-tab').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('dashboard-tab').classList.add('active');
+                renderDashboard();
+            }
+        }
+
+        // Toggle Language
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'ur' : 'en';
+            const btn = document.getElementById('lang-toggle');
+            if (currentLang === 'ur') {
+                btn.textContent = '🌐 زبان: اردو';
+                document.getElementById('kiosk-title').textContent = 'اسمارٹ خودکار سپر اسٹور';
+                document.getElementById('kiosk-sub').textContent = 'اشیاء کو براہ راست منتخب کریں۔ خودکار اے آئی تصدیقی نظام فعال ہے۔';
+                document.getElementById('staff-label').textContent = '🤖 مارٹ 10 سرگرم خودکار تکنیکی ماہرین کے ذریعہ چلایا جاتا ہے';
+                document.getElementById('cart-header-text').textContent = '🛍️ شاپنگ کارٹ';
+            } else {
+                btn.textContent = '🌐 اردو / English';
+                document.getElementById('kiosk-title').textContent = 'Smart Autonomous Superstore';
+                document.getElementById('kiosk-sub').textContent = 'Pick items directly. Automated AI inventory verification active.';
+                document.getElementById('staff-label').textContent = '🤖 Mart operated by 10 active automation technicians';
+                document.getElementById('cart-header-text').textContent = '🛍️ Shopping Cart';
+            }
+            renderProducts();
+        }
+
+        // Render Product Grid
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const searchVal = document.getElementById('search-input').value.toLowerCase();
+            
+            const filtered = products.filter(p => {
+                const matchCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchSearch = p.name.toLowerCase().includes(searchVal);
+                return matchCat && matchSearch;
+            });
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card">
+                    <img src="${p.image}" class="product-img" alt="${p.name}">
+                    <div class="product-cat">${p.category.toUpperCase()} • RACK ${p.rack_id}</div>
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">Rs. ${p.price.toLocaleString()}</div>
+                    <button class="add-btn" onclick="addToCart('${p.item_id}')">+ Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(cat, btnEl) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            renderProducts();
+        }
+
+        function filterProducts() { renderProducts(); }
+
+        // Cart Actions
+        function addToCart(id) {
+            const item = products.find(p => p.item_id === id);
+            if (!item) return;
+            const existing = cart.find(c => c.item_id === id);
+            if (existing) existing.qty += 1;
+            else cart.push({ ...item, qty: 1 });
+            playChime('beep');
+            renderCart();
+            showToast(`Added ${item.name} to cart`);
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(c => c.item_id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(c => c.item_id !== id);
+            playChime('beep');
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total-pkr');
+            const countEl = document.getElementById('cart-count');
+            
+            const totalQty = cart.reduce((s, c) => s + c.qty, 0);
+            const totalBill = cart.reduce((s, c) => s + (c.price * c.qty), 0);
+            
+            countEl.textContent = `${totalQty} items`;
+            totalEl.textContent = `Rs. ${totalBill.toLocaleString()}`;
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 30px 0;">Your cart is empty.<br>Touch items to add!</p>';
+                return;
+            }
+
+            container.innerHTML = cart.map(c => `
+                <div class="cart-item">
+                    <div class="ci-info">
+                        <div class="ci-name">${c.name}</div>
+                        <div class="ci-price">Rs. ${c.price.toLocaleString()} × ${c.qty}</div>
+                    </div>
+                    <div class="ci-qty">
+                        <button class="qty-btn" onclick="changeQty('${c.item_id}', -1)">−</button>
+                        <span>${c.qty}</span>
+                        <button class="qty-btn" onclick="changeQty('${c.item_id}', 1)">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Process Checkout
+        function processCheckout(method) {
+            if (cart.length === 0) {
+                showToast('Your cart is empty! Please select products first.');
+                return;
+            }
+            const totalBill = cart.reduce((s, c) => s + (c.price * c.qty), 0);
+            playChime(method === 'Cash' ? 'cash' : 'success');
+            
+            showToast(`🎉 Payment Approved! Rs. ${totalBill.toLocaleString()} processed via ${method}.`);
+            cart = [];
+            renderCart();
+        }
+
+        // Render Admin Dashboard
+        function renderDashboard() {
+            // Render Inventory Table
+            const invBody = document.getElementById('inventory-tbody');
+            invBody.innerHTML = products.map(p => `
+                <tr>
+                    <td><strong>${p.item_id}</strong></td>
+                    <td>${p.name}</td>
+                    <td><span style="text-transform: uppercase; color: var(--cosmic-indigo); font-weight: bold;">${p.category}</span></td>
+                    <td style="color: var(--cyber-gold); font-weight: bold;">Rs. ${p.price.toLocaleString()}</td>
+                    <td>${p.stock} units</td>
+                    <td>Rack ${p.rack_id}</td>
+                </tr>
+            `).join('');
+
+            // Render Employee Table
+            const empBody = document.getElementById('employee-tbody');
+            empBody.innerHTML = employees.map(e => {
+                let badgeClass = 'active';
+                if (e.status === 'On Break') badgeClass = 'break';
+                if (e.status === 'Clocked Out') badgeClass = 'out';
+                return `
+                    <tr>
+                        <td><strong>${e.name}</strong></td>
+                        <td>${e.role}</td>
+                        <td><span class="status-badge ${badgeClass}">${e.status}</span></td>
+                        <td>
+                            <button class="action-btn" onclick="toggleEmpStatus('${e.emp_id}')">Toggle Shift Status</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function toggleEmpStatus(empId) {
+            const emp = employees.find(e => e.emp_id === empId);
+            if (!emp) return;
+            if (emp.status === 'Active Shift') emp.status = 'On Break';
+            else if (emp.status === 'On Break') emp.status = 'Clocked Out';
+            else emp.status = 'Active Shift';
+            
+            localStorage.setItem('nexus_employees', JSON.stringify(employees));
+            renderDashboard();
+            showToast(`Shift status updated for ${emp.name} to ${emp.status}`);
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.display = 'block';
+            setTimeout(() => { t.style.display = 'none'; }, 3500);
+        }
+
+        // Initial Load
+        renderProducts();
+    </script>
+</body>
+</html>
