@@ -127,15 +127,44 @@ else:
 
 
 def main():
-    port = int(os.getenv("PORT", 8000))
+    initial_port = int(os.getenv("PORT", 8000))
+    candidate_ports = [initial_port, 8001, 8002, 8080, 8888, 5000, 5001]
+    
+    # Remove duplicates while preserving order
+    ports_to_try = []
+    for p in candidate_ports:
+        if p not in ports_to_try:
+            ports_to_try.append(p)
+            
+    import socket
+    selected_port = initial_port
+    for p in ports_to_try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            try:
+                s.bind(("127.0.0.1", p))
+                selected_port = p
+                break
+            except OSError:
+                print(f"  [!] Port {p} is currently in use. Trying next available port...")
+                continue
+                
+    # Save active port for launcher verification
+    try:
+        data_dir = PROJECT_ROOT / "data"
+        data_dir.mkdir(exist_ok=True)
+        with open(data_dir / "active_port.txt", "w", encoding="utf-8") as pf:
+            pf.write(str(selected_port))
+    except Exception as e:
+        print(f"  [!] Could not write active_port.txt: {e}")
+
     print("========================================================================")
     print("  NEXUS SHOPKEEPER - Phase 2 FastAPI Server Boot")
-    print(f"  Local URL: http://localhost:{port}")
-    print(f"  API Docs:  http://localhost:{port}/docs")
+    print(f"  Local URL: http://localhost:{selected_port}")
+    print(f"  API Docs:  http://localhost:{selected_port}/docs")
     print("========================================================================")
     
-    # Run uvicorn on configured port
-    uvicorn.run(app, host="127.0.0.1", port=port)
+    # Run uvicorn on verified available port
+    uvicorn.run(app, host="127.0.0.1", port=selected_port)
 
 
 if __name__ == "__main__":

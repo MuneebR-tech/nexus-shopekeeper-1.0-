@@ -56,9 +56,12 @@ if exist .env (
 echo   [+] Python environment detected: %PYTHON_EXE%
 echo   [+] Target application port: %APP_PORT%
 echo   [+] Checking Python dependencies...
-%PYTHON_EXE% -m pip install -r requirements.txt --user
+%PYTHON_EXE% -m pip install -r requirements.txt --user >nul 2>nul
 if %errorlevel% neq 0 (
-    echo   [!] Warning: Default installer failed. Trying standard pip...
+    echo   [!] Retrying dependency installation without --user flag...
+    %PYTHON_EXE% -m pip install -r requirements.txt
+)
+if %errorlevel% neq 0 (
     pip install -r requirements.txt --user
 )
 echo   [+] Dependencies verified.
@@ -68,10 +71,15 @@ echo.
 start "Nexus Shopkeeper Backend" cmd /k "%PYTHON_EXE% -X utf8 backend\api_server.py"
 echo   [+] Backend started in background.
 echo.
-echo Waiting 3 seconds for server to initialize...
-timeout /t 3 /nobreak >nul
+echo Waiting 4 seconds for server to initialize and bind port...
+timeout /t 4 /nobreak >nul
 echo.
-echo Opening Presentation Portal in your browser...
+if exist "data\active_port.txt" (
+    for /f "usebackq tokens=1 delims=" %%p in ("data\active_port.txt") do (
+        if not "%%p"=="" set APP_PORT=%%p
+    )
+)
+echo Opening Presentation Portal on verified port http://localhost:%APP_PORT%/ ...
 start http://localhost:%APP_PORT%/
 echo.
 echo =======================================================================
