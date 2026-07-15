@@ -5,6 +5,22 @@ echo   NEXUS SHOPKEEPER (PAKISTANI SAAS EDITION) - STARTUP UTILITY
 echo =======================================================================
 echo.
 
+:: Verify project folders are extracted
+if not exist "frontend\" (
+    echo [!] ===================================================================
+    echo [!] ERROR: MISSING PROJECT FOLDERS (frontend folder not found^)
+    echo [!] ===================================================================
+    echo [!] It looks like you ran start_app.bat directly inside the ZIP file,
+    echo [!] or only extracted part of the project!
+    echo [!]
+    echo [!] Please right-click nexus_shopkeeper_submission.zip, select
+    echo [!] "Extract All...", and run start_app.bat inside the EXTRACTED folder.
+    echo [!] ===================================================================
+    echo.
+    pause
+    exit /b 1
+)
+
 :: Detect Python executable (py vs python)
 set PYTHON_EXE=
 where py >nul 2>nul
