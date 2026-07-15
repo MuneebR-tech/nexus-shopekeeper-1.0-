@@ -25,7 +25,20 @@ if "%PYTHON_EXE%"=="" (
     exit /b 1
 )
 
+:: Default port
+set APP_PORT=8000
+
+:: Parse .env file for PORT configuration
+if exist .env (
+    for /f "usebackq tokens=1,2 delims==" %%i in (".env") do (
+        if "%%i"=="PORT" (
+            set APP_PORT=%%j
+        )
+    )
+)
+
 echo   [+] Python environment detected: %PYTHON_EXE%
+echo   [+] Target application port: %APP_PORT%
 echo   [+] Checking Python dependencies...
 %PYTHON_EXE% -m pip install -r requirements.txt --quiet
 if %errorlevel% neq 0 (
@@ -43,7 +56,7 @@ echo Waiting 3 seconds for server to initialize...
 timeout /t 3 /nobreak >nul
 echo.
 echo Opening Presentation Portal in your browser...
-start http://localhost:8000/
+start http://localhost:%APP_PORT%/
 echo.
 echo =======================================================================
 echo   Application launched! Keep the server command window open to shop.

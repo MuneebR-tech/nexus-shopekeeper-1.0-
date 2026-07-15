@@ -5,12 +5,14 @@ and mounts/serves the frontend static files.
 """
 
 import sys
+import os
 import uvicorn
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+from dotenv import load_dotenv
 
 # Force UTF-8 encoding for standard streams on Windows to prevent print/logging crashes
 if sys.platform == 'win32':
@@ -23,6 +25,9 @@ if sys.platform == 'win32':
 # Add project root to python path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
+
+# Load .env file configurations
+load_dotenv(PROJECT_ROOT / ".env")
 
 from backend.api.router import router as api_router
 
@@ -74,14 +79,15 @@ else:
 
 
 def main():
+    port = int(os.getenv("PORT", 8000))
     print("========================================================================")
     print("  NEXUS SHOPKEEPER - Phase 2 FastAPI Server Boot")
-    print("  Local URL: http://localhost:8000")
-    print("  API Docs:  http://localhost:8000/docs")
+    print(f"  Local URL: http://localhost:{port}")
+    print(f"  API Docs:  http://localhost:{port}/docs")
     print("========================================================================")
     
-    # Run uvicorn on port 8000
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    # Run uvicorn on configured port
+    uvicorn.run(app, host="127.0.0.1", port=port)
 
 
 if __name__ == "__main__":
