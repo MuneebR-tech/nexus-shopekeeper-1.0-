@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+customer_features.npy
+logs/*
+!logs/.gitkeep
+*.zip

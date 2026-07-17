@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Shopkeeper — Phase 1 Demonstration</title>
+  <link rel="stylesheet" href="../assets/css/styles.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: var(--bg-deepest);
+      color: var(--text-primary);
+      overflow-y: auto;
+      height: 100vh;
+    }
+    .phase1-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .phase1-header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .phase1-header h1 {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .phase1-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.9fr;
+      gap: 28px;
+    }
+    .control-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .coord-display {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-top: 12px;
+      display: none;
+    }
+    .coord-display.active {
+      display: block;
+      animation: fade-up 0.3s var(--ease-out);
+    }
+    .coord-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--cyber-teal);
+      font-family: monospace;
+    }
+    .visualizer-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 480px;
+      position: relative;
+    }
+    canvas {
+      background: rgba(10, 11, 16, 0.6);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      max-width: 100%;
+    }
+    .tab-nav {
+      display: flex;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 12px;
+      margin-bottom: 8px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px 12px;
+      transition: all var(--transition-fast);
+      border-radius: var(--radius-sm);
+    }
+    .tab-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.03);
+    }
+    .tab-btn.active {
+      color: var(--cyber-teal);
+      background: rgba(0, 242, 254, 0.08);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.05);
+    }
+    .tab-content {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .tab-content.active {
+      display: flex;
+    }
+    .route-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13.5px;
+    }
+    .route-step:last-child {
+      border-bottom: none;
+    }
+    .route-step-idx {
+      width: 24px;
+      height: 24px;
+      background: var(--cosmic-indigo);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .route-summary {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cyber-teal);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation topbar matching SaaS baseline -->
+  <nav class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo-icon">🏪</span>
+      <span class="topbar-brand">Nexus <span class="gradient-text">Shopkeeper</span></span>
+    </div>
+    <div class="topbar-center" style="display:flex; justify-content:center; gap:20px;">
+      <span style="font-family:var(--font-heading); font-weight:700; font-size:15px; color:var(--text-secondary);">🏫 Phase 1 Classroom Presentation</span>
+    </div>
+    <div class="topbar-right" style="display:flex; gap:12px;">
+      <a href="index.html" class="btn btn-glass btn-sm">🏠 Portal Home</a>
+      <a href="kiosk.html" class="btn btn-glass btn-sm">🖥️ Kiosk Mode</a>
+      <a href="dashboard.html" class="btn btn-glass btn-sm">📊 Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="phase1-container">
+    <header class="phase1-header">
+      <h1 class="gradient-text">Phase 1: Store Physical Layout & Route Optimization</h1>
+      <p class="text-secondary" style="font-size:15px; max-width: 680px; margin: 0 auto;">
+        Demonstrating the mathematical mapping of a retail environment into a 3D coordinate grid, and solving path routing using the Traveling Salesperson Problem (TSP) algorithm.
+      </p>
+    </header>
+
+    <div class="phase1-grid">
+      
+      <!-- CONTROLS COLUMN -->
+      <div class="glass-card control-card">
+        
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('coord-tab')">📍 Coordinate Calculator</button>
+          <button class="tab-btn" onclick="switchTab('route-tab')">🚚 Route Optimizer</button>
+        </div>
+
+        <!-- COORDINATE TAB -->
+        <div id="coord-tab" class="tab-content active">
+          <p class="body-xs text-muted">Enter physical store rack identifiers to calculate their corresponding X, Y, Z spatial coordinates (in meters) and Floor level parameters.</p>
+          
+          <div class="form-group">
+            <label for="rack-aisle">Aisle Letter (X Coordinate)</label>
+            <select id="rack-aisle" class="search-input" style="padding-left:14px;">
+              <option value="A">Aisle A (2.0m)</option>
+              <option value="B">Aisle B (4.0m)</option>
+              <option value="C">Aisle C (6.0m)</option>
+              <option value="D" selected>Aisle D (8.0m)</option>
+              <option value="E">Aisle E (10.0m)</option>
+              <option value="F">Aisle F (12.0m)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="rack-section">Section Number (Y Coordinate)</label>
+            <select id="rack-section" class="search-input" style="padding-left:14px;">
+              <option value="1">Section 1 (1.5m - Ground Floor)</option>
+              <option value="2">Section 2 (3.5m - Ground Floor)</option>
+              <option value="3" selected>Section 3 (5.5m - Ground Floor)</option>
+              <option value="4">Section 4 (7.5m - 1st Floor)</option>
+              <option value="5">Section 5 (9.5m - 1st Floor)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="shelf-level">Shelf Level (Z Height Coordinate)</label>
+            <select id="shelf-level" class="search-input" style="padding-left:14px;">
+              <option value="1">Shelf 1 (0.3m - Bottom)</option>
+              <option value="2">Shelf 2 (0.7m)</option>
+              <option value="3" selected>Shelf 3 (1.1m - Middle)</option>
+              <option value="4">Shelf 4 (1.5m)</option>
+              <option value="5">Shelf 5 (1.9m - Top)</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary" onclick="calculateCoords()" style="justify-content:center; margin-top:8px;">
+            Calculate 3D Coordinates
+          </button>
+
+          <div id="coord-result" class="coord-display">
+            <div style="font-size:12px; color:var(--text-secondary); margin-bottom:4px;">Computed Output:</div>
+            <div style="margin-bottom:6px;">Rack ID: <strong id="res-rack-id">D3</strong> | Shelf: <strong id="res-shelf">3</strong></div>
+            <div style="margin-bottom:6px;">Floor: <span class="badge" id="res-floor">Ground Floor</span></div>
+            <div>Coordinates: <span class="coord-val" id="res-coords">X: 8.0, Y: 5.5, Z: 1.1</span></div>
+          </div>
+        </div>
+
+        <!-- ROUTE OPTIMIZATION TAB -->
+        <div id="route-tab" class="tab-content">
+          <p class="body-xs text-muted">Select multiple rack locations to optimize the pathing route for robotic inventory carts. The TSP algorithm solves for the shortest cycle starting and returning to the checkout origin (0,0,0).</p>
+          
+          <div class="form-group">
+            <label>Select Rack Stops (A1 - F5)</label>
+            <div style="display:flex; gap:10px;">
+              <select id="route-rack-select" class="search-input" style="padding-left:14px; flex:2;">
+                <!-- Filled dynamically -->
+              </select>
+              <button class="btn btn-glass" onclick="addRouteStop()" style="flex:1; justify-content:center; font-size:12px;">➕ Add Stop</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Selected Stop Sequence</label>
+            <div id="selected-stops" class="text-secondary" style="font-size:13px; min-height:36px; padding:10px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); display:flex; flex-wrap:wrap; gap:8px;">
+              <span style="color:var(--text-muted)">No stops added.</span>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-primary" onclick="solveRoute()" style="flex:2; justify-content:center;">Calculate Route</button>
+            <button class="btn btn-outline" onclick="clearStops()" style="flex:1; justify-content:center;">Clear</button>
+          </div>
+
+          <div id="route-result" class="coord-display">
+            <div style="font-size:12px; color:var(--text-secondary); margin-bottom:8px;">Optimized TSP Tour Path:</div>
+            <div id="route-steps-container" style="display:flex; flex-direction:column; max-height:220px; overflow-y:auto; background:rgba(0,0,0,0.2); border-radius:var(--radius-sm); border:1px solid var(--border-subtle);">
+              <!-- Step list goes here -->
+            </div>
+            <div class="route-summary" id="route-total-distance">Total Distance: 0m</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUALIZER COLUMN -->
+      <div class="glass-card visualizer-card">
+        <h3 style="position:absolute; top:20px; left:24px; font-family:var(--font-heading); font-size:16px; font-weight:700;">🗺️ 2D Layout Map Visualizer</h3>
+        <span style="position:absolute; top:20px; right:24px; font-size:11px; color:var(--text-muted);">Scale: 1 cell = 2m x 2m</span>
+        
+        <canvas id="layout-canvas" width="560" height="420"></canvas>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JS SCRIPT -->
+  <script>
+    const CANVAS = document.getElementById('layout-canvas');
+    const CTX = CANVAS.getContext('2d');
+    
+    // Grid variables
+    const gridCols = 6;
+    const gridRows = 5;
+    const cellWidth = 70;
+    const cellHeight = 60;
+    const offsetX = 80;
+    const offsetY = 50;
+
+    const aisles = ['A', 'B', 'C', 'D', 'E', 'F'];
+    
+    // UI state
+    let activeTab = 'coord-tab';
+    let selectedStopsList = [];
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      drawBaseGrid();
+      populateRackSelect();
+    });
+
+    function switchTab(tabId) {
+      activeTab = tabId;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      
+      drawBaseGrid();
+      if (tabId === 'route-tab') {
+        redrawRoute();
+      }
+    }
+
+    function populateRackSelect() {
+      const select = document.getElementById('route-rack-select');
+      select.innerHTML = '';
+      for (const aisle of aisles) {
+        for (let sec = 1; sec <= 5; sec++) {
+          const rack = `${aisle}${sec}`;
+          const option = document.createElement('option');
+          option.value = rack;
+          option.textContent = `Rack ${rack}`;
+          select.appendChild(option);
+        }
+      }
+    }
+
+    function drawBaseGrid() {
+      CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+      
+      // Draw Entrance/Checkout label
+      CTX.fillStyle = '#ff9e0b';
+      CTX.beginPath();
+      CTX.arc(offsetX - 40, CANVAS.height - offsetY, 10, 0, Math.PI * 2);
+      CTX.fill();
+      CTX.fillStyle = '#f0f1f7';
+      CTX.font = '10px Inter';
+      CTX.fillText('Origin (0,0)', offsetX - 65, CANVAS.height - offsetY + 24);
+
+      // Draw Grid blocks representing store shelves
+      for (let c = 0; c < gridCols; c++) {
+        for (let r = 0; r < gridRows; r++) {
+          const x = offsetX + c * cellWidth;
+          const y = CANVAS.height - offsetY - (r + 1) * cellHeight;
+          
+          // Outer card
+          CTX.strokeStyle = 'rgba(88, 101, 242, 0.15)';
+          CTX.fillStyle = 'rgba(255, 255, 255, 0.02)';
+          CTX.lineWidth = 1;
+          CTX.fillRect(x + 5, y + 5, cellWidth - 10, cellHeight - 10);
+          CTX.strokeRect(x + 5, y + 5, cellWidth - 10, cellHeight - 10);
+          
+          // Draw text label e.g., A5
+          const rackId = `${aisles[c]}${r + 1}`;
+          CTX.fillStyle = 'rgba(255,255,255,0.25)';
+          CTX.font = '11px monospace';
+          CTX.fillText(rackId, x + 25, y + 34);
+        }
+      }
+
+      // Draw aisle markers
+      for (let c = 0; c < gridCols; c++) {
+        CTX.fillStyle = '#00f2fe';
+        CTX.font = '11px Outfit';
+        CTX.fillText(`Aisle ${aisles[c]}`, offsetX + c * cellWidth + 14, CANVAS.height - offsetY + 20);
+      }
+
+      // Draw section labels
+      for (let r = 0; r < gridRows; r++) {
+        CTX.fillStyle = '#f0f1f7';
+        CTX.font = '11px Outfit';
+        const floor = (r + 1) >= 4 ? '1stF' : 'GF';
+        CTX.fillText(`Sec ${r + 1} (${floor})`, offsetX - 70, CANVAS.height - offsetY - r * cellHeight - 30);
+      }
+    }
+
+    async function calculateCoords() {
+      const aisle = document.getElementById('rack-aisle').value;
+      const section = document.getElementById('rack-section').value;
+      const shelf = document.getElementById('shelf-level').value;
+      const rackId = `${aisle}${section}`;
+
+      try {
+        const res = await fetch(`http://localhost:8000/api/layout/coordinates?rack_id=${rackId}&shelf_position=${shelf}`);
+        const data = await res.json();
+        
+        if (data.status === 'success') {
+          document.getElementById('res-rack-id').textContent = data.rack_id;
+          document.getElementById('res-shelf').textContent = data.shelf_position;
+          document.getElementById('res-floor').textContent = data.floor;
+          document.getElementById('res-coords').textContent = `X: ${data.coordinates.x.toFixed(1)}m, Y: ${data.coordinates.y.toFixed(1)}m, Z: ${data.coordinates.z.toFixed(1)}m`;
+          
+          // Set floor badge class
+          const floorBadge = document.getElementById('res-floor');
+          if (data.floor.includes('1st')) {
+            floorBadge.style.background = 'var(--cosmic-indigo)';
+          } else {
+            floorBadge.style.background = 'var(--cyber-teal)';
+          }
+
+          document.getElementById('coord-result').classList.add('active');
+          highlightCell(aisle, parseInt(section));
+          showToast('Coordinates computed successfully!', 'success');
+        }
+      } catch (err) {
+        showToast('Failed to fetch coordinates from server.', 'error');
+      }
+    }
+
+    function highlightCell(aisleLetter, sectionNum) {
+      drawBaseGrid();
+      
+      const colIdx = aisles.indexOf(aisleLetter);
+      const rowIdx = sectionNum - 1;
+      
+      const x = offsetX + colIdx * cellWidth;
+      const y = CANVAS.height - offsetY - (rowIdx + 1) * cellHeight;
+      
+      // Draw highlighted fill
+      CTX.fillStyle = 'rgba(0, 242, 254, 0.15)';
+      CTX.strokeStyle = '#00f2fe';
+      CTX.lineWidth = 2;
+      CTX.fillRect(x + 5, y + 5, cellWidth - 10, cellHeight - 10);
+      CTX.strokeRect(x + 5, y + 5, cellWidth - 10, cellHeight - 10);
+      
+      // Draw pulse center indicator
+      CTX.fillStyle = '#00f2fe';
+      CTX.beginPath();
+      CTX.arc(x + cellWidth/2, y + cellHeight/2, 6, 0, Math.PI * 2);
+      CTX.fill();
+    }
+
+    function addRouteStop() {
+      const select = document.getElementById('route-rack-select');
+      const val = select.value;
+      if (selectedStopsList.includes(val)) {
+        showToast('Stop already added to sequence!', 'info');
+        return;
+      }
+      selectedStopsList.push(val);
+      updateStopsUI();
+      redrawRoute();
+    }
+
+    function updateStopsUI() {
+      const container = document.getElementById('selected-stops');
+      if (selectedStopsList.length === 0) {
+        container.innerHTML = '<span style="color:var(--text-muted)">No stops added.</span>';
+        return;
+      }
+
+      container.innerHTML = selectedStopsList.map((stop, idx) => `
+        <span class="badge" style="background:rgba(88,101,242,0.15); border:1px solid rgba(88,101,242,0.3); padding:4px 8px; border-radius:4px; display:inline-flex; align-items:center; gap:6px;">
+          ${stop}
+          <span style="cursor:pointer; color:var(--error-red); font-weight:700;" onclick="removeStop(${idx})">✕</span>
+        </span>
+      `).join('');
+    }
+
+    function removeStop(idx) {
+      selectedStopsList.splice(idx, 1);
+      updateStopsUI();
+      redrawRoute();
+    }
+
+    function clearStops() {
+      selectedStopsList = [];
+      updateStopsUI();
+      drawBaseGrid();
+      document.getElementById('route-result').classList.remove('active');
+    }
+
+    function redrawRoute() {
+      drawBaseGrid();
+      
+      // Highlight all selected stops in orange
+      selectedStopsList.forEach(stop => {
+        const colIdx = aisles.indexOf(stop[0]);
+        const rowIdx = parseInt(stop[1]) - 1;
+        const x = offsetX + colIdx * cellWidth;
+        const y = CANVAS.height - offsetY - (rowIdx + 1) * cellHeight;
+        
+        CTX.strokeStyle = '#ff9e0b';
+        CTX.fillStyle = 'rgba(245, 158, 11, 0.12)';
+        CTX.lineWidth = 1.5;
+        CTX.fillRect(x + 6, y + 6, cellWidth - 12, cellHeight - 12);
+        CTX.strokeRect(x + 6, y + 6, cellWidth - 12, cellHeight - 12);
+      });
+    }
+
+    async function solveRoute() {
+      if (selectedStopsList.length === 0) {
+        showToast('Please add at least one stop coordinates.', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:8000/api/layout/route', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ rack_ids: selectedStopsList })
+        });
+        const data = await res.json();
+        
+        if (data.route) {
+          renderRouteList(data.route);
+          document.getElementById('route-total-distance').textContent = `Total Path Distance: ${data.total_distance_m} meters`;
+          document.getElementById('route-result').classList.add('active');
+          
+          drawRouteTour(data.route);
+          showToast('Shortest path tour computed!', 'success');
+        }
+      } catch (err) {
+        showToast('Failed to compute TSP path on server.', 'error');
+      }
+    }
+
+    function renderRouteList(route) {
+      const container = document.getElementById('route-steps-container');
+      container.innerHTML = '';
+      
+      // Origin step
+      container.innerHTML += `
+        <div class="route-step">
+          <span class="route-step-idx">S</span>
+          <div>Start: <strong>Origin (0.0, 0.0, 0.0)</strong></div>
+        </div>
+      `;
+
+      route.forEach((step, idx) => {
+        container.innerHTML += `
+          <div class="route-step">
+            <span class="route-step-idx" style="background:var(--cyber-teal); color:#000;">${idx+1}</span>
+            <div>${step.name} (${step.rack_id}) &rarr; <span style="font-family:monospace; color:var(--cyber-teal);">X:${step.coords[0].toFixed(1)}m, Y:${step.coords[1].toFixed(1)}m</span></div>
+          </div>
+        `;
+      });
+
+      // Final step returning
+      container.innerHTML += `
+        <div class="route-step">
+          <span class="route-step-idx">E</span>
+          <div>End: Return to <strong>Origin (0.0, 0.0, 0.0)</strong></div>
+        </div>
+      `;
+    }
+
+    function drawRouteTour(route) {
+      redrawRoute();
+      
+      // Trace path line
+      CTX.beginPath();
+      CTX.strokeStyle = '#5865f2';
+      CTX.lineWidth = 3;
+      CTX.lineJoin = 'round';
+      CTX.setLineDash([5, 5]); // dashed route path line for robotics feel
+      
+      // Start path at origin
+      const startX = offsetX - 40;
+      const startY = CANVAS.height - offsetY;
+      CTX.moveTo(startX, startY);
+      
+      const coordinatesList = [[startX, startY]];
+
+      // Add route stops coordinates
+      route.forEach(step => {
+        const colIdx = aisles.indexOf(step.rack_id[0]);
+        const rowIdx = parseInt(step.rack_id[1]) - 1;
+        const cellX = offsetX + colIdx * cellWidth + cellWidth / 2;
+        const cellY = CANVAS.height - offsetY - (rowIdx + 1) * cellHeight + cellHeight / 2;
+        
+        CTX.lineTo(cellX, cellY);
+        coordinatesList.push([cellX, cellY]);
+      });
+      
+      // Return to origin
+      CTX.lineTo(startX, startY);
+      coordinatesList.push([startX, startY]);
+      
+      CTX.stroke();
+      CTX.setLineDash([]); // Reset line dashes
+      
+      // Draw markers and step numbers at each stop
+      coordinatesList.forEach((coord, idx) => {
+        if (idx === 0 || idx === coordinatesList.length - 1) return;
+        
+        CTX.fillStyle = '#00f2fe';
+        CTX.beginPath();
+        CTX.arc(coord[0], coord[1], 10, 0, Math.PI * 2);
+        CTX.fill();
+        
+        CTX.fillStyle = '#0a0b10';
+        CTX.font = 'bold 10px Inter';
+        CTX.fillText(idx, coord[0] - 3, coord[1] + 3);
+      });
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast--${type}`;
+      const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+      toast.innerHTML = `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

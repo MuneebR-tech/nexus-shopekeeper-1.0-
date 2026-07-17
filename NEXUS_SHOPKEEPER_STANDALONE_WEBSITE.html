@@ -156,9 +156,21 @@
         <!-- ═════════════════════════════════════════════ -->
         <div id="kiosk-tab" class="tab-pane active">
             <div class="store-header">
-                <h1 id="kiosk-title">Smart Autonomous Superstore</h1>
-                <p id="kiosk-sub">Pick items directly. Automated AI inventory verification active.</p>
-                <div class="staff-alert" id="staff-label">🤖 Mart operated by 10 active automation technicians</div>
+                <h1 id="kiosk-title">✨ Nexus Smart Superstore & Kiosk</h1>
+                <p id="kiosk-sub">Touch items to add to your cart or check in below for personalized discounts & rewards.</p>
+                <div class="staff-alert" id="staff-label">🤝 Smart Mart Active — Our AI & 10 floor staff work collaboratively to keep shelves stocked & checkout instant</div>
+                
+                <div style="margin: 18px auto 6px; max-width: 680px; background: rgba(30, 34, 48, 0.85); border: 1px solid rgba(88, 101, 242, 0.4); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+                    <div style="text-align: left;">
+                        <span style="font-size: 0.85rem; color: #a855f7; font-weight: 700; text-transform: uppercase;">Active Shopper Check-In:</span>
+                        <div id="active-user-display" style="font-size: 1.05rem; font-weight: bold; color: white;">👤 Guest Shopper (Standard Pricing)</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="signInUser('Zeeshan Malik', 'Platinum VIP • 15% Off', 4800)" style="background: var(--cosmic-indigo); color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;">🤴 Zeeshan (VIP)</button>
+                        <button onclick="signInUser('Ayesha Khan', 'Gold Member • 10% Off', 2500)" style="background: var(--emerald-green); color: white; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;">🧕 Ayesha (Gold)</button>
+                        <button onclick="signInUser('Ahmed Ali', 'Store Manager Admin', 9999)" style="background: var(--cyber-gold); color: #000; border: none; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s;">👨‍💼 Manager</button>
+                    </div>
+                </div>
             </div>
 
             <div class="controls-row">
@@ -350,6 +362,19 @@
             } catch (e) { /* audio blocked */ }
         }
 
+        // Sign In User with Warm Chime & Visual Update
+        function signInUser(name, tier, balance) {
+            playChime('success');
+            const display = document.getElementById('active-user-display');
+            if (display) {
+                display.textContent = `🌟 ${name} (${tier} • Store Credit: Rs. ${balance})`;
+            }
+            showToast(`✅ Welcome, ${name}! Signed in successfully.`);
+            if (name === 'Ahmed Ali') {
+                setTimeout(() => switchTab('dashboard'), 1000);
+            }
+        }
+
         // Switch Tabs
         function switchTab(tabId) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -370,15 +395,15 @@
             const btn = document.getElementById('lang-toggle');
             if (currentLang === 'ur') {
                 btn.textContent = '🌐 زبان: اردو';
-                document.getElementById('kiosk-title').textContent = 'اسمارٹ خودکار سپر اسٹور';
-                document.getElementById('kiosk-sub').textContent = 'اشیاء کو براہ راست منتخب کریں۔ خودکار اے آئی تصدیقی نظام فعال ہے۔';
-                document.getElementById('staff-label').textContent = '🤖 مارٹ 10 سرگرم خودکار تکنیکی ماہرین کے ذریعہ چلایا جاتا ہے';
+                document.getElementById('kiosk-title').textContent = '✨ نیکس اسمارٹ سپر اسٹور اور کیوسک';
+                document.getElementById('kiosk-sub').textContent = 'اشیاء منتخب کریں یا ذاتی رعایت اور ریوارڈز کے لیے نیچے سائن ان کریں۔';
+                document.getElementById('staff-label').textContent = '🤝 اسمارٹ مارٹ فعال — اے آئی اور 10 عملے کے ارکان مل کر خریداری کو آسان بناتے ہیں';
                 document.getElementById('cart-header-text').textContent = '🛍️ شاپنگ کارٹ';
             } else {
                 btn.textContent = '🌐 اردو / English';
-                document.getElementById('kiosk-title').textContent = 'Smart Autonomous Superstore';
-                document.getElementById('kiosk-sub').textContent = 'Pick items directly. Automated AI inventory verification active.';
-                document.getElementById('staff-label').textContent = '🤖 Mart operated by 10 active automation technicians';
+                document.getElementById('kiosk-title').textContent = '✨ Nexus Smart Superstore & Kiosk';
+                document.getElementById('kiosk-sub').textContent = 'Touch items to add to your cart or check in below for personalized discounts & rewards.';
+                document.getElementById('staff-label').textContent = '🤝 Smart Mart Active — Our AI & 10 floor staff work collaboratively to keep shelves stocked & checkout instant';
                 document.getElementById('cart-header-text').textContent = '🛍️ Shopping Cart';
             }
             renderProducts();

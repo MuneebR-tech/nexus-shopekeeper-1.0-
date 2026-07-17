@@ -1,0 +1,1801 @@
+[
+  {
+    "checkout_id": "CH-0001",
+    "customer_id": "CUST-00013",
+    "amount": 9359.84,
+    "payment_method": "Card",
+    "timestamp": "2026-06-15T17:56:41.164463"
+  },
+  {
+    "checkout_id": "CH-0002",
+    "customer_id": "CUST-00280",
+    "amount": 1406.31,
+    "payment_method": "Card",
+    "timestamp": "2026-06-10T00:03:41.164463"
+  },
+  {
+    "checkout_id": "CH-0003",
+    "customer_id": "CUST-00120",
+    "amount": 6490.07,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-22T07:52:41.164463"
+  },
+  {
+    "checkout_id": "CH-0004",
+    "customer_id": "CUST-00280",
+    "amount": 5447.17,
+    "payment_method": "Card",
+    "timestamp": "2026-06-08T06:47:41.164463"
+  },
+  {
+    "checkout_id": "CH-0005",
+    "customer_id": "CUST-00004",
+    "amount": 9569.51,
+    "payment_method": "Points",
+    "timestamp": "2026-06-17T02:37:41.164463"
+  },
+  {
+    "checkout_id": "CH-0006",
+    "customer_id": "CUST-00080",
+    "amount": 2966.06,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-29T14:58:41.164463"
+  },
+  {
+    "checkout_id": "CH-0007",
+    "customer_id": "CUST-00050",
+    "amount": 4711.6,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-11T05:48:41.164463"
+  },
+  {
+    "checkout_id": "CH-0008",
+    "customer_id": "CUST-00236",
+    "amount": 6865.17,
+    "payment_method": "Points",
+    "timestamp": "2026-05-24T12:59:41.165473"
+  },
+  {
+    "checkout_id": "CH-0009",
+    "customer_id": "CUST-00186",
+    "amount": 7364.83,
+    "payment_method": "Card",
+    "timestamp": "2026-05-31T23:02:41.165473"
+  },
+  {
+    "checkout_id": "CH-0010",
+    "customer_id": "CUST-00149",
+    "amount": 12320.44,
+    "payment_method": "Card",
+    "timestamp": "2026-05-26T17:09:41.165473"
+  },
+  {
+    "checkout_id": "CH-0011",
+    "customer_id": "CUST-00143",
+    "amount": 5858.94,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-27T13:54:41.165473"
+  },
+  {
+    "checkout_id": "CH-0012",
+    "customer_id": "CUST-00108",
+    "amount": 8492.63,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-31T03:23:41.165473"
+  },
+  {
+    "checkout_id": "CH-0013",
+    "customer_id": "CUST-00088",
+    "amount": 6839.8,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-15T19:35:41.165473"
+  },
+  {
+    "checkout_id": "CH-0014",
+    "customer_id": "CUST-00286",
+    "amount": 3018.32,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-12T23:50:41.165473"
+  },
+  {
+    "checkout_id": "CH-0015",
+    "customer_id": "CUST-00162",
+    "amount": 5224.15,
+    "payment_method": "Points",
+    "timestamp": "2026-06-20T18:06:41.165473"
+  },
+  {
+    "checkout_id": "CH-0016",
+    "customer_id": "CUST-00162",
+    "amount": 2933.41,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-07T12:08:41.165473"
+  },
+  {
+    "checkout_id": "CH-0017",
+    "customer_id": "CUST-00235",
+    "amount": 2085.89,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-18T17:17:41.165473"
+  },
+  {
+    "checkout_id": "CH-0018",
+    "customer_id": "CUST-00135",
+    "amount": 9426.22,
+    "payment_method": "Card",
+    "timestamp": "2026-06-09T06:39:41.165473"
+  },
+  {
+    "checkout_id": "CH-0019",
+    "customer_id": "CUST-00071",
+    "amount": 6540.74,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-20T23:09:41.165473"
+  },
+  {
+    "checkout_id": "CH-0020",
+    "customer_id": "CUST-00082",
+    "amount": 9973.76,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-09T06:00:41.165473"
+  },
+  {
+    "checkout_id": "CH-0021",
+    "customer_id": "CUST-00240",
+    "amount": 6778.74,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-06T00:21:41.165473"
+  },
+  {
+    "checkout_id": "CH-0022",
+    "customer_id": "CUST-00275",
+    "amount": 9473.17,
+    "payment_method": "Card",
+    "timestamp": "2026-05-29T04:43:41.165473"
+  },
+  {
+    "checkout_id": "CH-0023",
+    "customer_id": "CUST-00223",
+    "amount": 2271.62,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-22T01:08:41.165473"
+  },
+  {
+    "checkout_id": "CH-0024",
+    "customer_id": "CUST-00257",
+    "amount": 9607.84,
+    "payment_method": "Card",
+    "timestamp": "2026-06-06T21:09:41.165473"
+  },
+  {
+    "checkout_id": "CH-0025",
+    "customer_id": "CUST-00260",
+    "amount": 7748.99,
+    "payment_method": "Card",
+    "timestamp": "2026-06-18T13:16:41.165473"
+  },
+  {
+    "checkout_id": "CH-0026",
+    "customer_id": "CUST-00272",
+    "amount": 11509.7,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-03T14:33:41.165473"
+  },
+  {
+    "checkout_id": "CH-0027",
+    "customer_id": "CUST-00186",
+    "amount": 11026.47,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-27T15:49:41.165473"
+  },
+  {
+    "checkout_id": "CH-0028",
+    "customer_id": "CUST-00291",
+    "amount": 11855.44,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-20T01:33:41.165473"
+  },
+  {
+    "checkout_id": "CH-0029",
+    "customer_id": "CUST-00273",
+    "amount": 9654.89,
+    "payment_method": "Points",
+    "timestamp": "2026-06-18T03:34:41.165473"
+  },
+  {
+    "checkout_id": "CH-0030",
+    "customer_id": "CUST-00085",
+    "amount": 3570.44,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-26T05:37:41.165473"
+  },
+  {
+    "checkout_id": "CH-0031",
+    "customer_id": "CUST-00277",
+    "amount": 9526.47,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-31T18:19:41.165473"
+  },
+  {
+    "checkout_id": "CH-0032",
+    "customer_id": "CUST-00192",
+    "amount": 5672.92,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-06T10:57:41.165473"
+  },
+  {
+    "checkout_id": "CH-0033",
+    "customer_id": "CUST-00033",
+    "amount": 4457.74,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-04T07:50:41.165473"
+  },
+  {
+    "checkout_id": "CH-0034",
+    "customer_id": "CUST-00004",
+    "amount": 1212.57,
+    "payment_method": "Card",
+    "timestamp": "2026-06-02T23:50:41.165473"
+  },
+  {
+    "checkout_id": "CH-0035",
+    "customer_id": "CUST-00017",
+    "amount": 10794.57,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-20T08:49:41.165473"
+  },
+  {
+    "checkout_id": "CH-0036",
+    "customer_id": "CUST-00249",
+    "amount": 2952.98,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-18T01:05:41.165473"
+  },
+  {
+    "checkout_id": "CH-0037",
+    "customer_id": "CUST-00296",
+    "amount": 6092.95,
+    "payment_method": "Points",
+    "timestamp": "2026-05-28T09:13:41.165473"
+  },
+  {
+    "checkout_id": "CH-0038",
+    "customer_id": "CUST-00049",
+    "amount": 1527.71,
+    "payment_method": "Card",
+    "timestamp": "2026-06-09T13:37:41.165473"
+  },
+  {
+    "checkout_id": "CH-0039",
+    "customer_id": "CUST-00028",
+    "amount": 8531.38,
+    "payment_method": "Card",
+    "timestamp": "2026-06-02T22:01:41.165473"
+  },
+  {
+    "checkout_id": "CH-0040",
+    "customer_id": "CUST-00174",
+    "amount": 10077.2,
+    "payment_method": "Card",
+    "timestamp": "2026-06-19T17:52:41.165473"
+  },
+  {
+    "checkout_id": "CH-0041",
+    "customer_id": "CUST-00230",
+    "amount": 2053.21,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-17T16:35:41.165473"
+  },
+  {
+    "checkout_id": "CH-0042",
+    "customer_id": "CUST-00039",
+    "amount": 5734.04,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-26T07:58:41.165473"
+  },
+  {
+    "checkout_id": "CH-0043",
+    "customer_id": "CUST-00277",
+    "amount": 10507.74,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-20T17:54:41.165473"
+  },
+  {
+    "checkout_id": "CH-0044",
+    "customer_id": "CUST-00247",
+    "amount": 2947.03,
+    "payment_method": "Card",
+    "timestamp": "2026-06-10T23:54:41.165473"
+  },
+  {
+    "checkout_id": "CH-0045",
+    "customer_id": "CUST-00200",
+    "amount": 3572.22,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-28T10:46:41.165473"
+  },
+  {
+    "checkout_id": "CH-0046",
+    "customer_id": "CUST-00285",
+    "amount": 8391.74,
+    "payment_method": "Card",
+    "timestamp": "2026-06-07T20:52:41.165473"
+  },
+  {
+    "checkout_id": "CH-0047",
+    "customer_id": "CUST-00030",
+    "amount": 7387.04,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-05T23:17:41.165473"
+  },
+  {
+    "checkout_id": "CH-0048",
+    "customer_id": "CUST-00026",
+    "amount": 7447.76,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-06T08:54:41.165473"
+  },
+  {
+    "checkout_id": "CH-0049",
+    "customer_id": "CUST-00261",
+    "amount": 1323.35,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-17T22:26:41.165473"
+  },
+  {
+    "checkout_id": "CH-0050",
+    "customer_id": "CUST-00121",
+    "amount": 5255.87,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-23T06:49:41.165473"
+  },
+  {
+    "checkout_id": "CH-0051",
+    "customer_id": "CUST-00021",
+    "amount": 7875.49,
+    "payment_method": "Card",
+    "timestamp": "2026-06-09T03:27:41.165473"
+  },
+  {
+    "checkout_id": "CH-0052",
+    "customer_id": "CUST-00162",
+    "amount": 11706.68,
+    "payment_method": "Card",
+    "timestamp": "2026-06-16T03:19:41.165473"
+  },
+  {
+    "checkout_id": "CH-0053",
+    "customer_id": "CUST-00136",
+    "amount": 5158.8,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-01T04:45:41.165473"
+  },
+  {
+    "checkout_id": "CH-0054",
+    "customer_id": "CUST-00038",
+    "amount": 463.18,
+    "payment_method": "Card",
+    "timestamp": "2026-06-03T06:58:41.165473"
+  },
+  {
+    "checkout_id": "CH-0055",
+    "customer_id": "CUST-00110",
+    "amount": 6496.5,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-18T13:08:41.165473"
+  },
+  {
+    "checkout_id": "CH-0056",
+    "customer_id": "CUST-00126",
+    "amount": 4839.75,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-17T10:11:41.165473"
+  },
+  {
+    "checkout_id": "CH-0057",
+    "customer_id": "CUST-00155",
+    "amount": 7781.88,
+    "payment_method": "Card",
+    "timestamp": "2026-05-28T04:31:41.165473"
+  },
+  {
+    "checkout_id": "CH-0058",
+    "customer_id": "CUST-00284",
+    "amount": 3987.45,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-01T21:08:41.165473"
+  },
+  {
+    "checkout_id": "CH-0059",
+    "customer_id": "CUST-00060",
+    "amount": 11160.01,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-30T07:55:41.165473"
+  },
+  {
+    "checkout_id": "CH-0060",
+    "customer_id": "CUST-00108",
+    "amount": 9068.99,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-16T03:24:41.165473"
+  },
+  {
+    "checkout_id": "CH-0061",
+    "customer_id": "CUST-00259",
+    "amount": 6285.66,
+    "payment_method": "Points",
+    "timestamp": "2026-05-25T23:59:41.165473"
+  },
+  {
+    "checkout_id": "CH-0062",
+    "customer_id": "CUST-00142",
+    "amount": 885.65,
+    "payment_method": "Card",
+    "timestamp": "2026-06-12T20:24:41.165473"
+  },
+  {
+    "checkout_id": "CH-0063",
+    "customer_id": "CUST-00083",
+    "amount": 9355.96,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-05T02:37:41.165473"
+  },
+  {
+    "checkout_id": "CH-0064",
+    "customer_id": "CUST-00058",
+    "amount": 1264.21,
+    "payment_method": "Card",
+    "timestamp": "2026-05-25T02:07:41.165473"
+  },
+  {
+    "checkout_id": "CH-0065",
+    "customer_id": "CUST-00019",
+    "amount": 10490.33,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-04T07:55:41.165473"
+  },
+  {
+    "checkout_id": "CH-0066",
+    "customer_id": "CUST-00022",
+    "amount": 4095.34,
+    "payment_method": "Card",
+    "timestamp": "2026-05-25T23:07:41.165473"
+  },
+  {
+    "checkout_id": "CH-0067",
+    "customer_id": "CUST-00128",
+    "amount": 8453.24,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-11T07:08:41.165473"
+  },
+  {
+    "checkout_id": "CH-0068",
+    "customer_id": "CUST-00080",
+    "amount": 11598.03,
+    "payment_method": "Points",
+    "timestamp": "2026-06-15T19:13:41.165473"
+  },
+  {
+    "checkout_id": "CH-0069",
+    "customer_id": "CUST-00212",
+    "amount": 651.15,
+    "payment_method": "Points",
+    "timestamp": "2026-05-30T14:14:41.165473"
+  },
+  {
+    "checkout_id": "CH-0070",
+    "customer_id": "CUST-00128",
+    "amount": 3591.69,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-28T02:58:41.165473"
+  },
+  {
+    "checkout_id": "CH-0071",
+    "customer_id": "CUST-00020",
+    "amount": 10781.91,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-15T18:12:41.165473"
+  },
+  {
+    "checkout_id": "CH-0072",
+    "customer_id": "CUST-00180",
+    "amount": 4058.07,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-28T17:50:41.165473"
+  },
+  {
+    "checkout_id": "CH-0073",
+    "customer_id": "CUST-00099",
+    "amount": 5191.36,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-14T22:15:41.165473"
+  },
+  {
+    "checkout_id": "CH-0074",
+    "customer_id": "CUST-00261",
+    "amount": 5206.09,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-27T07:43:41.165473"
+  },
+  {
+    "checkout_id": "CH-0075",
+    "customer_id": "CUST-00060",
+    "amount": 11006.02,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-14T19:27:41.165473"
+  },
+  {
+    "checkout_id": "CH-0076",
+    "customer_id": "CUST-00136",
+    "amount": 814.82,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-03T11:42:41.165473"
+  },
+  {
+    "checkout_id": "CH-0077",
+    "customer_id": "CUST-00161",
+    "amount": 5652.19,
+    "payment_method": "Card",
+    "timestamp": "2026-06-06T21:40:41.165473"
+  },
+  {
+    "checkout_id": "CH-0078",
+    "customer_id": "CUST-00098",
+    "amount": 3444.88,
+    "payment_method": "Points",
+    "timestamp": "2026-05-31T12:04:41.165473"
+  },
+  {
+    "checkout_id": "CH-0079",
+    "customer_id": "CUST-00276",
+    "amount": 8695.31,
+    "payment_method": "Card",
+    "timestamp": "2026-05-23T01:17:41.165473"
+  },
+  {
+    "checkout_id": "CH-0080",
+    "customer_id": "CUST-00187",
+    "amount": 5590.26,
+    "payment_method": "Card",
+    "timestamp": "2026-05-23T03:06:41.165473"
+  },
+  {
+    "checkout_id": "CH-0081",
+    "customer_id": "CUST-00161",
+    "amount": 8410.16,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-19T01:07:41.165473"
+  },
+  {
+    "checkout_id": "CH-0082",
+    "customer_id": "CUST-00159",
+    "amount": 8452.75,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-12T12:20:41.165473"
+  },
+  {
+    "checkout_id": "CH-0083",
+    "customer_id": "CUST-00066",
+    "amount": 2680.86,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-01T12:21:41.165473"
+  },
+  {
+    "checkout_id": "CH-0084",
+    "customer_id": "CUST-00090",
+    "amount": 7828.51,
+    "payment_method": "Card",
+    "timestamp": "2026-06-13T12:29:41.165473"
+  },
+  {
+    "checkout_id": "CH-0085",
+    "customer_id": "CUST-00156",
+    "amount": 3836.0,
+    "payment_method": "Points",
+    "timestamp": "2026-06-09T06:26:41.165473"
+  },
+  {
+    "checkout_id": "CH-0086",
+    "customer_id": "CUST-00239",
+    "amount": 5717.7,
+    "payment_method": "Card",
+    "timestamp": "2026-06-01T18:32:41.165473"
+  },
+  {
+    "checkout_id": "CH-0087",
+    "customer_id": "CUST-00087",
+    "amount": 8355.04,
+    "payment_method": "Card",
+    "timestamp": "2026-06-13T08:22:41.165473"
+  },
+  {
+    "checkout_id": "CH-0088",
+    "customer_id": "CUST-00172",
+    "amount": 1484.65,
+    "payment_method": "Card",
+    "timestamp": "2026-05-23T17:21:41.165473"
+  },
+  {
+    "checkout_id": "CH-0089",
+    "customer_id": "CUST-00102",
+    "amount": 2140.35,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-21T17:34:41.165473"
+  },
+  {
+    "checkout_id": "CH-0090",
+    "customer_id": "CUST-00038",
+    "amount": 5883.31,
+    "payment_method": "Card",
+    "timestamp": "2026-05-25T04:28:41.165473"
+  },
+  {
+    "checkout_id": "CH-0091",
+    "customer_id": "CUST-00197",
+    "amount": 6356.68,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-15T20:23:41.165473"
+  },
+  {
+    "checkout_id": "CH-0092",
+    "customer_id": "CUST-00055",
+    "amount": 9807.81,
+    "payment_method": "Card",
+    "timestamp": "2026-06-15T19:13:41.165473"
+  },
+  {
+    "checkout_id": "CH-0093",
+    "customer_id": "CUST-00266",
+    "amount": 5994.28,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-05T17:06:41.165473"
+  },
+  {
+    "checkout_id": "CH-0094",
+    "customer_id": "CUST-00234",
+    "amount": 1970.07,
+    "payment_method": "Points",
+    "timestamp": "2026-06-08T03:31:41.165473"
+  },
+  {
+    "checkout_id": "CH-0095",
+    "customer_id": "CUST-00163",
+    "amount": 11892.98,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-25T10:25:41.165473"
+  },
+  {
+    "checkout_id": "CH-0096",
+    "customer_id": "CUST-00259",
+    "amount": 5534.9,
+    "payment_method": "Points",
+    "timestamp": "2026-05-24T07:36:41.165473"
+  },
+  {
+    "checkout_id": "CH-0097",
+    "customer_id": "CUST-00244",
+    "amount": 5818.35,
+    "payment_method": "Points",
+    "timestamp": "2026-05-29T17:11:41.165473"
+  },
+  {
+    "checkout_id": "CH-0098",
+    "customer_id": "CUST-00267",
+    "amount": 6237.85,
+    "payment_method": "Card",
+    "timestamp": "2026-06-15T16:36:41.165473"
+  },
+  {
+    "checkout_id": "CH-0099",
+    "customer_id": "CUST-00147",
+    "amount": 3199.1,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-12T14:07:41.166481"
+  },
+  {
+    "checkout_id": "CH-0100",
+    "customer_id": "CUST-00071",
+    "amount": 2182.59,
+    "payment_method": "Card",
+    "timestamp": "2026-06-10T02:55:41.166481"
+  },
+  {
+    "checkout_id": "CH-0101",
+    "customer_id": "CUST-00033",
+    "amount": 5390.64,
+    "payment_method": "Card",
+    "timestamp": "2026-06-12T07:35:41.166481"
+  },
+  {
+    "checkout_id": "CH-0102",
+    "customer_id": "CUST-00106",
+    "amount": 10469.63,
+    "payment_method": "Card",
+    "timestamp": "2026-06-10T06:20:41.166481"
+  },
+  {
+    "checkout_id": "CH-0103",
+    "customer_id": "CUST-00295",
+    "amount": 4971.63,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-22T13:45:41.166481"
+  },
+  {
+    "checkout_id": "CH-0104",
+    "customer_id": "CUST-00215",
+    "amount": 6889.38,
+    "payment_method": "Points",
+    "timestamp": "2026-05-30T07:13:41.166481"
+  },
+  {
+    "checkout_id": "CH-0105",
+    "customer_id": "CUST-00113",
+    "amount": 6281.99,
+    "payment_method": "Card",
+    "timestamp": "2026-06-14T11:33:41.166481"
+  },
+  {
+    "checkout_id": "CH-0106",
+    "customer_id": "CUST-00173",
+    "amount": 8476.81,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-28T12:18:41.166481"
+  },
+  {
+    "checkout_id": "CH-0107",
+    "customer_id": "CUST-00240",
+    "amount": 11522.43,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-03T08:03:41.166481"
+  },
+  {
+    "checkout_id": "CH-0108",
+    "customer_id": "CUST-00289",
+    "amount": 8405.45,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-20T04:37:41.166481"
+  },
+  {
+    "checkout_id": "CH-0109",
+    "customer_id": "CUST-00237",
+    "amount": 2558.01,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-14T12:44:41.166481"
+  },
+  {
+    "checkout_id": "CH-0110",
+    "customer_id": "CUST-00168",
+    "amount": 4450.63,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-25T12:47:41.166481"
+  },
+  {
+    "checkout_id": "CH-0111",
+    "customer_id": "CUST-00216",
+    "amount": 3415.1,
+    "payment_method": "Points",
+    "timestamp": "2026-06-20T10:03:41.166481"
+  },
+  {
+    "checkout_id": "CH-0112",
+    "customer_id": "CUST-00027",
+    "amount": 12498.88,
+    "payment_method": "Card",
+    "timestamp": "2026-06-11T17:23:41.166481"
+  },
+  {
+    "checkout_id": "CH-0113",
+    "customer_id": "CUST-00021",
+    "amount": 9513.93,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-23T17:52:41.166481"
+  },
+  {
+    "checkout_id": "CH-0114",
+    "customer_id": "CUST-00079",
+    "amount": 3248.32,
+    "payment_method": "Points",
+    "timestamp": "2026-06-07T03:57:41.166481"
+  },
+  {
+    "checkout_id": "CH-0115",
+    "customer_id": "CUST-00112",
+    "amount": 6000.16,
+    "payment_method": "Card",
+    "timestamp": "2026-06-14T13:54:41.166481"
+  },
+  {
+    "checkout_id": "CH-0116",
+    "customer_id": "CUST-00059",
+    "amount": 9800.17,
+    "payment_method": "Card",
+    "timestamp": "2026-06-17T15:58:41.166481"
+  },
+  {
+    "checkout_id": "CH-0117",
+    "customer_id": "CUST-00160",
+    "amount": 7345.93,
+    "payment_method": "Card",
+    "timestamp": "2026-05-24T12:39:41.166481"
+  },
+  {
+    "checkout_id": "CH-0118",
+    "customer_id": "CUST-00102",
+    "amount": 1273.36,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-31T04:49:41.166481"
+  },
+  {
+    "checkout_id": "CH-0119",
+    "customer_id": "CUST-00155",
+    "amount": 10681.06,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-03T21:14:41.166481"
+  },
+  {
+    "checkout_id": "CH-0120",
+    "customer_id": "CUST-00022",
+    "amount": 4568.53,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-09T03:41:41.166481"
+  },
+  {
+    "checkout_id": "CH-0121",
+    "customer_id": "CUST-00175",
+    "amount": 503.72,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-09T09:58:41.166481"
+  },
+  {
+    "checkout_id": "CH-0122",
+    "customer_id": "CUST-00186",
+    "amount": 8072.36,
+    "payment_method": "Card",
+    "timestamp": "2026-05-27T10:19:41.166481"
+  },
+  {
+    "checkout_id": "CH-0123",
+    "customer_id": "CUST-00091",
+    "amount": 9265.61,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-23T04:47:41.166481"
+  },
+  {
+    "checkout_id": "CH-0124",
+    "customer_id": "CUST-00276",
+    "amount": 9761.89,
+    "payment_method": "Card",
+    "timestamp": "2026-06-08T11:12:41.166481"
+  },
+  {
+    "checkout_id": "CH-0125",
+    "customer_id": "CUST-00138",
+    "amount": 4266.0,
+    "payment_method": "Card",
+    "timestamp": "2026-06-15T22:47:41.166481"
+  },
+  {
+    "checkout_id": "CH-0126",
+    "customer_id": "CUST-00125",
+    "amount": 9468.29,
+    "payment_method": "Points",
+    "timestamp": "2026-06-04T05:22:41.166481"
+  },
+  {
+    "checkout_id": "CH-0127",
+    "customer_id": "CUST-00015",
+    "amount": 6355.82,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-12T19:33:41.166481"
+  },
+  {
+    "checkout_id": "CH-0128",
+    "customer_id": "CUST-00133",
+    "amount": 4485.12,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-25T05:20:41.166481"
+  },
+  {
+    "checkout_id": "CH-0129",
+    "customer_id": "CUST-00285",
+    "amount": 473.34,
+    "payment_method": "Points",
+    "timestamp": "2026-05-23T18:59:41.166481"
+  },
+  {
+    "checkout_id": "CH-0130",
+    "customer_id": "CUST-00209",
+    "amount": 6286.22,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-29T17:20:41.166481"
+  },
+  {
+    "checkout_id": "CH-0131",
+    "customer_id": "CUST-00252",
+    "amount": 5795.32,
+    "payment_method": "Card",
+    "timestamp": "2026-06-22T22:46:41.166481"
+  },
+  {
+    "checkout_id": "CH-0132",
+    "customer_id": "CUST-00125",
+    "amount": 4070.4,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-04T13:34:41.166481"
+  },
+  {
+    "checkout_id": "CH-0133",
+    "customer_id": "CUST-00177",
+    "amount": 5519.87,
+    "payment_method": "Card",
+    "timestamp": "2026-05-30T07:43:41.166481"
+  },
+  {
+    "checkout_id": "CH-0134",
+    "customer_id": "CUST-00233",
+    "amount": 3641.63,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-14T17:57:41.166481"
+  },
+  {
+    "checkout_id": "CH-0135",
+    "customer_id": "CUST-00162",
+    "amount": 1802.59,
+    "payment_method": "Card",
+    "timestamp": "2026-06-05T02:53:41.166481"
+  },
+  {
+    "checkout_id": "CH-0136",
+    "customer_id": "CUST-00248",
+    "amount": 3709.47,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-04T08:26:41.166481"
+  },
+  {
+    "checkout_id": "CH-0137",
+    "customer_id": "CUST-00052",
+    "amount": 10466.43,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-13T17:41:41.166481"
+  },
+  {
+    "checkout_id": "CH-0138",
+    "customer_id": "CUST-00008",
+    "amount": 8952.42,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-18T17:02:41.166481"
+  },
+  {
+    "checkout_id": "CH-0139",
+    "customer_id": "CUST-00284",
+    "amount": 3899.46,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-23T20:24:41.166481"
+  },
+  {
+    "checkout_id": "CH-0140",
+    "customer_id": "CUST-00252",
+    "amount": 1596.44,
+    "payment_method": "Points",
+    "timestamp": "2026-06-22T06:46:41.166481"
+  },
+  {
+    "checkout_id": "CH-0141",
+    "customer_id": "CUST-00226",
+    "amount": 4489.58,
+    "payment_method": "Card",
+    "timestamp": "2026-05-23T23:48:41.166481"
+  },
+  {
+    "checkout_id": "CH-0142",
+    "customer_id": "CUST-00245",
+    "amount": 1736.16,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-20T12:33:41.166481"
+  },
+  {
+    "checkout_id": "CH-0143",
+    "customer_id": "CUST-00028",
+    "amount": 2193.48,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-28T06:45:41.166481"
+  },
+  {
+    "checkout_id": "CH-0144",
+    "customer_id": "CUST-00128",
+    "amount": 1789.19,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-29T11:26:41.166481"
+  },
+  {
+    "checkout_id": "CH-0145",
+    "customer_id": "CUST-00116",
+    "amount": 9774.68,
+    "payment_method": "Card",
+    "timestamp": "2026-06-10T10:06:41.166481"
+  },
+  {
+    "checkout_id": "CH-0146",
+    "customer_id": "CUST-00220",
+    "amount": 4060.37,
+    "payment_method": "Card",
+    "timestamp": "2026-06-03T23:25:41.166481"
+  },
+  {
+    "checkout_id": "CH-0147",
+    "customer_id": "CUST-00051",
+    "amount": 11863.22,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-16T04:51:41.166481"
+  },
+  {
+    "checkout_id": "CH-0148",
+    "customer_id": "CUST-00042",
+    "amount": 2258.24,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-17T08:00:41.166481"
+  },
+  {
+    "checkout_id": "CH-0149",
+    "customer_id": "CUST-00210",
+    "amount": 5823.62,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-03T09:46:41.166481"
+  },
+  {
+    "checkout_id": "CH-0150",
+    "customer_id": "CUST-00148",
+    "amount": 8939.51,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-31T11:00:41.166481"
+  },
+  {
+    "checkout_id": "CH-0151",
+    "customer_id": "CUST-00136",
+    "amount": 9922.11,
+    "payment_method": "Card",
+    "timestamp": "2026-06-02T06:22:41.166481"
+  },
+  {
+    "checkout_id": "CH-0152",
+    "customer_id": "CUST-00102",
+    "amount": 5515.44,
+    "payment_method": "Points",
+    "timestamp": "2026-06-05T17:23:41.166481"
+  },
+  {
+    "checkout_id": "CH-0153",
+    "customer_id": "CUST-00137",
+    "amount": 10393.57,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-20T23:54:41.166481"
+  },
+  {
+    "checkout_id": "CH-0154",
+    "customer_id": "CUST-00292",
+    "amount": 11542.49,
+    "payment_method": "Points",
+    "timestamp": "2026-06-08T21:35:41.166481"
+  },
+  {
+    "checkout_id": "CH-0155",
+    "customer_id": "CUST-00207",
+    "amount": 11803.52,
+    "payment_method": "Card",
+    "timestamp": "2026-06-06T07:33:41.167122"
+  },
+  {
+    "checkout_id": "CH-0156",
+    "customer_id": "CUST-00021",
+    "amount": 11156.49,
+    "payment_method": "Card",
+    "timestamp": "2026-05-30T14:26:41.167122"
+  },
+  {
+    "checkout_id": "CH-0157",
+    "customer_id": "CUST-00047",
+    "amount": 3131.43,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-01T06:27:41.167122"
+  },
+  {
+    "checkout_id": "CH-0158",
+    "customer_id": "CUST-00138",
+    "amount": 7351.4,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-29T19:34:41.167122"
+  },
+  {
+    "checkout_id": "CH-0159",
+    "customer_id": "CUST-00227",
+    "amount": 11480.28,
+    "payment_method": "Card",
+    "timestamp": "2026-06-17T06:37:41.167122"
+  },
+  {
+    "checkout_id": "CH-0160",
+    "customer_id": "CUST-00252",
+    "amount": 12124.02,
+    "payment_method": "Card",
+    "timestamp": "2026-06-07T13:38:41.167122"
+  },
+  {
+    "checkout_id": "CH-0161",
+    "customer_id": "CUST-00054",
+    "amount": 10771.46,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-12T11:20:41.167122"
+  },
+  {
+    "checkout_id": "CH-0162",
+    "customer_id": "CUST-00206",
+    "amount": 10234.83,
+    "payment_method": "Card",
+    "timestamp": "2026-06-05T23:35:41.167122"
+  },
+  {
+    "checkout_id": "CH-0163",
+    "customer_id": "CUST-00130",
+    "amount": 4277.78,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-29T12:09:41.167122"
+  },
+  {
+    "checkout_id": "CH-0164",
+    "customer_id": "CUST-00001",
+    "amount": 8340.57,
+    "payment_method": "Card",
+    "timestamp": "2026-06-05T10:38:41.167122"
+  },
+  {
+    "checkout_id": "CH-0165",
+    "customer_id": "CUST-00266",
+    "amount": 4745.62,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-29T09:24:41.167122"
+  },
+  {
+    "checkout_id": "CH-0166",
+    "customer_id": "CUST-00027",
+    "amount": 2823.23,
+    "payment_method": "Card",
+    "timestamp": "2026-06-05T20:05:41.167122"
+  },
+  {
+    "checkout_id": "CH-0167",
+    "customer_id": "CUST-00249",
+    "amount": 1825.33,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-02T05:13:41.167122"
+  },
+  {
+    "checkout_id": "CH-0168",
+    "customer_id": "CUST-00082",
+    "amount": 4125.61,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-22T07:38:41.167122"
+  },
+  {
+    "checkout_id": "CH-0169",
+    "customer_id": "CUST-00059",
+    "amount": 5956.59,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-19T04:11:41.167122"
+  },
+  {
+    "checkout_id": "CH-0170",
+    "customer_id": "CUST-00150",
+    "amount": 6532.79,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-14T11:11:41.167122"
+  },
+  {
+    "checkout_id": "CH-0171",
+    "customer_id": "CUST-00242",
+    "amount": 3311.33,
+    "payment_method": "Card",
+    "timestamp": "2026-06-05T20:40:41.167122"
+  },
+  {
+    "checkout_id": "CH-0172",
+    "customer_id": "CUST-00261",
+    "amount": 9417.45,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-18T22:47:41.167122"
+  },
+  {
+    "checkout_id": "CH-0173",
+    "customer_id": "CUST-00213",
+    "amount": 4479.48,
+    "payment_method": "Points",
+    "timestamp": "2026-05-28T08:47:41.167122"
+  },
+  {
+    "checkout_id": "CH-0174",
+    "customer_id": "CUST-00145",
+    "amount": 9171.52,
+    "payment_method": "Points",
+    "timestamp": "2026-05-27T06:27:41.167122"
+  },
+  {
+    "checkout_id": "CH-0175",
+    "customer_id": "CUST-00251",
+    "amount": 10862.92,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-08T07:34:41.167122"
+  },
+  {
+    "checkout_id": "CH-0176",
+    "customer_id": "CUST-00283",
+    "amount": 9618.9,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-10T10:05:41.167122"
+  },
+  {
+    "checkout_id": "CH-0177",
+    "customer_id": "CUST-00097",
+    "amount": 12266.41,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-15T06:40:41.167122"
+  },
+  {
+    "checkout_id": "CH-0178",
+    "customer_id": "CUST-00211",
+    "amount": 880.31,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-30T09:19:41.167122"
+  },
+  {
+    "checkout_id": "CH-0179",
+    "customer_id": "CUST-00196",
+    "amount": 5040.86,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-01T04:55:41.167122"
+  },
+  {
+    "checkout_id": "CH-0180",
+    "customer_id": "CUST-00019",
+    "amount": 1883.89,
+    "payment_method": "Card",
+    "timestamp": "2026-05-23T06:43:41.167122"
+  },
+  {
+    "checkout_id": "CH-0181",
+    "customer_id": "CUST-00226",
+    "amount": 1561.5,
+    "payment_method": "Points",
+    "timestamp": "2026-05-24T11:04:41.167122"
+  },
+  {
+    "checkout_id": "CH-0182",
+    "customer_id": "CUST-00210",
+    "amount": 10931.84,
+    "payment_method": "Card",
+    "timestamp": "2026-06-18T22:34:41.167122"
+  },
+  {
+    "checkout_id": "CH-0183",
+    "customer_id": "CUST-00136",
+    "amount": 4463.52,
+    "payment_method": "Points",
+    "timestamp": "2026-05-31T12:23:41.167122"
+  },
+  {
+    "checkout_id": "CH-0184",
+    "customer_id": "CUST-00169",
+    "amount": 10705.95,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-26T07:40:41.167122"
+  },
+  {
+    "checkout_id": "CH-0185",
+    "customer_id": "CUST-00250",
+    "amount": 10949.45,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-21T06:00:41.167122"
+  },
+  {
+    "checkout_id": "CH-0186",
+    "customer_id": "CUST-00148",
+    "amount": 12468.72,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-30T22:37:41.167122"
+  },
+  {
+    "checkout_id": "CH-0187",
+    "customer_id": "CUST-00052",
+    "amount": 5740.69,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-31T15:07:41.167122"
+  },
+  {
+    "checkout_id": "CH-0188",
+    "customer_id": "CUST-00167",
+    "amount": 10023.14,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-13T13:41:41.167122"
+  },
+  {
+    "checkout_id": "CH-0189",
+    "customer_id": "CUST-00126",
+    "amount": 6803.67,
+    "payment_method": "Card",
+    "timestamp": "2026-06-04T03:14:41.167122"
+  },
+  {
+    "checkout_id": "CH-0190",
+    "customer_id": "CUST-00090",
+    "amount": 1309.47,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-26T12:25:41.167122"
+  },
+  {
+    "checkout_id": "CH-0191",
+    "customer_id": "CUST-00255",
+    "amount": 11440.87,
+    "payment_method": "Card",
+    "timestamp": "2026-06-18T17:35:41.167122"
+  },
+  {
+    "checkout_id": "CH-0192",
+    "customer_id": "CUST-00236",
+    "amount": 3452.22,
+    "payment_method": "Card",
+    "timestamp": "2026-06-22T10:07:41.167122"
+  },
+  {
+    "checkout_id": "CH-0193",
+    "customer_id": "CUST-00280",
+    "amount": 2269.4,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-08T13:27:41.167122"
+  },
+  {
+    "checkout_id": "CH-0194",
+    "customer_id": "CUST-00218",
+    "amount": 8737.31,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-08T15:52:41.167122"
+  },
+  {
+    "checkout_id": "CH-0195",
+    "customer_id": "CUST-00248",
+    "amount": 1645.84,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-10T06:42:41.167122"
+  },
+  {
+    "checkout_id": "CH-0196",
+    "customer_id": "CUST-00152",
+    "amount": 616.57,
+    "payment_method": "Card",
+    "timestamp": "2026-05-27T03:39:41.167122"
+  },
+  {
+    "checkout_id": "CH-0197",
+    "customer_id": "CUST-00290",
+    "amount": 10860.57,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-29T02:01:41.167122"
+  },
+  {
+    "checkout_id": "CH-0198",
+    "customer_id": "CUST-00255",
+    "amount": 10468.99,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-25T15:15:41.167122"
+  },
+  {
+    "checkout_id": "CH-0199",
+    "customer_id": "CUST-00181",
+    "amount": 3010.91,
+    "payment_method": "Points",
+    "timestamp": "2026-06-16T05:48:41.167122"
+  },
+  {
+    "checkout_id": "CH-0200",
+    "customer_id": "CUST-00071",
+    "amount": 7983.21,
+    "payment_method": "Card",
+    "timestamp": "2026-05-25T04:23:41.167122"
+  },
+  {
+    "checkout_id": "CH-0201",
+    "customer_id": "CUST-00226",
+    "amount": 755.38,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-11T01:56:41.167122"
+  },
+  {
+    "checkout_id": "CH-0202",
+    "customer_id": "CUST-00152",
+    "amount": 4319.64,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-09T19:52:41.167122"
+  },
+  {
+    "checkout_id": "CH-0203",
+    "customer_id": "CUST-00277",
+    "amount": 10999.0,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-11T08:32:41.167122"
+  },
+  {
+    "checkout_id": "CH-0204",
+    "customer_id": "CUST-00085",
+    "amount": 3472.19,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-27T09:13:41.168121"
+  },
+  {
+    "checkout_id": "CH-0205",
+    "customer_id": "CUST-00174",
+    "amount": 10121.43,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-08T22:55:41.168121"
+  },
+  {
+    "checkout_id": "CH-0206",
+    "customer_id": "CUST-00116",
+    "amount": 10800.71,
+    "payment_method": "Points",
+    "timestamp": "2026-05-30T03:39:41.168121"
+  },
+  {
+    "checkout_id": "CH-0207",
+    "customer_id": "CUST-00286",
+    "amount": 4794.17,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-28T13:04:41.168121"
+  },
+  {
+    "checkout_id": "CH-0208",
+    "customer_id": "CUST-00064",
+    "amount": 5875.65,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-01T01:21:41.168121"
+  },
+  {
+    "checkout_id": "CH-0209",
+    "customer_id": "CUST-00196",
+    "amount": 10342.37,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-23T13:58:41.168121"
+  },
+  {
+    "checkout_id": "CH-0210",
+    "customer_id": "CUST-00242",
+    "amount": 654.05,
+    "payment_method": "Card",
+    "timestamp": "2026-05-25T07:44:41.168121"
+  },
+  {
+    "checkout_id": "CH-0211",
+    "customer_id": "CUST-00114",
+    "amount": 8218.98,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-02T10:06:41.168121"
+  },
+  {
+    "checkout_id": "CH-0212",
+    "customer_id": "CUST-00210",
+    "amount": 1767.61,
+    "payment_method": "Card",
+    "timestamp": "2026-06-21T23:45:41.168121"
+  },
+  {
+    "checkout_id": "CH-0213",
+    "customer_id": "CUST-00060",
+    "amount": 1530.88,
+    "payment_method": "Coupons",
+    "timestamp": "2026-05-25T07:56:41.168121"
+  },
+  {
+    "checkout_id": "CH-0214",
+    "customer_id": "CUST-00190",
+    "amount": 8496.41,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-30T02:30:41.168121"
+  },
+  {
+    "checkout_id": "CH-0215",
+    "customer_id": "CUST-00080",
+    "amount": 11107.78,
+    "payment_method": "Card",
+    "timestamp": "2026-06-02T21:11:41.168121"
+  },
+  {
+    "checkout_id": "CH-0216",
+    "customer_id": "CUST-00209",
+    "amount": 11759.49,
+    "payment_method": "Card",
+    "timestamp": "2026-06-14T23:20:41.168121"
+  },
+  {
+    "checkout_id": "CH-0217",
+    "customer_id": "CUST-00228",
+    "amount": 5753.05,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-15T13:58:41.168121"
+  },
+  {
+    "checkout_id": "CH-0218",
+    "customer_id": "CUST-00189",
+    "amount": 6965.26,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-02T14:01:41.168121"
+  },
+  {
+    "checkout_id": "CH-0219",
+    "customer_id": "CUST-00098",
+    "amount": 12113.71,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-23T10:59:41.168121"
+  },
+  {
+    "checkout_id": "CH-0220",
+    "customer_id": "CUST-00011",
+    "amount": 964.53,
+    "payment_method": "Card",
+    "timestamp": "2026-06-12T17:56:41.168121"
+  },
+  {
+    "checkout_id": "CH-0221",
+    "customer_id": "CUST-00106",
+    "amount": 1183.61,
+    "payment_method": "Points",
+    "timestamp": "2026-05-29T07:51:41.168121"
+  },
+  {
+    "checkout_id": "CH-0222",
+    "customer_id": "CUST-00120",
+    "amount": 4342.0,
+    "payment_method": "Card",
+    "timestamp": "2026-06-18T06:04:41.168121"
+  },
+  {
+    "checkout_id": "CH-0223",
+    "customer_id": "CUST-00075",
+    "amount": 12348.46,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-05T16:13:41.168121"
+  },
+  {
+    "checkout_id": "CH-0224",
+    "customer_id": "CUST-00014",
+    "amount": 1951.41,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-11T17:27:41.168121"
+  },
+  {
+    "checkout_id": "CH-0225",
+    "customer_id": "CUST-00090",
+    "amount": 3574.22,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-18T01:38:41.168121"
+  },
+  {
+    "checkout_id": "CH-0226",
+    "customer_id": "CUST-00033",
+    "amount": 6136.39,
+    "payment_method": "Card",
+    "timestamp": "2026-05-29T13:32:41.168121"
+  },
+  {
+    "checkout_id": "CH-0227",
+    "customer_id": "CUST-00232",
+    "amount": 6471.64,
+    "payment_method": "Card",
+    "timestamp": "2026-05-23T06:02:41.168121"
+  },
+  {
+    "checkout_id": "CH-0228",
+    "customer_id": "CUST-00267",
+    "amount": 4014.81,
+    "payment_method": "Card",
+    "timestamp": "2026-06-03T01:01:41.168121"
+  },
+  {
+    "checkout_id": "CH-0229",
+    "customer_id": "CUST-00206",
+    "amount": 5529.22,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-19T09:19:41.168121"
+  },
+  {
+    "checkout_id": "CH-0230",
+    "customer_id": "CUST-00038",
+    "amount": 11276.09,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-12T05:55:41.168121"
+  },
+  {
+    "checkout_id": "CH-0231",
+    "customer_id": "CUST-00141",
+    "amount": 7935.46,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-04T07:19:41.168121"
+  },
+  {
+    "checkout_id": "CH-0232",
+    "customer_id": "CUST-00272",
+    "amount": 3933.01,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-06T05:37:41.168121"
+  },
+  {
+    "checkout_id": "CH-0233",
+    "customer_id": "CUST-00059",
+    "amount": 10711.43,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-02T07:18:41.168121"
+  },
+  {
+    "checkout_id": "CH-0234",
+    "customer_id": "CUST-00221",
+    "amount": 5836.39,
+    "payment_method": "Points",
+    "timestamp": "2026-06-15T11:43:41.168121"
+  },
+  {
+    "checkout_id": "CH-0235",
+    "customer_id": "CUST-00205",
+    "amount": 5404.27,
+    "payment_method": "Points",
+    "timestamp": "2026-06-19T14:37:41.168121"
+  },
+  {
+    "checkout_id": "CH-0236",
+    "customer_id": "CUST-00131",
+    "amount": 4897.76,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-18T03:05:41.168121"
+  },
+  {
+    "checkout_id": "CH-0237",
+    "customer_id": "CUST-00047",
+    "amount": 10456.03,
+    "payment_method": "Card",
+    "timestamp": "2026-06-20T11:58:41.168121"
+  },
+  {
+    "checkout_id": "CH-0238",
+    "customer_id": "CUST-00191",
+    "amount": 10213.0,
+    "payment_method": "Card",
+    "timestamp": "2026-06-05T23:27:41.168121"
+  },
+  {
+    "checkout_id": "CH-0239",
+    "customer_id": "CUST-00288",
+    "amount": 4355.2,
+    "payment_method": "Coupons",
+    "timestamp": "2026-06-19T11:42:41.168121"
+  },
+  {
+    "checkout_id": "CH-0240",
+    "customer_id": "CUST-00217",
+    "amount": 10897.32,
+    "payment_method": "Points",
+    "timestamp": "2026-05-30T23:46:41.168121"
+  },
+  {
+    "checkout_id": "CH-0241",
+    "customer_id": "CUST-00181",
+    "amount": 1608.75,
+    "payment_method": "Card",
+    "timestamp": "2026-06-06T18:55:41.168121"
+  },
+  {
+    "checkout_id": "CH-0242",
+    "customer_id": "CUST-00115",
+    "amount": 10644.39,
+    "payment_method": "Card",
+    "timestamp": "2026-06-11T07:41:41.168121"
+  },
+  {
+    "checkout_id": "CH-0243",
+    "customer_id": "CUST-00143",
+    "amount": 7325.32,
+    "payment_method": "Cash",
+    "timestamp": "2026-05-28T11:10:41.168121"
+  },
+  {
+    "checkout_id": "CH-0244",
+    "customer_id": "CUST-00286",
+    "amount": 668.98,
+    "payment_method": "Card",
+    "timestamp": "2026-05-24T03:11:41.168121"
+  },
+  {
+    "checkout_id": "CH-0245",
+    "customer_id": "CUST-00015",
+    "amount": 2542.06,
+    "payment_method": "Card",
+    "timestamp": "2026-05-31T15:06:41.168121"
+  },
+  {
+    "checkout_id": "CH-0246",
+    "customer_id": "CUST-00004",
+    "amount": 2554.08,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-18T06:22:41.168121"
+  },
+  {
+    "checkout_id": "CH-0247",
+    "customer_id": "CUST-00073",
+    "amount": 9352.77,
+    "payment_method": "Card",
+    "timestamp": "2026-06-22T22:17:41.168121"
+  },
+  {
+    "checkout_id": "CH-0248",
+    "customer_id": "CUST-00193",
+    "amount": 5450.96,
+    "payment_method": "Card",
+    "timestamp": "2026-06-12T19:41:41.168121"
+  },
+  {
+    "checkout_id": "CH-0249",
+    "customer_id": "CUST-00167",
+    "amount": 9788.55,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-04T05:59:41.168121"
+  },
+  {
+    "checkout_id": "CH-0250",
+    "customer_id": "CUST-00080",
+    "amount": 2262.53,
+    "payment_method": "Points",
+    "timestamp": "2026-06-03T23:21:41.168121"
+  },
+  {
+    "checkout_id": "CH-0251",
+    "customer_id": "GUEST",
+    "amount": 2377.0,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-23T01:06:59.999747"
+  },
+  {
+    "checkout_id": "CH-0252",
+    "customer_id": "CUST-DEMO",
+    "amount": 1537.0,
+    "payment_method": "Card",
+    "timestamp": "2026-06-23T01:07:24.167361"
+  },
+  {
+    "checkout_id": "CH-0253",
+    "customer_id": "CUST-DEMO",
+    "amount": 1397.0,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-23T01:12:54.655700"
+  },
+  {
+    "checkout_id": "CH-0254",
+    "customer_id": "CUST-DEMO",
+    "amount": 2517.0,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-23T04:34:24.599915"
+  },
+  {
+    "checkout_id": "CH-0255",
+    "customer_id": "CUST-00001",
+    "amount": 100.0,
+    "payment_method": "Points",
+    "timestamp": "2026-06-23T05:48:00.145072"
+  },
+  {
+    "checkout_id": "CH-0256",
+    "customer_id": "CUST-00001",
+    "amount": 100.0,
+    "payment_method": "Points",
+    "timestamp": "2026-06-23T14:52:49.015187"
+  },
+  {
+    "checkout_id": "CH-0257",
+    "customer_id": "CUST-DEMO",
+    "amount": 1450.0,
+    "payment_method": "Cash",
+    "timestamp": "2026-06-23T18:47:20.903319"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "emp_id": "EMP-001",
+    "name": "Ali Raza",
+    "role": "Manager",
+    "status": "Active"
+  },
+  {
+    "emp_id": "EMP-002",
+    "name": "Sana Khan",
+    "role": "Cashier",
+    "status": "Active"
+  },
+  {
+    "emp_id": "EMP-003",
+    "name": "Bilal Ahmed",
+    "role": "Stocker",
+    "status": "On Break"
+  },
+  {
+    "emp_id": "EMP-004",
+    "name": "Ayesha Siddiqui",
+    "role": "Security",
+    "status": "Active"
+  },
+  {
+    "emp_id": "EMP-005",
+    "name": "Zainab Fatima",
+    "role": "Cashier",
+    "status": "Clocked Out"
+  },
+  {
+    "emp_id": "EMP-006",
+    "name": "Hamza Yusuf",
+    "role": "Stocker",
+    "status": "Active"
+  },
+  {
+    "emp_id": "EMP-007",
+    "name": "Mariam Tariq",
+    "role": "Security",
+    "status": "Clocked Out"
+  },
+  {
+    "emp_id": "EMP-008",
+    "name": "Osman Lodhi",
+    "role": "Cashier",
+    "status": "Active"
+  },
+  {
+    "emp_id": "EMP-009",
+    "name": "Fiza Batool",
+    "role": "Manager",
+    "status": "On Break"
+  },
+  {
+    "emp_id": "EMP-010",
+    "name": "Mustafa Qureshi",
+    "role": "Stocker",
+    "status": "Active"
+  }
+]
