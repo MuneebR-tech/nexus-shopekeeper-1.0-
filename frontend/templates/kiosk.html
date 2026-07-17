@@ -472,17 +472,30 @@
        MOBILE SYNC QR MODAL
        ═══════════════════════════════════════════════════════════════ -->
   <div class="modal-overlay" id="qr-modal-overlay">
-    <div class="modal glass-card" id="qr-modal" style="max-width: 360px; width: 90%; text-align: center;">
+    <div class="modal glass-card" id="qr-modal" style="max-width: 400px; width: 92%; text-align: center; border: 1px solid var(--cyber-teal);">
       <div class="modal-header">
-        <h2 style="font-size: 18px; font-weight: 700;" data-translate="mobile_sync">Sync Kiosk to Mobile</h2>
+        <h2 style="font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px;" data-translate="mobile_sync">📱 Sync Kiosk to Mobile</h2>
         <button class="modal-close" id="qr-modal-close">✕</button>
       </div>
-      <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding-bottom: 20px;">
-        <p class="body-xs text-secondary" style="font-size:12px; line-height: 1.4;" data-translate="qr_instructions">Scan this QR code with your phone camera to take your cart, aisle coordinates, and customer profile on the go!</p>
-        <img id="mobile-sync-qr" src="" width="180" height="180" style="background: white; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: block;" alt="Sync QR Code" />
-        <span style="font-size: 11px; font-weight: 700; color: var(--cyber-teal);" id="mart-network-ip-label" data-translate="server_ip">Mart Network IP: 192.168.10.85:8000</span>
-      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding-bottom: 20px;">
+        <p class="body-xs text-secondary" style="font-size:12px; line-height: 1.4;" data-translate="qr_instructions">Scan with your phone camera to transfer your active cart, coordinates & discounts onto your mobile screen!</p>
+        
+        <div id="qr-image-container" style="background: white; padding: 14px; border-radius: var(--radius-lg); box-shadow: 0 4px 16px rgba(0,0,0,0.3); position: relative; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;">
+          <img id="mobile-sync-qr" src="" width="176" height="176" style="display: block;" alt="Sync QR Code" />
+          <div id="qr-fallback-text" style="display: none; color: #000; font-size: 11px; font-weight: bold; text-align: center;">📲 Mobile Companion<br>Ready to Sync</div>
+        </div>
 
+        <span style="font-size: 11px; font-weight: 700; color: var(--cyber-teal);" id="mart-network-ip-label" data-translate="server_ip">Mart Network IP: 192.168.10.85:8000</span>
+        
+        <div style="width: 100%; border-top: 1px dashed var(--border-subtle); padding-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+          <button class="btn btn-primary btn-sm" onclick="window.kioskApp?.openMobileCompanionView()" style="width: 100%; justify-content: center; background: var(--cosmic-indigo); font-weight: bold;">
+            📲 Open Mobile Companion Screen (Simulate Scan)
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="window.kioskApp?.simulateBarcodeCameraScan()" style="width: 100%; justify-content: center; border-color: var(--cyber-gold); color: var(--cyber-gold); font-weight: bold;">
+            📷 Simulate Product Barcode Scan
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

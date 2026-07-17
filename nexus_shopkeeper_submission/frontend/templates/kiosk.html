@@ -33,66 +33,105 @@
     </div>
     
     <div class="welcome-content">
-      <div class="welcome-logo-ring">
-        <span class="welcome-logo-icon">🏪</span>
+      <div class="welcome-logo-ring" style="width: 100px; height: 100px; font-size: 3.2rem;">
+        <span class="welcome-logo-icon">✨</span>
       </div>
-      <h1 class="welcome-title" data-translate="welcome_title">نیکس شاپ کیپر</h1>
-      <p class="welcome-subtitle" data-translate="welcome_subtitle">پاکستان کا سب سے ذہین اور خودکار ریٹیل کیوسک</p>
+      <h1 class="welcome-title" data-translate="welcome_title" style="font-size: 2.8rem; margin-bottom: 8px;">نیکس شاپ کیپر</h1>
+      <p class="welcome-subtitle" data-translate="welcome_subtitle" style="font-size: 1.2rem; color: #e2e8f0;">پاکستان کا سب سے دوستانہ اور اسمارٹ خودکار ریٹیل کیوسک</p>
       <div class="welcome-divider"></div>
       
       <div class="welcome-actions" style="flex-direction: column; align-items: center; gap: 16px;">
-        <button id="btn-enter-mart" class="btn btn-primary btn-xl" style="width: 340px; justify-content: center;" data-translate="enter_mart_btn">
-          <span class="btn-icon">🛒</span>
+        <button id="btn-enter-mart" class="btn btn-primary btn-xl" style="width: 360px; justify-content: center; box-shadow: 0 10px 25px rgba(88,101,242,0.4);" data-translate="enter_mart_btn">
+          <span class="btn-icon">🛍️</span>
           <span class="btn-label">داخل ہوں (چیک ان)</span>
         </button>
-        <button id="btn-exit-mart" class="btn btn-outline btn-xl" style="width: 340px; justify-content: center; backdrop-filter: blur(8px);" data-translate="exit_mart_btn">
+        <button id="btn-exit-mart" class="btn btn-outline btn-xl" style="width: 360px; justify-content: center; backdrop-filter: blur(8px); border-color: var(--emerald-green); color: var(--emerald-green);" data-translate="exit_mart_btn">
           <span class="btn-icon">💳</span>
           <span class="btn-label">ادائیگی کریں (چیک آؤٹ)</span>
         </button>
       </div>
-      <p class="welcome-footer-note" data-translate="footer_note">شروع کرنے کے لیے ایک آپشن کو چھوئیں. کوئی انسانی کیشئیر لائن نہیں، 100٪ خودکار۔</p>
+      
+      <div class="human-login-cards" style="margin-top: 32px; width: 100%; max-width: 580px; background: rgba(30, 34, 48, 0.85); border: 1px solid rgba(88, 101, 242, 0.35); border-radius: 16px; padding: 20px; text-align: center; backdrop-filter: blur(12px); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+        <h3 style="font-size: 0.95rem; color: #fff; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <span>✨ Quick Human Check-In (Tap a profile to sign in instantly)</span>
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+          <button class="quick-user-btn" onclick="window.kioskApp?.quickSignIn('CUST-DEMO', 'Zeeshan Malik', 'Platinum VIP', 4800, '111111')" style="background: rgba(88, 101, 242, 0.2); border: 1px solid #5865f2; border-radius: 12px; padding: 14px 10px; color: white; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+            <span style="font-size: 1.8rem;">🤴</span>
+            <strong style="font-size: 0.9rem;">Zeeshan Malik</strong>
+            <span style="font-size: 0.75rem; color: #c084fc;">Platinum • Rs. 4,800</span>
+          </button>
+          <button class="quick-user-btn" onclick="window.kioskApp?.quickSignIn('CUST-002', 'Ayesha Khan', 'Gold Member', 2500, '222222')" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 12px; padding: 14px 10px; color: white; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+            <span style="font-size: 1.8rem;">🧕</span>
+            <strong style="font-size: 0.9rem;">Ayesha Khan</strong>
+            <span style="font-size: 0.75rem; color: #34d399;">Gold • Rs. 2,500</span>
+          </button>
+          <button class="quick-user-btn" onclick="window.kioskApp?.quickSignIn('EMP-MGR', 'Ahmed Ali', 'Store Manager', 9999, '999999')" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; border-radius: 12px; padding: 14px 10px; color: white; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+            <span style="font-size: 1.8rem;">👨‍💼</span>
+            <strong style="font-size: 0.9rem;">Store Manager</strong>
+            <span style="font-size: 0.75rem; color: #fbbf24;">Staff Admin Access</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="welcome-footer-note" style="margin-top: 18px;" data-translate="footer_note">شروع کرنے کے لیے ایک آپشن کو چھوئیں. کوئی انسانی کیشئیر لائن نہیں، 100٪ خودکار۔</p>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       VIEW 1 — WELCOME SCREEN (Premium Ask)
+       VIEW 1 — WELCOME SCREEN (Warm Membership & Role Selection)
        ═══════════════════════════════════════════════════════════════ -->
   <section id="welcome-screen" class="screen">
     <div class="welcome-bg-anim"></div>
     <div class="welcome-content">
       <div class="welcome-logo-ring">
-        <span class="welcome-logo-icon">💳</span>
+        <span class="welcome-logo-icon">🌟</span>
       </div>
-      <h1 class="welcome-title" data-translate="loyalty_title">وفاداری کی تصدیق</h1>
-      <p class="welcome-subtitle" data-translate="loyalty_subtitle">ذاتی ڈسکاؤنٹ اور کریڈٹ کی حد لاگو کرنے کے لیے اپنی شناخت کروائیں</p>
+      <h1 class="welcome-title" data-translate="loyalty_title">خوش آمدید! اپنی شناخت کروائیں</h1>
+      <p class="welcome-subtitle" data-translate="loyalty_subtitle">ذاتی رعایتی ڈسکاؤنٹ، لائلٹی پوائنٹس اور اسٹور کریڈٹ حاصل کرنے کے لیے سائن ان کریں</p>
       <div class="welcome-divider"></div>
-      <h2 class="welcome-question" data-translate="loyalty_question">کیا آپ کے پاس پریمیم ممبرشپ کارڈ ہے؟</h2>
+      <h2 class="welcome-question" data-translate="loyalty_question">کیا آپ کے پاس پریمیم ممبرشپ پن یا کارڈ ہے؟</h2>
       
       <div class="welcome-actions">
         <button id="btn-has-card" class="btn btn-primary btn-xl" data-translate="yes_pin_btn">
           <span class="btn-icon">🔑</span>
-          <span class="btn-label">جی ہاں، میرے پاس پن ہے</span>
+          <span class="btn-label">جی ہاں، پن کوڈ درج کریں</span>
         </button>
         <button id="btn-guest" class="btn btn-outline btn-xl" data-translate="guest_btn">
           <span class="btn-icon">👤</span>
-          <span class="btn-label">مہمان صارف کے طور پر جاری رکھیں</span>
+          <span class="btn-label">بطور مہمان (Guest) خریداری کریں</span>
         </button>
       </div>
+
+      <div class="human-login-cards" style="margin-top: 32px; width: 100%; max-width: 560px; background: rgba(30, 34, 48, 0.85); border: 1px solid rgba(88, 101, 242, 0.35); border-radius: 16px; padding: 18px; text-align: center; backdrop-filter: blur(12px);">
+        <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 12px;">⚡ یا براہ راست ایک کلک سے سائن ان کریں:</p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+          <button class="quick-user-btn" onclick="window.kioskApp?.quickSignIn('CUST-DEMO', 'Zeeshan Malik', 'Platinum VIP', 4800, '111111')" style="background: rgba(88, 101, 242, 0.2); border: 1px solid #5865f2; border-radius: 10px; padding: 10px; color: white; cursor: pointer;">
+            <strong>🤴 Zeeshan Malik</strong><br><span style="font-size: 0.75rem; color: #c084fc;">Platinum VIP</span>
+          </button>
+          <button class="quick-user-btn" onclick="window.kioskApp?.quickSignIn('CUST-002', 'Ayesha Khan', 'Gold Member', 2500, '222222')" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; border-radius: 10px; padding: 10px; color: white; cursor: pointer;">
+            <strong>🧕 Ayesha Khan</strong><br><span style="font-size: 0.75rem; color: #34d399;">Gold Member</span>
+          </button>
+          <button class="quick-user-btn" onclick="window.kioskApp?.quickSignIn('EMP-MGR', 'Ahmed Ali', 'Store Manager', 9999, '999999')" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; color: white; cursor: pointer;">
+            <strong>👨‍💼 Store Manager</strong><br><span style="font-size: 0.75rem; color: #fbbf24;">Admin Portal</span>
+          </button>
+        </div>
+      </div>
       
-      <button class="btn-link" id="btn-welcome-back" style="margin-top: 36px; display: block; margin-left: auto; margin-right: auto;" data-translate="back_entry_btn">
+      <button class="btn-link" id="btn-welcome-back" style="margin-top: 24px; display: block; margin-left: auto; margin-right: auto;" data-translate="back_entry_btn">
         ← واپس شروع پر جائیں
       </button>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       VIEW 2 — MEMBERSHIP KEYPAD
+       VIEW 2 — MEMBERSHIP KEYPAD (Warm Human Sign-in)
        ═══════════════════════════════════════════════════════════════ -->
   <section id="keypad-screen" class="screen">
     <div class="keypad-wrapper">
       <div class="keypad-header">
         <h2 class="keypad-title" data-translate="enter_pin_title">اپنا 6 ہندسوں کا پن درج کریں</h2>
-        <p class="keypad-subtitle" data-translate="enter_pin_subtitle">اپنا ایکٹو پروفائل حاصل کرنے کے لیے پن کوڈ درج کریں</p>
+        <p class="keypad-subtitle" data-translate="enter_pin_subtitle">اپنا ایکٹو پروفائل اور کریڈٹ حاصل کرنے کے لیے پن درج کریں</p>
       </div>
 
       <div class="pin-display" id="pin-display">
@@ -120,8 +159,20 @@
         <button class="keypad-btn keypad-btn--backspace" data-key="backspace">⌫</button>
       </div>
 
-      <button class="btn btn-primary btn-lg keypad-submit" id="keypad-submit" data-translate="verify_pin_btn">تصدیق کریں پن →</button>
-      <button class="btn-link keypad-cancel" id="keypad-cancel" data-translate="cancel_btn">← منسوخ کریں اور واپس جائیں</button>
+      <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; width: 100%;">
+        <button class="btn btn-primary btn-lg keypad-submit" id="keypad-submit" style="flex: 1;" data-translate="verify_pin_btn">تصدیق کریں پن →</button>
+      </div>
+
+      <div class="human-login-cards" style="margin-top: 20px; width: 100%; background: rgba(30, 34, 48, 0.85); border: 1px solid rgba(88, 101, 242, 0.35); border-radius: 14px; padding: 14px; text-align: center;">
+        <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px;">✨ ڈیمو پن کوڈز: Zeeshan (111111) • Ayesha (222222) • Manager (999999)</p>
+        <div style="display: flex; gap: 8px; justify-content: center;">
+          <button onclick="window.kioskApp?.quickSignIn('CUST-DEMO', 'Zeeshan Malik', 'Platinum VIP', 4800, '111111')" class="btn btn-sm" style="background: var(--cosmic-indigo); color: white;">🤴 Zeeshan</button>
+          <button onclick="window.kioskApp?.quickSignIn('CUST-002', 'Ayesha Khan', 'Gold Member', 2500, '222222')" class="btn btn-sm" style="background: var(--emerald-green); color: white;">🧕 Ayesha</button>
+          <button onclick="window.kioskApp?.quickSignIn('EMP-MGR', 'Ahmed Ali', 'Store Manager', 9999, '999999')" class="btn btn-sm" style="background: var(--cyber-gold); color: black; font-weight: bold;">👨‍💼 Manager</button>
+        </div>
+      </div>
+
+      <button class="btn-link keypad-cancel" id="keypad-cancel" style="margin-top: 16px;" data-translate="cancel_btn">← منسوخ کریں اور واپس جائیں</button>
     </div>
   </section>
 
@@ -178,12 +229,12 @@
       <!-- CENTER CONTENT -->
       <main class="center-content" id="center-content">
         <!-- Headcount / Statistics bar -->
-        <div class="glass-card" style="margin-bottom: var(--space-md); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-left: 3px solid var(--cyber-teal);">
-          <span style="font-size: 14px; font-weight: 500; display: flex; items-center; gap: 8px;">
-            🤖 <span id="staff-count-indicator" data-translate="staff_count">Mart operated by 10 active automation technicians.</span>
+        <div class="glass-card" style="margin-bottom: var(--space-md); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--cosmic-indigo); background: rgba(30, 34, 48, 0.75);">
+          <span style="font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px;">
+            ✨ <span id="staff-count-indicator" data-translate="staff_count">Smart Mart Active — Operated by 10 active staff & AI automation assistants.</span>
           </span>
-          <span style="font-size: 12px; color: var(--text-secondary); font-weight: 600;" data-translate="staff_reduction">
-            📉 Staff headcount reduced by 85% via automated IoT storage.
+          <span style="font-size: 12px; color: #c084fc; font-weight: 600;" data-translate="staff_reduction">
+            🤝 Frictionless Checkout & Smart IoT Shelf Assistance
           </span>
         </div>
 

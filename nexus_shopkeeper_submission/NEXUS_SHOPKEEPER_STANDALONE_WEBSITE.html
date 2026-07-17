@@ -145,10 +145,8 @@
             <button class="tab-btn active" onclick="switchTab('kiosk')">🖥️ Kiosk Portal</button>
             <button class="tab-btn" onclick="switchTab('dashboard')">🔐 Admin Dashboard & Analytics</button>
         </div>
-        <div style="display: flex; gap: 8px;">
+        <div>
             <button class="lang-btn" onclick="toggleLang()" id="lang-toggle">🌐 اردو / English</button>
-            <button class="lang-btn" onclick="openQrModal()" style="background: var(--cosmic-indigo);">📱 Mobile Sync & QR</button>
-            <button class="lang-btn" onclick="simulateScan()" style="background: var(--cyber-gold); color: #000;">📷 Scan Barcode</button>
         </div>
     </div>
 
@@ -562,62 +560,8 @@
             setTimeout(() => { t.style.display = 'none'; }, 3500);
         }
 
-        // QR Code & Barcode Scan Modal Logic
-        function openQrModal() {
-            const modal = document.getElementById('qr-modal-container');
-            const qrImg = document.getElementById('standalone-qr-img');
-            const fallback = document.getElementById('standalone-qr-fallback');
-            const url = window.location.href;
-            if (qrImg) {
-                qrImg.onerror = () => { qrImg.style.display = 'none'; if (fallback) fallback.style.display = 'block'; };
-                qrImg.onload = () => { qrImg.style.display = 'block'; if (fallback) fallback.style.display = 'none'; };
-                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(url)}`;
-            }
-            if (modal) modal.style.display = 'flex';
-        }
-
-        function closeQrModal() {
-            const modal = document.getElementById('qr-modal-container');
-            if (modal) modal.style.display = 'none';
-        }
-
-        function simulateCompanion() {
-            closeQrModal();
-            playChime('success');
-            showToast('📱 Mobile Companion Connected! Your phone screen is now synced with Kiosk Session.');
-        }
-
-        function simulateScan() {
-            closeQrModal();
-            playChime('beep');
-            const randomItem = products[Math.floor(Math.random() * products.length)];
-            if (randomItem) {
-                addToCart(randomItem.id);
-                showToast(`📷 Barcode Scanned: Added ${randomItem.name} directly to your cart!`);
-            }
-        }
-
         // Initial Load
         renderProducts();
     </script>
-
-    <!-- QR & Scanner Modal -->
-    <div id="qr-modal-container" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(6px);">
-        <div style="background: var(--surface-card); border: 1px solid var(--cosmic-indigo); border-radius: 16px; padding: 24px; max-width: 420px; width: 90%; text-align: center; position: relative;">
-            <button onclick="closeQrModal()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer;">✕</button>
-            <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 10px;">📱 Sync Kiosk to Mobile</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">Scan this QR code with your smartphone camera to transfer your active shopping cart & session onto your mobile screen!</p>
-            
-            <div style="background: white; padding: 16px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; width: 200px; height: 200px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
-                <img id="standalone-qr-img" src="" width="170" height="170" alt="Mobile QR Code">
-                <div id="standalone-qr-fallback" style="display: none; color: #000; font-size: 0.8rem; font-weight: bold;">📲 Mobile Companion<br>Active & Ready</div>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 10px; border-top: 1px dashed var(--border); padding-top: 16px;">
-                <button onclick="simulateCompanion()" style="background: var(--cosmic-indigo); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer;">📲 Open Mobile Companion Screen</button>
-                <button onclick="simulateScan()" style="background: var(--cyber-gold); color: #000; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer;">📷 Simulate Barcode Product Scan</button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

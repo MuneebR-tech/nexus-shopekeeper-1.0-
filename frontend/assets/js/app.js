@@ -1437,6 +1437,15 @@ class KioskApp {
 
     syncURL += '?' + params.join('&');
 
+    const fallbackText = document.getElementById('qr-fallback-text');
+    this.mobileSyncQr.onerror = () => {
+      this.mobileSyncQr.style.display = 'none';
+      if (fallbackText) fallbackText.style.display = 'block';
+    };
+    this.mobileSyncQr.onload = () => {
+      this.mobileSyncQr.style.display = 'block';
+      if (fallbackText) fallbackText.style.display = 'none';
+    };
     this.mobileSyncQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(syncURL)}`;
 
     const settingsSyncQr = document.getElementById('settings-sync-qr');
@@ -1448,6 +1457,32 @@ class KioskApp {
       this.martNetworkIpLabel.textContent = this.currentLang === 'ur'
         ? `مارٹ نیٹ ورک آئی پی: ${host}:${port}`
         : `Mart Network IP: ${host}:${port}`;
+    }
+  }
+
+  openMobileCompanionView() {
+    this.qrOverlay?.classList.remove('visible');
+    this.audio.playSuccess();
+    const shopperName = this.memberData?.name || (this.currentLang === 'ur' ? 'مہمان خریدار' : 'Guest Shopper');
+    const msg = this.currentLang === 'ur'
+      ? `📱 موبائل اسکرین منسلک ہو گئی! ${shopperName} کی کارٹ اب آپ کے فون پر لائیو ہے۔`
+      : `📱 Mobile Companion Connected! Your phone screen is now synchronized with ${shopperName}'s Kiosk Session.`;
+    this._showToast(msg, 'success');
+  }
+
+  simulateBarcodeCameraScan() {
+    this.qrOverlay?.classList.remove('visible');
+    this.audio.playScan();
+    // Scan a popular Pakistani grocery product automatically
+    const sampleItems = ['PRD-001', 'PRD-002', 'PRD-004', 'PRD-005', 'PRD-007'];
+    const randomId = sampleItems[Math.floor(Math.random() * sampleItems.length)];
+    const product = this.inventory.find(i => i.item_id === randomId) || this.inventory[0];
+    if (product) {
+      this.addToCart(product);
+      const msg = this.currentLang === 'ur'
+        ? `📷 بارکوڈ اسکین کامیاب: ${product.name_ur || product.name} کارٹ میں شامل کر لیا گیا!`
+        : `📷 Barcode Scan Success: Added ${product.name} directly to your cart!`;
+      this._showToast(msg, 'success');
     }
   }
 
